@@ -102,11 +102,14 @@ Output: -->
 - Memeriksa data *missing value* dan *duplicated data* 
 
 **Visualisasi Data**
-- *Univariate Data Analysist*
+- *Univariate Data Analysis*
   ![Univariate_Cat](https://github.com/user-attachments/assets/7610c81d-4215-4361-84d4-ef0d154cbec5)
   <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
-- *Multivariate Data Analysist*
+- *Multivariate Data Analysis*
+  ![Univariate_Num](https://github.com/user-attachments/assets/6badd2e9-e4f9-4042-a629-2e1cdf161892)
+  <div align="center">Gambar 1.2 - Univariate Analysis Numerical Column</div>
 - *Box Plots*
+  ![Image](https://github.com/user-attachments/assets/4a9ab892-baae-4982-8d81-c190fe2014fc)
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
