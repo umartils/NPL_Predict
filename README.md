@@ -20,15 +20,15 @@ Menurut data dari Otoritas Jasa Keuangan (OJK), tingkat kredit bermasalah atau N
 
 - Bagaimana cara menentukan apakah suatu pengajuan pinjaman dapat disetujui atau ditolak berdasarkan data historis calon nasabah yang mengajukan pinjaman?
 - Faktor apa saja yang dapat mempengaruhi keputusan dalam memprediksi kelayakan calon nasabah?
-- Model machine learning apa yang paling akurat untuk memprediksi kelayakan calon nasabah?
+- Model *machine learning* apa yang paling akurat untuk memprediksi kelayakan calon nasabah?
 
 Bank sering kali mengalami kerugian akibat memberikan pinjaman kepada nasabah yang sebenarnya berisiko tinggi untuk gagal membayar. Dibutuhkan sistem yang dapat membantu memprediksi kelayakan pinjaman nasabah berdasarkan data historis seorang nasabah.
 
 ### Goals
 
-- Membangun model machine learning klasifikasi yang dapat menentukan apakah pengajuan pinjaman disetujui atau tidak berdasarkan data historis calon nasabah.
+- Membangun model *machine learning* klasifikasi yang dapat menentukan apakah pengajuan pinjaman disetujui atau tidak berdasarkan data historis calon nasabah.
 - Menidentifikasi dan menganalisis faktor yang mempengaruhi dalam proses prediksi kelayakan calon nasabah.
-- Membandingkan performa dari beberapa model machine learning dan memilih model terbaik dalam proses prediksi kelayakan calon nasabah.
+- Membandingkan performa dari beberapa model *machine learning* dan memilih model terbaik dalam proses prediksi kelayakan calon nasabah.
 
 Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
 
@@ -44,18 +44,32 @@ Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pe
     - Solusi yang diberikan harus dapat terukur dengan metrik evaluasi.
 
 ## Data Understanding
-Dataset yang digunakan pada proyek *machine learning* ini adalah **"Loan Prediction Problem Dataset"** 
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+*Dataset* yang digunakan pada proyek *machine learning* ini adalah **"*Loan Approval Prediction Dataset*"**, yang tersedia di *platform* [Kaggle](https://www.kaggle.com/datasets/architsharma01/loan-approval-prediction-dataset). *Dataset* ini berisi kumpulan data kuantitatif yang terdiri dari berbagai kolom yang menjadi faktor apakah pengajuan pinjaman ditolak atau disetujui. Secara keseluruhan, *dataset* ini terdiri dari 4269 baris dan 12 kolom.
+
+*Dataset* ini sesuai dengan kebutuhan dalam membangun proyek machine learning, khususnya untuk tugas *binary classification*. 
 
 Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
 
 ### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+- ```loan_id```: id atau idex dari data pengajuan pinjaman.
+- ```no_of_dependents```: jumlah orang yang menjadi tanggungan pemohon atau nasabah.
+- ```education```: status pendidikan pemohon atau nasabah.
+- ```self_employed```: status pekerjaan pemohon apakah bekerja sendiri sebagai wirausaha atau bukan.
+- ```income_annum```: nilai pendapatan tahunan pemohon.
+- ```loan_ammount```: jumlah atau nominal pinjaman yang diajukan.
+- ```loan_term```: waktu atau durasi pelunasan pinjaman dalam satuan bulan.
+- ```cibil_score```: jumlah skor kredit pemohon atau nasabah.
+- ```residential_assets_value```: nilai aset pemohon dalam bentuk rumah atau tempat tinggal.
+- ```commercial_assets_value```: nilai aset komersial yang dimiliki oleh pemohon atau nasabah.
+- ```luxury_assets_value```: nilai aset pemohon dalam bentuk barang mewah atau berharga.
+- ```bank_assets_value```: nilai tabungan atau dana finansial yang dimiliki oleh pemohon atau nasabah.
+- ```loan_status```: status pinjaman apakah disetujui atau ditolak.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+Selanjutnya, untuk meingkatkan pemahaman mengenai data yang digunakan, penulis melakukan proses *exploratory data analysist* (EDA).
+
+***Exploratory Data Analysist* (EDA)**
+
+Exploratory Data Analysis (EDA) adalah pendekatan analisis data yang bertujuan untuk memahami karakteristik utama dari kumpulan data. EDA melibatkan penggunaan teknik statistik dan visualisasi grafis untuk menemukan pola, hubungan, atau anomali untuk membentuk hipotesis. Proses ini sering kali tidak terstruktur dan dianggap sebagai langkah awal penting dalam analisis data yang membantu menentukan arah analisis lebih lanjut.
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
