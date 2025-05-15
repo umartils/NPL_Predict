@@ -103,6 +103,8 @@ Output: -->
 
 **Visualisasi Data**
 - *Univariate Data Analysist*
+  ![Univariate_Cat](https://github.com/user-attachments/assets/7610c81d-4215-4361-84d4-ef0d154cbec5)
+  <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
 - *Multivariate Data Analysist*
 - *Box Plots*
 ## Data Preparation
