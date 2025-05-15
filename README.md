@@ -50,7 +50,7 @@ Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pe
 
 Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
 
-### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
+### Variabel-variabel pada *Loan Approval Prediction Dataset* adalah sebagai berikut:
 - ```loan_id```: id atau idex dari data pengajuan pinjaman.
 - ```no_of_dependents```: jumlah orang yang menjadi tanggungan pemohon atau nasabah.
 - ```education```: status pendidikan pemohon atau nasabah.
@@ -71,6 +71,40 @@ Selanjutnya, untuk meingkatkan pemahaman mengenai data yang digunakan, penulis m
 
 Exploratory Data Analysis (EDA) adalah pendekatan analisis data yang bertujuan untuk memahami karakteristik utama dari kumpulan data. EDA melibatkan penggunaan teknik statistik dan visualisasi grafis untuk menemukan pola, hubungan, atau anomali untuk membentuk hipotesis. Proses ini sering kali tidak terstruktur dan dianggap sebagai langkah awal penting dalam analisis data yang membantu menentukan arah analisis lebih lanjut.
 
+Berikut tahapan EDA yang dilakukan:
+<!-- ```py
+df.info()
+```
+Output: -->
+- Melihat informasi tabel pada *dataset*
+    ```py
+    RangeIndex: 4269 entries, 0 to 4268
+    Data columns (total 13 columns):
+    #   Column                     Non-Null Count  Dtype 
+    ---  ------                     --------------  ----- 
+    0   loan_id                    4269 non-null   int64 
+    1    no_of_dependents          4269 non-null   int64 
+    2    education                 4269 non-null   object
+    3    self_employed             4269 non-null   object
+    4    income_annum              4269 non-null   int64 
+    5    loan_amount               4269 non-null   int64 
+    6    loan_term                 4269 non-null   int64 
+    7    cibil_score               4269 non-null   int64 
+    8    residential_assets_value  4269 non-null   int64 
+    9    commercial_assets_value   4269 non-null   int64 
+    10   luxury_assets_value       4269 non-null   int64 
+    11   bank_asset_value          4269 non-null   int64 
+    12   loan_status               4269 non-null   object
+    dtypes: int64(10), object(3)
+    memory usage: 433.7+ KB
+    ```
+- Melihat analsis
+- Memeriksa data *missing value* dan *duplicated data* 
+
+**Visualisasi Data**
+- *Univariate Data Analysist*
+- *Multivariate Data Analysist*
+- *Box Plots*
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
