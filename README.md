@@ -30,11 +30,10 @@ Bank sering kali mengalami kerugian akibat memberikan pinjaman kepada nasabah ya
 - Menidentifikasi dan menganalisis faktor yang mempengaruhi dalam proses prediksi kelayakan calon nasabah.
 - Membandingkan performa dari beberapa model *machine learning* dan memilih model terbaik dalam proses prediksi kelayakan calon nasabah.
 
-Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
 
 ### Solution statements
 - Dengan membangun model machine learning klasifikasi menggunakan beberapa algoritma seperti Random Forest, Logistic Regression, atau XGBoost yang dilatih menggunakan data historis pengajuan pinjaman.
-- Solusi yang diberikan harus dapat terukur dengan metrik evaluasi.
+- Melakukan proses *data preprocessing* agar kualitas data yang digunakan menjadi lebih baik sehingga model machine learning yang dibangun memiliki performa yang baik.
   
 **Rubrik/Kriteria Tambahan (Opsional)**:
 - Menambahkan bagian “Solution Statement” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
@@ -57,7 +56,7 @@ Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:
 - ```self_employed```: status pekerjaan pemohon apakah bekerja sendiri sebagai wirausaha atau bukan.
 - ```income_annum```: nilai pendapatan tahunan pemohon.
 - ```loan_ammount```: jumlah atau nominal pinjaman yang diajukan.
-- ```loan_term```: waktu atau durasi pelunasan pinjaman dalam satuan bulan.
+- ```loan_term```: jangka waktu atau durasi pinjaman dalam satuan tahun.
 - ```cibil_score```: jumlah skor kredit pemohon atau nasabah.
 - ```residential_assets_value```: nilai aset pemohon dalam bentuk rumah atau tempat tinggal.
 - ```commercial_assets_value```: nilai aset komersial yang dimiliki oleh pemohon atau nasabah.
@@ -72,11 +71,7 @@ Selanjutnya, untuk meingkatkan pemahaman mengenai data yang digunakan, penulis m
 Exploratory Data Analysis (EDA) adalah pendekatan analisis data yang bertujuan untuk memahami karakteristik utama dari kumpulan data. EDA melibatkan penggunaan teknik statistik dan visualisasi grafis untuk menemukan pola, hubungan, atau anomali untuk membentuk hipotesis. Proses ini sering kali tidak terstruktur dan dianggap sebagai langkah awal penting dalam analisis data yang membantu menentukan arah analisis lebih lanjut.
 
 Berikut tahapan EDA yang dilakukan:
-<!-- ```py
-df.info()
-```
-Output: -->
-- Melihat informasi tabel pada *dataset*
+- **Melihat informasi tabel pada *dataset***
     ```py
     RangeIndex: 4269 entries, 0 to 4268
     Data columns (total 13 columns):
@@ -98,18 +93,48 @@ Output: -->
     dtypes: int64(10), object(3)
     memory usage: 433.7+ KB
     ```
-- Melihat analsis
-- Memeriksa data *missing value* dan *duplicated data* 
+    **Insights**
+    
+- **Melihat ringkasan statistik deskriptif kolom numerik**
+  
+    | **Feature**                   | **count**   | **mean**        | **std**         | **min**     | *25%*      | **50%**      | **75%**       | **max**       |
+    |---------------------------|---------|-------------|-------------|---------|----------|----------|-----------|-----------|
+    | no_of_dependents          | 4269.0  | 2.498712e+00| 1.695910e+00| 0.0     | 1.0      | 3.0      | 4.0       | 5.0       |
+    | income_annum              | 4269.0  | 5.059124e+06| 2.806840e+06| 200000.0| 2700000.0| 5100000.0| 7500000.0 | 9900000.0 |
+    | loan_amount               | 4269.0  | 1.513345e+07| 9.043363e+06| 300000.0| 7700000.0| 14500000.0| 21500000.0| 39500000.0|
+    | loan_term                 | 4269.0  | 1.090045e+01| 5.709187e+00| 2.0     | 6.0      | 10.0     | 16.0      | 20.0      |
+    | cibil_score               | 4269.0  | 5.999361e+02| 1.724304e+02| 300.0   | 453.0    | 600.0    | 748.0     | 900.0     |
+    | residential_assets_value  | 4269.0  | 7.472617e+06| 6.503637e+06| -100000.0|2200000.0 | 5600000.0| 11300000.0| 29100000.0|
+    | commercial_assets_value   | 4269.0  | 4.973155e+06| 4.388986e+06| 0.0     | 1300000.0| 3700000.0| 7600000.0 | 19400000.0|
+    | luxury_assets_value       | 4269.0  | 1.512631e+07| 9.103754e+06| 300000.0| 7500000.0| 14600000.0| 21700000.0| 39200000.0|
+    | bank_asset_value          | 4269.0  | 4.976692e+06| 3.250185e+06| 0.0     | 2300000.0| 4600000.0| 7100000.0 | 14700000.0|
+
+    **Insights**
+    - ```no_of_depents```: Rata-rata tanggungan nasabah sebesar 2,5, dengan nilai maksimum 5 dan minimum 0. Mayoritas pemohon memiliki 1-4 orang tanggungan, data ini memengaruhi kelayakan pemohon untuk diberi pinjaman.
+    - ```income_annum```: Rata-rata pendapatan tahunan 5 juta dengan nilai maksimum 9,9 juta dan minimum 200 ribu. rentang nilai pendapatan setiap pemohon sangat besar, perlu dilakukan normalisasi atau *scaling* pada proses *data preprocessing* sebelum dilakukan tahap *modeling*
+    - ```loan_amount```: Rata-rata nilai pinjaman 15 juta dengan nilai maksimum 39,5 juta dan nilai minimum 300 ribu. Rentang nilai cukup tinggi berpotensi memiliki *outlier*.
+    - ```loan_term```: Rata-rata 10 dengan nilai maksimum 20 dan nilai minimum 2. Mayoritas pemohon mengajukan pinjaman jangka panjang dengan waktu pinjaman cukup lama.
+    - ```cibil_score```: Rata-rata nilai sekitar 600 dengan nilai maksimum 900 dan minimum 300.
+    - ```residential_assets_value```: Rata-rata nilai aset residensial pemohon sekitar 7jt dengan nilai maksimum 29 juta dan nilai minimum -100 ribu. Data memiliki rentang nilai yang cukup jauh dan terdapat anomali yaitu terdapat nilai negatif. Nilai tersebut bisa jadi hasil dari kesalahan input data atau nilai aset berupa hutang. 
+    - ```commercial_assets_value```: 
+    - ```luxury_assets_value```: 
+    - ```bank_assets_value```: 
+ 
+- **Memeriksa data *missing value* dan *duplicated data***
 
 **Visualisasi Data**
-- *Univariate Data Analysis*
+- ***Univariate Data Analysis***
   ![Univariate_Cat](https://github.com/user-attachments/assets/7610c81d-4215-4361-84d4-ef0d154cbec5)
   <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
-- *Multivariate Data Analysis*
+- ***Multivariate Data Analysis***
   ![Univariate_Num](https://github.com/user-attachments/assets/6badd2e9-e4f9-4042-a629-2e1cdf161892)
   <div align="center">Gambar 1.2 - Univariate Analysis Numerical Column</div>
-- *Box Plots*
+- ***Box Plots***
   ![Image](https://github.com/user-attachments/assets/4a9ab892-baae-4982-8d81-c190fe2014fc)
+  <div align="center">Gambar 1.3 - </div>
+  
+  **Insights**
+  Visualisasi data menggunakan *box plot* bertujuan untuk melihat distribusi data pada kolom numerik,  mengidentifikasi perbedaan distribusi antar kelas, serta mendeteksi keberadaan outliers yang dapat memengaruhi performa model. Dengan melihat median, rentang interkuartil (IQR), dan pencilan, boxplot membantu menentukan apakah fitur tertentu memiliki pengaruh signifikan terhadap target dan memberikan wawasan awal untuk pemilihan fitur atau penanganan data sebelum pemodelan.
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
