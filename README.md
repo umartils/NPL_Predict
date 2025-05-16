@@ -133,11 +133,13 @@ Berikut tahapan EDA yang dilakukan:
   
   **Insights**
 
+
   Pada ```Gambar 1.1``` menampilkan distribusi nilai pada kolom kategorikal yang ada di *dataset*. Terlihat bahwa kolom ```education``` dan ```self_employed``` memiliki distribusi yang merata dari setiap kategorinya, sedangkan pada kolom ``loan_status`` distribusi datanya kurang merata dimana kategori `Approved` memiliki jumlah yang lebih banyak dibanding kategori ``Rejected``. Perlu dilakukan proses *feature engineering* agar jumlah data pada kedua kategori dapat seimbang sehingga hasil dari model *machine learning* memiliki performa yang lebih baik.
   ![Univariate_Num](https://github.com/user-attachments/assets/8bed92ff-86d1-491b-b69f-92ff574d21a9)
   <div align="center">Gambar 1.2 - Univariate Analysis Numerical Column</div>
 
   **Insights**
+
 
   Berikut beberapa insights yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
   - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
@@ -154,7 +156,7 @@ Berikut tahapan EDA yang dilakukan:
 <div align="center">Gambar 1.3 - Pairplot</div>
 
 - ***Box Plots***
-- 
+
   Visualisasi data menggunakan *box plot* bertujuan untuk melihat distribusi data pada kolom numerik,  mengidentifikasi perbedaan distribusi antar kelas, serta mendeteksi keberadaan outliers yang dapat memengaruhi performa model. Dengan melihat median, rentang interkuartil (IQR), dan pencilan, boxplot membantu menentukan apakah fitur tertentu memiliki pengaruh signifikan terhadap target dan memberikan wawasan awal untuk pemilihan fitur atau penanganan data sebelum pemodelan.
   ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
   <div align="center">Gambar 1.4 - </div>
