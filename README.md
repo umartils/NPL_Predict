@@ -110,6 +110,7 @@ Berikut tahapan EDA yang dilakukan:
     | bank_asset_value          | 4269.0  | 4.976692e+06| 3.250185e+06| 0.0     | 2300000.0| 4600000.0| 7100000.0 | 14700000.0|
 
     **Insights**
+
     - ```no_of_depents```: Rata-rata tanggungan nasabah sebesar 2,5, dengan nilai maksimum 5 dan minimum 0. Mayoritas pemohon memiliki 1-4 orang tanggungan, data ini memengaruhi kelayakan pemohon untuk diberi pinjaman.
     - ```income_annum```: Rata-rata pendapatan tahunan 5 juta dengan nilai maksimum 9,9 juta dan minimum 200 ribu. rentang nilai pendapatan setiap pemohon sangat besar, perlu dilakukan normalisasi atau *scaling* pada proses *data preprocessing* sebelum dilakukan tahap *modeling*
     - ```loan_amount```: Rata-rata nilai pinjaman 15 juta dengan nilai maksimum 39,5 juta dan nilai minimum 300 ribu. Rentang nilai cukup tinggi berpotensi memiliki *outlier*.
@@ -131,25 +132,35 @@ Berikut tahapan EDA yang dilakukan:
   <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
   
   **Insights**
+
   Pada ```Gambar 1.1``` menampilkan distribusi nilai pada kolom kategorikal yang ada di *dataset*. Terlihat bahwa kolom ```education``` dan ```self_employed``` memiliki distribusi yang merata dari setiap kategorinya, sedangkan pada kolom ``loan_status`` distribusi datanya kurang merata dimana kategori `Approved` memiliki jumlah yang lebih banyak dibanding kategori ``Rejected``. Perlu dilakukan proses *feature engineering* agar jumlah data pada kedua kategori dapat seimbang sehingga hasil dari model *machine learning* memiliki performa yang lebih baik.
   ![Univariate_Num](https://github.com/user-attachments/assets/8bed92ff-86d1-491b-b69f-92ff574d21a9)
   <div align="center">Gambar 1.2 - Univariate Analysis Numerical Column</div>
 
   **Insights**
-  Pada ```Gambar 1.2``` menampilkan distribusi nilai pada kolom numerik yang ada di *dataset* dengan rincian sebagai berikut. 
+
+  Berikut beberapa insights yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
   - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
-  - income_annum: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
-  - loan_amount: memiliki distribusi cenderung *right skewed* 
+  - ```income_annum```: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
+  - ```loan_amount```: memiliki distribusi cenderung *right skewed* 
+  - ```loan_term```: memiliki distribusi diskrit dan merata dengan rentang 2,5 hingga 20 tahun, artinya jangka waktu pinjaman tersebar merata.
+  - ```cibil_score```: skor kredit
+  - ```residential_assets_value```:
+  - ```commercial_assets_value```:
+  - ```luxury_assets_value```:
+  - ```bank_assets_value```:
 - ***Multivariate Data Analysis***
   ![Pairplot](https://github.com/user-attachments/assets/27c43ffb-2f2d-40d4-9199-8b85d2bb98a9)
 <div align="center">Gambar 1.3 - Pairplot</div>
 
 - ***Box Plots***
+- 
   Visualisasi data menggunakan *box plot* bertujuan untuk melihat distribusi data pada kolom numerik,  mengidentifikasi perbedaan distribusi antar kelas, serta mendeteksi keberadaan outliers yang dapat memengaruhi performa model. Dengan melihat median, rentang interkuartil (IQR), dan pencilan, boxplot membantu menentukan apakah fitur tertentu memiliki pengaruh signifikan terhadap target dan memberikan wawasan awal untuk pemilihan fitur atau penanganan data sebelum pemodelan.
   ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
   <div align="center">Gambar 1.4 - </div>
   
   **Insights**
+
   Berdasarkan ```Gambar 1.4``` terdapat kolom yang memiliki *outlier* yaitu kolom ```residential_assets_value```, ```commercial_assets_value```, dan ```bank_assets_value```. Kondisi ini terjadi apabila terdapat data yang bernilai ekstrem atau jauh dari nilai mayoritas pada data.
   
 
