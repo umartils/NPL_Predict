@@ -139,9 +139,11 @@ Berikut tahapan EDA yang dilakukan:
 - ***Pairplot of Numerical Features***
   ![Pairplot](https://github.com/user-attachments/assets/27c43ffb-2f2d-40d4-9199-8b85d2bb98a9)
 <div align="center">Gambar 1.4 - Pairplot</div>
+
 - Heatmap
 ![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)
 <div align="center">Gambar 1.4 - Pairplot</div>
+
 ![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)
 <div align="center">Gambar 1.4 - Pairplot</div>
   
