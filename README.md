@@ -127,10 +127,10 @@ Berikut tahapan EDA yang dilakukan:
   ![Univariate_Cat](https://github.com/user-attachments/assets/a2942633-255c-4fe7-aed9-e96396942de9)
   <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
 - ***Multivariate Data Analysis***
-  ![Univariate_Num](https://github.com/user-attachments/assets/6badd2e9-e4f9-4042-a629-2e1cdf161892)
+  ![Univariate_Num](https://github.com/user-attachments/assets/8bed92ff-86d1-491b-b69f-92ff574d21a9)
   <div align="center">Gambar 1.2 - Univariate Analysis Numerical Column</div>
 - ***Box Plots***
-  ![Image](https://github.com/user-attachments/assets/4a9ab892-baae-4982-8d81-c190fe2014fc)
+  ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
   <div align="center">Gambar 1.3 - </div>
   
   **Insights**
