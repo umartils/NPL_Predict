@@ -152,7 +152,7 @@ Berikut tahapan EDA yang dilakukan:
   - ```luxury_assets_value```:
   - ```bank_assets_value```:
 - ***Multivariate Data Analysis***
-<br>
+  
   ![Pairplot](https://github.com/user-attachments/assets/27c43ffb-2f2d-40d4-9199-8b85d2bb98a9)
 <div align="center">Gambar 1.3 - Pairplot</div>
 
