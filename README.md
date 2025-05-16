@@ -144,6 +144,7 @@ Berikut tahapan EDA yang dilakukan:
 ![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)
 <div align="center">Gambar 1.4 - Pairplot</div>
 
+- Heatmap
 ![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)
 <div align="center">Gambar 1.4 - Pairplot</div>
   
