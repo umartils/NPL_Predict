@@ -124,7 +124,7 @@ Berikut tahapan EDA yang dilakukan:
 
 **Visualisasi Data**
 - ***Univariate Data Analysis***
-  ![Univariate_Cat](https://github.com/user-attachments/assets/7610c81d-4215-4361-84d4-ef0d154cbec5)
+  ![Univariate_Cat](https://github.com/user-attachments/assets/a2942633-255c-4fe7-aed9-e96396942de9)
   <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
 - ***Multivariate Data Analysis***
   ![Univariate_Num](https://github.com/user-attachments/assets/6badd2e9-e4f9-4042-a629-2e1cdf161892)
