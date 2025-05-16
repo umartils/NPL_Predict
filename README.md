@@ -127,7 +127,6 @@ Berikut tahapan EDA yang dilakukan:
 - ***Univariate Data Analysis***
   Univariate Analysis merupakan metode analisis data yang berfokus pada pemeriksaan satu variabel atau kolom data secara individual. Tujuannya adalah untuk memberikan gambaran deskriptif mengenai data tersebut serta mengidentifikasi pola-pola yang terdapat dalam sebaran nilainya. Teknik yang umum digunakan meliputi statistik deskriptif, histogram, dan diagram kotak (box plot) untuk menganalisis distribusi dan memahami karakteristik variabel yang bersangkutan.
 
-- 
   ![Univariate_Cat](https://github.com/user-attachments/assets/a2942633-255c-4fe7-aed9-e96396942de9)
   <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
   
@@ -135,6 +134,7 @@ Berikut tahapan EDA yang dilakukan:
 
 
   Pada ```Gambar 1.1``` menampilkan distribusi nilai pada kolom kategorikal yang ada di *dataset*. Terlihat bahwa kolom ```education``` dan ```self_employed``` memiliki distribusi yang merata dari setiap kategorinya, sedangkan pada kolom ``loan_status`` distribusi datanya kurang merata dimana kategori `Approved` memiliki jumlah yang lebih banyak dibanding kategori ``Rejected``. Perlu dilakukan proses *feature engineering* agar jumlah data pada kedua kategori dapat seimbang sehingga hasil dari model *machine learning* memiliki performa yang lebih baik.
+<br>
   ![Univariate_Num](https://github.com/user-attachments/assets/8bed92ff-86d1-491b-b69f-92ff574d21a9)
   <div align="center">Gambar 1.2 - Univariate Analysis Numerical Column</div>
 
@@ -152,6 +152,7 @@ Berikut tahapan EDA yang dilakukan:
   - ```luxury_assets_value```:
   - ```bank_assets_value```:
 - ***Multivariate Data Analysis***
+<br>
   ![Pairplot](https://github.com/user-attachments/assets/27c43ffb-2f2d-40d4-9199-8b85d2bb98a9)
 <div align="center">Gambar 1.3 - Pairplot</div>
 
