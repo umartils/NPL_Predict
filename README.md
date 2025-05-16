@@ -142,15 +142,16 @@ Berikut tahapan EDA yang dilakukan:
 
 
   Berikut beberapa insights yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
-  - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
-  - ```income_annum```: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
-  - ```loan_amount```: memiliki distribusi cenderung *right skewed* 
-  - ```loan_term```: memiliki distribusi diskrit dan merata dengan rentang 2,5 hingga 20 tahun, artinya jangka waktu pinjaman tersebar merata.
-  - ```cibil_score```: skor kredit
-  - ```residential_assets_value```:
-  - ```commercial_assets_value```:
-  - ```luxury_assets_value```:
-  - ```bank_assets_value```:
+   - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
+   - ```income_annum```: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
+   - ```loan_amount```: memiliki distribusi cenderung *right skewed* 
+   - ```loan_term```: memiliki distribusi diskrit dan merata dengan rentang 2,5 hingga 20 tahun, artinya jangka waktu pinjaman tersebar merata.
+   - ```cibil_score```: skor kredit
+   - ```residential_assets_value```:
+   - ```commercial_assets_value```:
+   - ```luxury_assets_value```:
+   - ```bank_assets_value```:
+
 - ***Multivariate Data Analysis***
   
   ![Pairplot](https://github.com/user-attachments/assets/27c43ffb-2f2d-40d4-9199-8b85d2bb98a9)
