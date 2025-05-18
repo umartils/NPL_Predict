@@ -94,6 +94,21 @@ Berikut tahapan EDA yang dilakukan:
     memory usage: 433.7+ KB
     ```
     **Insights**
+    - ```loan_id```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```no_of_dependents```: jmemiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```education```: memiliki tipe data ```object``` atau data kategorikal dengan jumlah data sebanyak 4269..
+  - ```self_employed```: memiliki tipe data ```object``` atau data kategorikal dengan jumlah data sebanyak 4269..
+  - ```income_annum```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```loan_ammount```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```loan_term```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```cibil_score```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```residential_assets_value```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```commercial_assets_value```: nmemiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```luxury_assets_value```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```bank_assets_value```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
+  - ```loan_status```: memiliki tipe data ```object``` atau data kategorikal dengan jumlah data sebanyak 4269.
+  
+  <br>
     
 - **Melihat ringkasan statistik deskriptif kolom numerik**
   
@@ -117,11 +132,16 @@ Berikut tahapan EDA yang dilakukan:
     - ```loan_term```: Rata-rata 10 dengan nilai maksimum 20 dan nilai minimum 2. Mayoritas pemohon mengajukan pinjaman jangka panjang dengan waktu pinjaman cukup lama.
     - ```cibil_score```: Rata-rata nilai sekitar 600 dengan nilai maksimum 900 dan minimum 300.
     - ```residential_assets_value```: Rata-rata nilai aset residensial pemohon sekitar 7jt dengan nilai maksimum 29 juta dan nilai minimum -100 ribu. Data memiliki rentang nilai yang cukup jauh dan terdapat anomali yaitu terdapat nilai negatif. Nilai tersebut bisa jadi hasil dari kesalahan input data atau nilai aset berupa hutang. 
-    - ```commercial_assets_value```: 
-    - ```luxury_assets_value```: 
-    - ```bank_assets_value```: 
+    - ```commercial_assets_value```: Rata-rata nilai aset komersial sebesar 4jt dengan nilai maksimum sebesar 19,4 juta dan nilai minimum 0. Berpotensi memiliki outlier karena memiliki range nilai yang cukup besar.
+    - ```luxury_assets_value```: Rata-rata nilai aset barang berharga sebesar 15 juta dengan nilai maksimum 39,2 juta dan nilai minimum sebesar 300 ribu. Berpotensi memiliki outlier karena memiliki range nilai yang cukup besar.
+    - ```bank_assets_value```: Rata-rata nilai aset di bank sebesar 4 juta dengan nilai maksimum 14,7 juta dan nilai minimum 0.
+  
+  <br>
  
 - **Memeriksa data *missing value* dan *duplicated data***
+
+    - Tidak ada data yang hilang karena semua kolom pada dataset memiliki jumlah baris yang sama dengan total jumlah data.
+    - Tidak terdapat data duplikat, sehingga data sudah bisa digunakan tanpa harus menghilangkan data yang duplikat
 
 **Visualisasi Data**
 - ***Univariate Data Analysis***
@@ -133,11 +153,11 @@ Berikut tahapan EDA yang dilakukan:
   
   **Insights**
 
-  Pada ```Gambar 1.1``` menampilkan distribusi nilai pada kolom kategorikal yang ada di *dataset*. Terlihat bahwa kolom ```education``` dan ```self_employed``` memiliki distribusi yang merata dari setiap kategorinya, sedangkan pada kolom ``loan_status`` distribusi datanya kurang merata dimana kategori `Approved` memiliki jumlah yang lebih banyak dibanding kategori ``Rejected``. Perlu dilakukan proses *feature engineering* agar jumlah data pada kedua kategori dapat seimbang sehingga hasil dari model *machine learning* memiliki performa yang lebih baik.
+  Pada ```Gambar 1.1``` menampilkan distribusi nilai pada kolom kategorikal yang ada di *dataset*. Terlihat bahwa kolom ```education``` dan ```self_employed``` memiliki distribusi yang merata dari setiap kategorinya, sedangkan pada kolom ``loan_status`` distribusi datanya kurang merata dimana kategori `Approved` memiliki jumlah yang lebih banyak dibanding kategori ``Rejected``. Perlu dilakukan proses *feature engineering* agar jumlah data pada kedua kategori dapat seimbang sehingga hasil dari model *machine learning* memiliki performa yang lebih baik. <br>
   ![Univariate_Num](https://github.com/user-attachments/assets/8bed92ff-86d1-491b-b69f-92ff574d21a9)
   <div align="center">Gambar 1.2 - Univariate Analysis Numerical Column</div>
-
-  **Insights**
+  
+  **Insight**
 
   Berikut beberapa insights yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
   - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
@@ -149,31 +169,51 @@ Berikut tahapan EDA yang dilakukan:
   - ```commercial_assets_value```:
   - ```luxury_assets_value```:
   - ```bank_assets_value```:
+<br>
+
 - ***Multivariate Data Analysis***
   ![Pairplot](https://github.com/user-attachments/assets/27c43ffb-2f2d-40d4-9199-8b85d2bb98a9)
-<div align="center">Gambar 1.3 - Pairplot</div>
+  <div align="center">Gambar 1.3 - Pairplot</div>
+
+  **Insights**
+  Berikut beberapa *insight* yang diperoleh dari ```Gambar 1.3``` mengenai *multivariate data analysis* pada kolom numerik terhadap kolom label atau kolom ```loan_status```.
+
+  - Kolom ```loan_ammount```, ```income_annum```, dan ```loan_term``` memiliki distribusi yang cenderung ke kanan (*right-skewed*)
+  - Kolom ```cibil_score``` menunjukkan distrbusi berbeda antara status *Approved* dan *Rejected* dimana ketika nilai ```cibil_score``` tinggi maka statusnya akan *Approved* begitupun sebaliknya.
+  - Terdapat hubungan linier antara kolom ```income_annum``` dengan ```loan_ammount``` dimana semakin tinggi nilai ```income_annum```, maka semakin tinggi pula nilai ```loan_ammount```.
+  - Pada kolom ```luxury_assets_value``` dan ```bank_assets_value``` menunjukkan korelasi wajar positif.
+  <br>
 
 - ***Box Plots***
 - 
-  Visualisasi data menggunakan *box plot* bertujuan untuk melihat distribusi data pada kolom numerik,  mengidentifikasi perbedaan distribusi antar kelas, serta mendeteksi keberadaan outliers yang dapat memengaruhi performa model. Dengan melihat median, rentang interkuartil (IQR), dan pencilan, boxplot membantu menentukan apakah fitur tertentu memiliki pengaruh signifikan terhadap target dan memberikan wawasan awal untuk pemilihan fitur atau penanganan data sebelum pemodelan.
+  Visualisasi data menggunakan *box plot* bertujuan untuk melihat distribusi data pada kolom numerik,  mengidentifikasi perbedaan distribusi antar kelas, serta mendeteksi keberadaan outliers yang dapat memengaruhi performa model. Dengan melihat median, rentang interkuartil (IQR), dan pencilan, boxplot membantu menentukan apakah fitur tertentu memiliki pengaruh signifikan terhadap target dan memberikan wawasan awal untuk pemilihan fitur atau penanganan data sebelum pemodelan.<br>
   ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
   <div align="center">Gambar 1.4 - </div>
   
   **Insights**
 
   Berdasarkan ```Gambar 1.4``` terdapat kolom yang memiliki *outlier* yaitu kolom ```residential_assets_value```, ```commercial_assets_value```, dan ```bank_assets_value```. Kondisi ini terjadi apabila terdapat data yang bernilai ekstrem atau jauh dari nilai mayoritas pada data.
+  <br>
   
 
-- Heatmap
-![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)
-<div align="center">Gambar 1.4 - Heatmap</div>
+- ***Heatmap* Korelasi Setiap Fitur Numerik dengan Label**
+![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)<div align="center">Gambar 1.5 - Heatmap</div>
 
-- Heatmap
+  **Insight**
+  Pada ```Gambar 1.5``` menunjukkan korelasi pearson setiap kolom numerik dengan kolom label yaitu kolom ```loan_status```. Terlihat bahwa fitur yang memiliki nilai korelasi paling tinggi terhadap kolom label adalah fitur ```cibi_score```. Artinya, semakin tinggi nilai dari ```cibil_score``` maka kemungkinan 
+  <br>
+
+
+
+- ***Heatmap* Korelasi Setiap Fitur Numerik**
 ![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)
-<div align="center">Gambar 1.4 - Heatmap</div>
+<div align="center">Gambar 1.6 - Heatmap</div>
   
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian data mentah ke dalam format yang dapat dipahami oleh algoritma pembelajaran mesin. Berikut ini adalah urutan langkah-langkah Data Preparation yang dilakukan beserta penjelasan dan alasannya:
+
+- Data Cleaning
+- 
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan proses data preparation yang dilakukan
@@ -181,6 +221,7 @@ Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dil
 
 ## Modeling
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+Pada tahap awal modeling, saya coba menggunakan algoritma decision tree untuk melakukan prediksi biner. H
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
