@@ -93,7 +93,7 @@ Berikut tahapan EDA yang dilakukan:
     dtypes: int64(10), object(3)
     memory usage: 433.7+ KB
     ```
-    **Insights**
+    **Insight**
     - ```loan_id```: memiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
   - ```no_of_dependents```: jmemiliki tipe data ```int64``` dengan jumlah data sebanyak 4269.
   - ```education```: memiliki tipe data ```object``` atau data kategorikal dengan jumlah data sebanyak 4269..
@@ -124,7 +124,7 @@ Berikut tahapan EDA yang dilakukan:
     | luxury_assets_value       | 4269.0  | 1.512631e+07| 9.103754e+06| 300000.0| 7500000.0| 14600000.0| 21700000.0| 39200000.0|
     | bank_asset_value          | 4269.0  | 4.976692e+06| 3.250185e+06| 0.0     | 2300000.0| 4600000.0| 7100000.0 | 14700000.0|
 
-    **Insights**
+    **Insight**
 
     - ```no_of_depents```: Rata-rata tanggungan nasabah sebesar 2,5, dengan nilai maksimum 5 dan minimum 0. Mayoritas pemohon memiliki 1-4 orang tanggungan, data ini memengaruhi kelayakan pemohon untuk diberi pinjaman.
     - ```income_annum```: Rata-rata pendapatan tahunan 5 juta dengan nilai maksimum 9,9 juta dan minimum 200 ribu. rentang nilai pendapatan setiap pemohon sangat besar, perlu dilakukan normalisasi atau *scaling* pada proses *data preprocessing* sebelum dilakukan tahap *modeling*
@@ -153,7 +153,7 @@ Berikut tahapan EDA yang dilakukan:
   ![Univariate_Cat](https://github.com/user-attachments/assets/a2942633-255c-4fe7-aed9-e96396942de9)
   <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
   
-  **Insights**
+  **Insight**
 
   Pada ```Gambar 1.1``` menampilkan distribusi nilai pada kolom kategorikal yang ada di *dataset*. Terlihat bahwa kolom ```education``` dan ```self_employed``` memiliki distribusi yang merata dari setiap kategorinya, sedangkan pada kolom ``loan_status`` distribusi datanya kurang merata dimana kategori `Approved` memiliki jumlah yang lebih banyak dibanding kategori ``Rejected``. Perlu dilakukan proses *feature engineering* agar jumlah data pada kedua kategori dapat seimbang sehingga hasil dari model *machine learning* memiliki performa yang lebih baik. <br>
   ![Univariate_Num](https://github.com/user-attachments/assets/8bed92ff-86d1-491b-b69f-92ff574d21a9)
@@ -161,7 +161,7 @@ Berikut tahapan EDA yang dilakukan:
   
   **Insight**
 
-  Berikut beberapa insights yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
+  Berikut beberapa insight yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
   - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
   - ```income_annum```: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
   - ```loan_amount```: memiliki distribusi cenderung *right skewed* 
@@ -177,14 +177,25 @@ Berikut tahapan EDA yang dilakukan:
   ![Pairplot](https://github.com/user-attachments/assets/27c43ffb-2f2d-40d4-9199-8b85d2bb98a9)
   <div align="center">Gambar 1.3 - Pairplot</div>
 
-  **Insights**
+  **Insight**
 
-  Berikut beberapa *insight* yang diperoleh dari ```Gambar 1.3``` mengenai *multivariate data analysis* pada kolom numerik terhadap kolom label atau kolom ```loan_status```.
+  Pada `Gambar 1.3` menampilkan hubungan multivariat antar kolom numerik terhadap kolom `loan_status` (Approved/Rejected). Berikut tambahan informasi yang diperoleh:
 
-  - Kolom ```loan_ammount```, ```income_annum```, dan ```loan_term``` memiliki distribusi yang cenderung ke kanan (*right-skewed*)
-  - Kolom ```cibil_score``` menunjukkan distrbusi berbeda antara status *Approved* dan *Rejected* dimana ketika nilai ```cibil_score``` tinggi maka statusnya akan *Approved* begitupun sebaliknya.
-  - Terdapat hubungan linier antara kolom ```income_annum``` dengan ```loan_ammount``` dimana semakin tinggi nilai ```income_annum```, maka semakin tinggi pula nilai ```loan_ammount```.
-  - Pada kolom ```luxury_assets_value``` dan ```bank_assets_value``` menunjukkan korelasi wajar positif.
+  * Kolom `residential_assets_value`, `commercial_assets_value`, dan `luxury_assets_value` memiliki distribusi yang cenderung tidak normal dan sebagian besar datanya terkonsentrasi di nilai rendah (left-skewed).
+  * Hubungan linier juga terlihat antara:
+
+    * `income_annum` dan `luxury_assets_value`
+    * `income_annum` dan `bank_asset_value`
+    * `loan_amount` dan `luxury_assets_value`
+  * Warna titik-titik pada plot (Approved - biru, Rejected - oranye) memperlihatkan bahwa distribusi pemohon pinjaman yang disetujui lebih tinggi secara umum dibandingkan yang ditolak, khususnya pada nilai-nilai:
+
+    * `cibil_score` tinggi
+    * `income_annum` dan `loan_amount` menengah ke atas
+  * Terdapat persebaran data yang cukup luas pada beberapa kolom seperti `income_annum` dan `loan_amount`, tetapi masih memperlihatkan pola yang dapat membantu dalam klasifikasi status pinjaman.
+
+  **Kesimpulan**
+  Visualisasi ini memperkuat temuan sebelumnya bahwa fitur seperti `cibil_score`, `income_annum`, `loan_amount`, dan `luxury_assets_value` sangat berpengaruh dalam menentukan status pinjaman. Distribusi serta hubungan linier antar fitur juga penting untuk dipertimbangkan saat membangun model prediktif.
+
   <br>
 
 - ***Box Plots***
@@ -193,7 +204,7 @@ Berikut tahapan EDA yang dilakukan:
   ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
   <div align="center">Gambar 1.4 - </div>
   
-  **Insights**
+  **Insight**
 
   Berdasarkan ```Gambar 1.4``` terdapat kolom yang memiliki *outlier* yaitu kolom ```residential_assets_value```, ```commercial_assets_value```, dan ```bank_assets_value```. Kondisi ini terjadi apabila terdapat data yang bernilai ekstrem atau jauh dari nilai mayoritas pada data.
   <br>
@@ -212,11 +223,18 @@ Berikut tahapan EDA yang dilakukan:
 ![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)<div align="center">Gambar 1.6 - Heatmap</div>
 
   **Insight**
-  
-  Pada ```Gambar 1.6``` menampilkan korelasi setiap kolom numerik pada data. Berikut informasi yang didapatkan dari gambar tersebut.
 
-  - ```income_annum``` dan ```loan_ammount``` memiliki korelasi yang paling tinggi yaitu sebesar 0.93 atau 93%
-  - ```income_annum``` dan ```luxury_assets_value``` memiliki korelasi yang tinggi yaitu sebesar 0.93 atau 93%
+  Pada `Gambar 1.6` menampilkan korelasi setiap kolom numerik pada data. Berikut informasi yang didapatkan dari gambar tersebut:
+
+  * `income_annum` dan `loan_amount` memiliki korelasi yang paling tinggi yaitu sebesar **0.93** atau **93%**
+  * `income_annum` dan `luxury_assets_value` juga memiliki korelasi tinggi yaitu sebesar **0.93** atau **93%**
+  * `loan_amount` berkorelasi tinggi dengan `luxury_assets_value` sebesar **0.86** atau **86%**
+  * `bank_asset_value` memiliki korelasi kuat terhadap `income_annum` (**0.85**) dan `loan_amount` (**0.79**)
+  * Korelasi paling signifikan terhadap variabel target `loan_status` berasal dari `cibil_score`, dengan nilai korelasi sebesar **0.77**, yang menunjukkan bahwa skor kredit sangat berpengaruh terhadap status pinjaman
+  * Sebagian besar kolom lainnya memiliki korelasi yang rendah atau hampir tidak berkorelasi dengan `loan_status`, seperti `loan_term` (-0.11), `no_of_dependents` (-0.02), dan `residential_assets_value` (-0.01)
+
+  **Kesimpulan**
+  Beberapa fitur seperti `cibil_score`, `income_annum`, `loan_amount`, dan `luxury_assets_value` dapat menjadi fitur penting dalam prediksi status pinjaman karena memiliki korelasi yang cukup tinggi terhadap `loan_status` ataupun antar fitur yang relevan.
 
 
 
