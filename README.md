@@ -196,7 +196,7 @@ Berikut tahapan EDA yang dilakukan:
   **Kesimpulan**
   Visualisasi ini memperkuat temuan sebelumnya bahwa fitur seperti `cibil_score`, `income_annum`, `loan_amount`, dan `luxury_assets_value` sangat berpengaruh dalam menentukan status pinjaman. Distribusi serta hubungan linier antar fitur juga penting untuk dipertimbangkan saat membangun model prediktif.
 
-  <br>
+  
 
 - ***Box Plots***
  
@@ -266,7 +266,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
   - Menghapus nilai tidak relevan
   - Menangani *Outliers*
   
-  <br>
+  
 - ***Data Transformation***
   
   Tahap transformasi data merupakan tahap untuk mengubah bentuk atau format data mentah menjadi data yang siap untuk digunakan pemodelan. Proses transformasi data sangat penting dilakukan agar model yang dibangun memiliki performa yang baik. Berikut beberapa tahapan yang akan dilakukan dalam proses transformasi data:
@@ -341,7 +341,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     Dengan menerapkan teknik *oversampling*, distribusi kelas dalam dataset menjadi lebih seimbang, sehingga model yang dibangun dapat belajar lebih adil terhadap seluruh kelas dan menghasilkan prediksi yang lebih akurat serta representatif, terutama dalam mengidentifikasi kelas minoritas.
  
 
-    <br>
+    
 
 - ***Data Splitting***
   
