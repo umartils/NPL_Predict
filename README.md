@@ -284,7 +284,9 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
     *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang seperti pada ```Gambar 7```
   
-    ![imbalanced_data](https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94)<div align="center">Gambar 1.2 - Imbalanced Data</div>
+    <p align="center">
+    <img src="https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94" alt="imbalanced_data" />
+    </p><div align="center">Gambar 1.2 - Imbalanced Data</div>
     
 - ***Data Splitting***
 
