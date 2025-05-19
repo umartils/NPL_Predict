@@ -32,7 +32,7 @@ Bank sering kali mengalami kerugian akibat memberikan pinjaman kepada nasabah ya
 
 
 ### Solution statements
-- Dengan membangun model machine learning klasifikasi menggunakan beberapa algoritma seperti Random Forest, Logistic Regression, atau XGBoost yang dilatih menggunakan data historis pengajuan pinjaman.
+- Dengan membangun model machine learning klasifikasi menggunakan beberapa algoritma seperti Decision Tree, Random Forest, atau XGBoost yang dilatih menggunakan data historis pengajuan pinjaman.
 - Melakukan proses *data preprocessing* agar kualitas data yang digunakan menjadi lebih baik sehingga model machine learning yang dibangun memiliki performa yang baik.
   
 **Rubrik/Kriteria Tambahan (Opsional)**:
@@ -142,12 +142,14 @@ Berikut tahapan EDA yang dilakukan:
 
     - Tidak ada data yang hilang karena semua kolom pada dataset memiliki jumlah baris yang sama dengan total jumlah data.
     - Tidak terdapat data duplikat, sehingga data sudah bisa digunakan tanpa harus menghilangkan data yang duplikat
+  
+  <br>
 
 **Visualisasi Data**
 - ***Univariate Data Analysis***
   Univariate Analysis merupakan metode analisis data yang berfokus pada pemeriksaan satu variabel atau kolom data secara individual. Tujuannya adalah untuk memberikan gambaran deskriptif mengenai data tersebut serta mengidentifikasi pola-pola yang terdapat dalam sebaran nilainya. Teknik yang umum digunakan meliputi statistik deskriptif, histogram, dan diagram kotak (box plot) untuk menganalisis distribusi dan memahami karakteristik variabel yang bersangkutan.
 
-- 
+ 
   ![Univariate_Cat](https://github.com/user-attachments/assets/a2942633-255c-4fe7-aed9-e96396942de9)
   <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
   
@@ -164,11 +166,11 @@ Berikut tahapan EDA yang dilakukan:
   - ```income_annum```: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
   - ```loan_amount```: memiliki distribusi cenderung *right skewed* 
   - ```loan_term```: memiliki distribusi diskrit dan merata dengan rentang 2,5 hingga 20 tahun, artinya jangka waktu pinjaman tersebar merata.
-  - ```cibil_score```: skor kredit
-  - ```residential_assets_value```:
-  - ```commercial_assets_value```:
-  - ```luxury_assets_value```:
-  - ```bank_assets_value```:
+  - ```cibil_score```: nilai skor kredit terdistribusi secara merata.
+  - ```residential_assets_value```: memiliki distribusi *right skewed* dimana nilai mean lebih besar dibanding median dan mode.
+  - ```commercial_assets_value```: memiliki distribusi *right skewed* dimana nilai mean lebih besar dibanding median dan mode.
+  - ```luxury_assets_value```: memiliki distribusi *right skewed* dimana nilai mean lebih besar dibanding median dan mode.
+  - ```bank_assets_value```: memiliki distribusi *right skewed* dimana nilai mean lebih besar dibanding median dan mode.
 <br>
 
 - ***Multivariate Data Analysis***
@@ -185,7 +187,7 @@ Berikut tahapan EDA yang dilakukan:
   <br>
 
 - ***Box Plots***
-- 
+ 
   Visualisasi data menggunakan *box plot* bertujuan untuk melihat distribusi data pada kolom numerik,  mengidentifikasi perbedaan distribusi antar kelas, serta mendeteksi keberadaan outliers yang dapat memengaruhi performa model. Dengan melihat median, rentang interkuartil (IQR), dan pencilan, boxplot membantu menentukan apakah fitur tertentu memiliki pengaruh signifikan terhadap target dan memberikan wawasan awal untuk pemilihan fitur atau penanganan data sebelum pemodelan.<br>
   ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
   <div align="center">Gambar 1.4 - </div>
@@ -206,14 +208,84 @@ Berikut tahapan EDA yang dilakukan:
 
 
 - ***Heatmap* Korelasi Setiap Fitur Numerik**
-![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)
-<div align="center">Gambar 1.6 - Heatmap</div>
+![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)<div align="center">Gambar 1.6 - Heatmap</div>
+
+  **Insight**
   
+  Pada ```Gambar 1.6``` menampilkan korelasi setiap kolom numerik pada data. Berikut informasi yang didapatkan dari gambar tersebut.
+
+  - ```income_annum``` dan ```loan_ammount``` memiliki korelasi yang paling tinggi yaitu sebesar 0.93 atau 93%
+  - ```income_annum``` dan ```luxury_assets_value``` memiliki korelasi yang tinggi yaitu sebesar 0.93 atau 93%
+
+
+
 ## Data Preparation
 Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian data mentah ke dalam format yang dapat dipahami oleh algoritma pembelajaran mesin. Berikut ini adalah urutan langkah-langkah Data Preparation yang dilakukan beserta penjelasan dan alasannya:
 
-- Data Cleaning
-- 
+- ***Data Cleaning***
+  
+  Pada tahap ini, data dibersihkan untuk meningkatkan kualitas dari data yang akan digunakan untuk melakukan pemodelan. Pada tahap ini ada beberapa hal yang akan dilakukan, yaitu sebagai berikut:
+
+  - Menghapus nilai tidak relevan
+  - Menangani *Outliers*
+- ***Data Transformation***
+  
+  Tahap transformasi data merupakan tahap untuk mengubah bentuk atau format data mentah menjadi data yang siap untuk digunakan pemodelan. Proses transformasi data sangat penting dilakukan agar model yang dibangun memiliki performa yang baik. Berikut beberapa tahapan yang akan dilakukan dalam proses transformasi data:
+
+  - Enkode Data Kategorical (Data *Encoding*)
+
+    *Data encoding* merupakan proses mengubah data kategorikal ke dalam bentuk numerik. Hal ini dilakukan karena model tidak dapat membaca data dalam bentuk teks atau kategorikal dan hanya dapat membaca data berupa angka atau bentuk numerik, sehingga tahap ini sangat penting jika terdapat data kategorikal pada dataset. 
+
+    Metode yang digunakan dalam proses *data encoding* adalah *label encoding*, dimana setiap kategori diubah ke dalam bentuk satu digit angka. Hal ini dilakukan karena setiap kolom yang memiliki data kategorikal pada dataset hanya terdapat dua jenis data saja, seperti *Graduate* atau *Not Graduate* pada kolom ```education```, lalu *yes* atau *no* pada kolom ```self_employed```, dan *Approved* atau *Rejected* pada kolom ```loan_status```. Berikut merupakan gambaran dari proses *data encoding*.
+
+    <br>
+    
+    **Kode**
+
+    ```py
+    categorical_columns = df.select_dtypes(include='object').columns
+    print(df[categorical_columns].head())
+    ```
+
+    <br>
+
+    **Output**
+
+    
+    | Index | Education     | Self Employed | Loan Status |
+    |-------|---------------|----------------|--------------|
+    | 0     | Graduate       | No             | Approved     |
+    | 1     | Not Graduate   | Yes            | Rejected     |
+    | 2     | Graduate       | No             | Rejected     |
+    | 3     | Graduate       | No             | Rejected     |
+    | 4     | Not Graduate   | Yes            | Rejected     |
+
+    **Kode**
+
+    ```py
+    df['education'] = df['education'].map({' Graduate': 1, ' Not Graduate': 0})
+    df['self_employed'] = df['self_employed'].map({' Yes': 1, ' No': 0})
+    df['loan_status'] = df['loan_status'].map({' Approved': 1, ' Rejected': 0})
+    print(df[cat_col].head())
+    ```
+
+    <br>
+
+    **Output**
+
+    
+    | Index | Education | Self Employed | Loan Status |
+    |-------|----------|----------------|-------------|
+    | 0     | 1        | 0              | 1           |
+    | 1     | 0        | 1              | 0           |
+    | 2     | 1        | 0              | 0           |
+    | 3     | 1        | 0              | 0           |
+    | 4     | 0        | 1              | 0           |
+
+  - Mengatasi Kelas Tidak Seimbang 
+  
+    Pada tahap ini,
+- ***Data Splitting***
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan proses data preparation yang dilakukan
