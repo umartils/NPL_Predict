@@ -161,7 +161,6 @@ Berikut tahapan EDA yang dilakukan:
   
   **Insight**
 
-
   Berikut beberapa insights yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
   - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
   - ```income_annum```: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
@@ -180,7 +179,6 @@ Berikut tahapan EDA yang dilakukan:
 
   **Insights**
 
-  
   Berikut beberapa *insight* yang diperoleh dari ```Gambar 1.3``` mengenai *multivariate data analysis* pada kolom numerik terhadap kolom label atau kolom ```loan_status```.
 
   - Kolom ```loan_ammount```, ```income_annum```, dan ```loan_term``` memiliki distribusi yang cenderung ke kanan (*right-skewed*)
@@ -285,8 +283,8 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
   - Mengatasi *Imbalanced Data* 
 
     *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang seperti pada ```Gambar 7```
-
-    
+  
+    ![imbalanced_data](https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94)<div align="center">Gambar 1.2 - Imbalanced Data</div>
     
 - ***Data Splitting***
 
