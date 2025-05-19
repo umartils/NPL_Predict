@@ -161,6 +161,7 @@ Berikut tahapan EDA yang dilakukan:
   
   **Insight**
 
+
   Berikut beberapa insights yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
   - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
   - ```income_annum```: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
@@ -178,6 +179,8 @@ Berikut tahapan EDA yang dilakukan:
   <div align="center">Gambar 1.3 - Pairplot</div>
 
   **Insights**
+
+  
   Berikut beberapa *insight* yang diperoleh dari ```Gambar 1.3``` mengenai *multivariate data analysis* pada kolom numerik terhadap kolom label atau kolom ```loan_status```.
 
   - Kolom ```loan_ammount```, ```income_annum```, dan ```loan_term``` memiliki distribusi yang cenderung ke kanan (*right-skewed*)
