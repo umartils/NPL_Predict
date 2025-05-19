@@ -202,7 +202,7 @@ Berikut tahapan EDA yang dilakukan:
  
   Visualisasi data menggunakan *box plot* bertujuan untuk melihat distribusi data pada kolom numerik,  mengidentifikasi perbedaan distribusi antar kelas, serta mendeteksi keberadaan outliers yang dapat memengaruhi performa model. Dengan melihat median, rentang interkuartil (IQR), dan pencilan, boxplot membantu menentukan apakah fitur tertentu memiliki pengaruh signifikan terhadap target dan memberikan wawasan awal untuk pemilihan fitur atau penanganan data sebelum pemodelan.<br>
   ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
-  <div align="center">Gambar 4 - </div>
+  <div align="center">Gambar 4 - Boxplot </div>
   
   **Insight**
 
@@ -211,7 +211,7 @@ Berikut tahapan EDA yang dilakukan:
   
 
 - ***Heatmap* Korelasi Setiap Fitur Numerik dengan Label**
-![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)<div align="center">Gambar 5 - Heatmap</div>
+![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)<div align="center">Gambar 5 - Heatmap Korelasi Pearson</div>
 
   **Insight**
 
@@ -238,7 +238,7 @@ Berikut tahapan EDA yang dilakukan:
 
 
 - ***Heatmap* Korelasi Setiap Fitur Numerik**
-![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)<div align="center">Gambar 6 - Heatmap</div>
+![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)<div align="center">Gambar 6 - Heatmap Korelasi Setiap Fitur Numerik</div>
 
   **Insight**
 
@@ -342,7 +342,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
  
 
     <p align="center">
-    <img src="https://github.com/user-attachments/assets/89fc036d-6b61-4df2-b181-8d69d818667b" alt="imbalanced_data" />
+    <img src="https://github.com/user-attachments/assets/8a4dde9a-6f06-4b77-aac4-682a346da4aa" alt="imbalanced_data" />
     </p><div align="center">Gambar 8 - Distribusi Kelas Data Seimbang</div>
     
 
