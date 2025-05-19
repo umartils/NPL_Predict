@@ -151,17 +151,17 @@ Berikut tahapan EDA yang dilakukan:
 
  
   ![Univariate_Cat](https://github.com/user-attachments/assets/a2942633-255c-4fe7-aed9-e96396942de9)
-  <div align="center">Gambar 1.1 - Univariate Analysis Categorical Column</div>
+  <div align="center">Gambar 1 - Univariate Analysis Categorical Column</div>
   
   **Insight**
 
-  Pada ```Gambar 1.1``` menampilkan distribusi nilai pada kolom kategorikal yang ada di *dataset*. Terlihat bahwa kolom ```education``` dan ```self_employed``` memiliki distribusi yang merata dari setiap kategorinya, sedangkan pada kolom ``loan_status`` distribusi datanya kurang merata dimana kategori `Approved` memiliki jumlah yang lebih banyak dibanding kategori ``Rejected``. Perlu dilakukan proses *feature engineering* agar jumlah data pada kedua kategori dapat seimbang sehingga hasil dari model *machine learning* memiliki performa yang lebih baik. <br>
+  Pada ```Gambar 1``` menampilkan distribusi nilai pada kolom kategorikal yang ada di *dataset*. Terlihat bahwa kolom ```education``` dan ```self_employed``` memiliki distribusi yang merata dari setiap kategorinya, sedangkan pada kolom ``loan_status`` distribusi datanya kurang merata dimana kategori `Approved` memiliki jumlah yang lebih banyak dibanding kategori ``Rejected``. Perlu dilakukan proses *feature engineering* agar jumlah data pada kedua kategori dapat seimbang sehingga hasil dari model *machine learning* memiliki performa yang lebih baik. <br>
   ![Univariate_Num](https://github.com/user-attachments/assets/8bed92ff-86d1-491b-b69f-92ff574d21a9)
-  <div align="center">Gambar 1.2 - Univariate Analysis Numerical Column</div>
+  <div align="center">Gambar 2 - Univariate Analysis Numerical Column</div>
   
   **Insight**
 
-  Berikut beberapa insight yang diperoleh dari ```Gambar 1.2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
+  Berikut beberapa insight yang diperoleh dari ```Gambar 2``` mengenai distribusi nilai pada kolom numerik dalam dataset: 
   - ```no_of_dependents```: memiliki distribusi diskrit dan merata dengan rentang 0 hingga 5, artinya pemohon tersebar relatif seimbang berdasarkan jumlah tanggungan.
   - ```income_annum```: memiliki distribusi cenderung seragam (*uniform*) dengan sedikit variasi. 
   - ```loan_amount```: memiliki distribusi cenderung *right skewed* 
@@ -175,11 +175,11 @@ Berikut tahapan EDA yang dilakukan:
 
 - ***Multivariate Data Analysis***
   ![Pairplot](https://github.com/user-attachments/assets/27c43ffb-2f2d-40d4-9199-8b85d2bb98a9)
-  <div align="center">Gambar 1.3 - Pairplot</div>
+  <div align="center">Gambar 3 - Pairplot</div>
 
   **Insight**
 
-  Pada `Gambar 1.3` menampilkan hubungan multivariat antar kolom numerik terhadap kolom `loan_status` (Approved/Rejected). Berikut tambahan informasi yang diperoleh:
+  Pada `Gambar 3` menampilkan hubungan multivariat antar kolom numerik terhadap kolom `loan_status` (Approved/Rejected). Berikut tambahan informasi yang diperoleh:
 
   * Kolom `residential_assets_value`, `commercial_assets_value`, dan `luxury_assets_value` memiliki distribusi yang cenderung tidak normal dan sebagian besar datanya terkonsentrasi di nilai rendah (left-skewed).
   * Hubungan linier juga terlihat antara:
@@ -202,20 +202,20 @@ Berikut tahapan EDA yang dilakukan:
  
   Visualisasi data menggunakan *box plot* bertujuan untuk melihat distribusi data pada kolom numerik,  mengidentifikasi perbedaan distribusi antar kelas, serta mendeteksi keberadaan outliers yang dapat memengaruhi performa model. Dengan melihat median, rentang interkuartil (IQR), dan pencilan, boxplot membantu menentukan apakah fitur tertentu memiliki pengaruh signifikan terhadap target dan memberikan wawasan awal untuk pemilihan fitur atau penanganan data sebelum pemodelan.<br>
   ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
-  <div align="center">Gambar 1.4 - </div>
+  <div align="center">Gambar 4 - </div>
   
   **Insight**
 
-  Berdasarkan ```Gambar 1.4``` terdapat kolom yang memiliki *outlier* yaitu kolom ```residential_assets_value```, ```commercial_assets_value```, dan ```bank_assets_value```. Kondisi ini terjadi apabila terdapat data yang bernilai ekstrem atau jauh dari nilai mayoritas pada data.
+  Berdasarkan ```Gambar 4``` terdapat kolom yang memiliki *outlier* yaitu kolom ```residential_assets_value```, ```commercial_assets_value```, dan ```bank_assets_value```. Kondisi ini terjadi apabila terdapat data yang bernilai ekstrem atau jauh dari nilai mayoritas pada data.
   <br>
   
 
 - ***Heatmap* Korelasi Setiap Fitur Numerik dengan Label**
-![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)<div align="center">Gambar 1.5 - Heatmap</div>
+![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)<div align="center">Gambar 5 - Heatmap</div>
 
   **Insight**
 
-  Pada `Gambar 1.5` menunjukkan korelasi Pearson antara setiap kolom numerik terhadap kolom label `loan_status`. Terlihat bahwa:
+  Pada `Gambar 5` menunjukkan korelasi Pearson antara setiap kolom numerik terhadap kolom label `loan_status`. Terlihat bahwa:
 
   * Fitur dengan nilai korelasi tertinggi terhadap kolom `loan_status` adalah **`cibil_score`** dengan nilai korelasi sebesar **0.77**, yang berarti hubungan positif yang kuat. Artinya, semakin tinggi nilai `cibil_score`, maka semakin besar kemungkinan pinjaman akan **disetujui (*Approved*)**.
   * Sementara itu, fitur lain seperti:
@@ -238,11 +238,11 @@ Berikut tahapan EDA yang dilakukan:
 
 
 - ***Heatmap* Korelasi Setiap Fitur Numerik**
-![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)<div align="center">Gambar 1.6 - Heatmap</div>
+![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)<div align="center">Gambar 6 - Heatmap</div>
 
   **Insight**
 
-  Pada `Gambar 1.6` menampilkan korelasi setiap kolom numerik pada data. Berikut informasi yang didapatkan dari gambar tersebut:
+  Pada `Gambar 6` menampilkan korelasi setiap kolom numerik pada data. Berikut informasi yang didapatkan dari gambar tersebut:
 
   * `income_annum` dan `loan_amount` memiliki korelasi yang paling tinggi yaitu sebesar **0.93** atau **93%**
   * `income_annum` dan `luxury_assets_value` juga memiliki korelasi tinggi yaitu sebesar **0.93** atau **93%**
@@ -324,7 +324,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
   
     <p align="center">
     <img src="https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94" alt="imbalanced_data" />
-    </p><div align="center">Gambar 1.2 - Imbalanced Data</div>
+    </p><div align="center">Gambar 7 - Distribusi Kelas Data Tidak Seimbang</div>
     
     Untuk mengatasi kondisi *imbalanced data*, terdapat beberapa pendekatan yang umum digunakan, antara lain:
 
@@ -338,7 +338,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
     * **SMOTE (*Synthetic Minority Over-sampling Technique*)**: Membuat data sintetis baru untuk kelas minoritas dengan cara menginterpolasi antar titik data terdekat. Teknik ini lebih canggih dibanding random *oversampling* karena menghasilkan variasi data baru yang dapat membantu model belajar pola dengan lebih baik.
 
-    Dengan menerapkan teknik *oversampling*, distribusi kelas dalam dataset menjadi lebih seimbang, sehingga model yang dibangun dapat belajar lebih adil terhadap seluruh kelas dan menghasilkan prediksi yang lebih akurat serta representatif, terutama dalam mengidentifikasi kelas minoritas.
+    Dengan menerapkan teknik *oversampling*, distribusi kelas dalam dataset menjadi lebih seimbang seperti pada `Gambar 8`, sehingga model yang dibangun dapat belajar lebih adil terhadap seluruh kelas dan menghasilkan prediksi yang lebih akurat serta representatif, terutama dalam mengidentifikasi kelas minoritas.
  
 
     
