@@ -250,7 +250,6 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     print(df[categorical_columns].head())
     ```
 
-    <br>
 
     **Output**
 
@@ -272,7 +271,6 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     print(df[cat_col].head())
     ```
 
-    <br>
 
     **Output**
 
