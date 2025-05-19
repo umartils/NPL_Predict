@@ -229,11 +229,13 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
   - Menghapus nilai tidak relevan
   - Menangani *Outliers*
+  
+  <br>
 - ***Data Transformation***
   
   Tahap transformasi data merupakan tahap untuk mengubah bentuk atau format data mentah menjadi data yang siap untuk digunakan pemodelan. Proses transformasi data sangat penting dilakukan agar model yang dibangun memiliki performa yang baik. Berikut beberapa tahapan yang akan dilakukan dalam proses transformasi data:
 
-  - Enkode Data Kategorical (Data *Encoding*)
+  - **Enkode Data Kategorical (Data *Encoding*)**
 
     *Data encoding* merupakan proses mengubah data kategorikal ke dalam bentuk numerik. Hal ini dilakukan karena model tidak dapat membaca data dalam bentuk teks atau kategorikal dan hanya dapat membaca data berupa angka atau bentuk numerik, sehingga tahap ini sangat penting jika terdapat data kategorikal pada dataset. 
 
@@ -280,14 +282,18 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     | 3     | 1        | 0              | 0           |
     | 4     | 0        | 1              | 0           |
 
-  - Mengatasi *Imbalanced Data* 
+  - **Mengatasi *Imbalanced Data*** 
 
-    *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang seperti pada ```Gambar 7```
+    *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang. Ketika distribusi data setiap kelas tidak seimbang, perlu dilakukan proses balancing data. Hal ini dilakukan agar model machine learning yang dibuat dapat melakukan prediksi dengan baik. Karena ketika data tidak seimbang, model akan cenderung mengabaikan kelas minoritas, sehingga performa dari model tidak maksimal. Selain itu model yang dibangun memiliki nilai akurasi yang tinggi, namun menipu karena model akan fokus untuk memprediksi kelas mayoritas. Kondisi *imbalanced data* bisa dilihat seperti pada ```Gambar 7```.
   
     <p align="center">
     <img src="https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94" alt="imbalanced_data" />
     </p><div align="center">Gambar 1.2 - Imbalanced Data</div>
     
+    Untuk mengatasi kondisi *imbalanced data* dapat dilakukan teknik *Oversampling* atau *Undesampling*. Pada tahap ini, teknik yang digunakan adalah *oversampling*. *Oversampling* adalah teknik untuk menambahkan jumlah kelas minoritas agar sama dengan jumlah kelas mayoritas. Terdapat beberapa jenis teknik *oversampling* seperti *Random Oversampling* atau *SMOTE* (*Synthetic Minority Over-Sampling Technique*). Cara kerja *random oversampling* adalah dengan melakukan duplikasi data kelas minoritas secara acak hingga kelas minoritas memiliki jumlah yang sama dengan kelas mayoritas. Dengan teknik ini, distribusi kelas data menjadi seimbang sehingga performa model yang dibangun akan lebih baik dibanding jika menggunakan data yang tidak seimbang. 
+
+    <br>
+
 - ***Data Splitting***
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
