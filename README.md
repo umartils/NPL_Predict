@@ -214,7 +214,25 @@ Berikut tahapan EDA yang dilakukan:
 ![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)<div align="center">Gambar 1.5 - Heatmap</div>
 
   **Insight**
-  Pada ```Gambar 1.5``` menunjukkan korelasi pearson setiap kolom numerik dengan kolom label yaitu kolom ```loan_status```. Terlihat bahwa fitur yang memiliki nilai korelasi paling tinggi terhadap kolom label adalah fitur ```cibi_score```. Artinya, semakin tinggi nilai dari ```cibil_score``` maka kemungkinan 
+
+  Pada `Gambar 1.5` menunjukkan korelasi Pearson antara setiap kolom numerik terhadap kolom label `loan_status`. Terlihat bahwa:
+
+  * Fitur dengan nilai korelasi tertinggi terhadap kolom `loan_status` adalah **`cibil_score`** dengan nilai korelasi sebesar **0.77**, yang berarti hubungan positif yang kuat. Artinya, semakin tinggi nilai `cibil_score`, maka semakin besar kemungkinan pinjaman akan **disetujui (*Approved*)**.
+  * Sementara itu, fitur lain seperti:
+
+    * `loan_amount` (0.02),
+    * `income_annum` (-0.02),
+    * `residential_assets_value` (-0.01),
+    * `bank_asset_value` (-0.01),
+    * dan lainnya, menunjukkan korelasi yang sangat lemah atau hampir tidak ada hubungan dengan status pinjaman.
+  * Korelasi negatif paling besar ditunjukkan oleh `loan_term` (-0.11), yang mengindikasikan bahwa semakin panjang jangka waktu pinjaman, kemungkinan untuk disetujui sedikit lebih rendah, meskipun hubungan ini juga masih sangat lemah.
+
+
+  **Kesimpulan**
+
+  * Dari hasil ini, dapat disimpulkan bahwa **`cibil_score`** merupakan fitur paling berpengaruh dalam menentukan status pinjaman.
+  * Fitur numerik lain mungkin tidak secara langsung memengaruhi keputusan, atau kontribusinya baru terlihat dalam interaksi dengan fitur lain (non-linear relationship).
+  * Oleh karena itu, penting untuk mempertimbangkan fitur tambahan atau transformasi fitur (feature engineering) serta mencoba model non-linear untuk mengeksplorasi hubungan yang lebih kompleks dalam prediksi `loan_status`.
   <br>
 
 
@@ -302,17 +320,53 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
   - **Mengatasi *Imbalanced Data*** 
 
-    *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang. Ketika distribusi data setiap kelas tidak seimbang, perlu dilakukan proses balancing data. Hal ini dilakukan agar model machine learning yang dibuat dapat melakukan prediksi dengan baik. Karena ketika data tidak seimbang, model akan cenderung mengabaikan kelas minoritas, sehingga performa dari model tidak maksimal. Selain itu model yang dibangun memiliki nilai akurasi yang tinggi, namun menipu karena model akan fokus untuk memprediksi kelas mayoritas. Kondisi *imbalanced data* bisa dilihat seperti pada ```Gambar 7```.
+    *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang, yaitu salah satu kelas (biasanya kelas mayoritas) memiliki jumlah data yang jauh lebih banyak dibandingkan kelas lainnya (kelas minoritas). Ketika distribusi kelas tidak seimbang, model *machine learning* yang dibangun cenderung bias terhadap kelas mayoritas dan mengabaikan kelas minoritas. Akibatnya, meskipun nilai akurasi model tampak tinggi, model tersebut dapat menipu karena gagal memprediksi kelas minoritas secara akurat. Hal ini menyebabkan performa model secara keseluruhan menjadi tidak optimal, khususnya jika metrik evaluasi seperti *precision*, *recall*, atau *F1-score* digunakan. Kondisi *imbalanced data* bisa dilihat seperti pada ```Gambar 7```.
   
     <p align="center">
     <img src="https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94" alt="imbalanced_data" />
     </p><div align="center">Gambar 1.2 - Imbalanced Data</div>
     
-    Untuk mengatasi kondisi *imbalanced data* dapat dilakukan teknik *Oversampling* atau *Undesampling*. Pada tahap ini, teknik yang digunakan adalah *oversampling*. *Oversampling* adalah teknik untuk menambahkan jumlah kelas minoritas agar sama dengan jumlah kelas mayoritas. Terdapat beberapa jenis teknik *oversampling* seperti *Random Oversampling* atau *SMOTE* (*Synthetic Minority Over-Sampling Technique*). Cara kerja *random oversampling* adalah dengan melakukan duplikasi data kelas minoritas secara acak hingga kelas minoritas memiliki jumlah yang sama dengan kelas mayoritas. Dengan teknik ini, distribusi kelas data menjadi seimbang sehingga performa model yang dibangun akan lebih baik dibanding jika menggunakan data yang tidak seimbang. 
+    Untuk mengatasi kondisi *imbalanced data*, terdapat beberapa pendekatan yang umum digunakan, antara lain:
+
+    * ***Oversampling***: Menambahkan jumlah data pada kelas minoritas agar setara dengan kelas mayoritas.
+    * ***Undersampling***: Mengurangi jumlah data pada kelas mayoritas agar seimbang dengan kelas minoritas.
+    * ***Hybrid methods***: Menggabungkan *oversampling* dan undersampling.
+
+    Pada tahap ini, teknik yang digunakan adalah ***oversampling***. Oversampling bertujuan untuk meningkatkan proporsi kelas minoritas dalam dataset agar distribusi kelas menjadi seimbang. Beberapa metode *oversampling* yang umum digunakan adalah:
+
+    * ***Random Oversampling***: Duplikasi acak terhadap data dari kelas minoritas hingga jumlahnya setara dengan kelas mayoritas. Meskipun sederhana dan cepat, metode ini berisiko menimbulkan *overfitting* karena data yang sama diulang berkali-kali.
+
+    * **SMOTE (*Synthetic Minority Over-sampling Technique*)**: Membuat data sintetis baru untuk kelas minoritas dengan cara menginterpolasi antar titik data terdekat. Teknik ini lebih canggih dibanding random *oversampling* karena menghasilkan variasi data baru yang dapat membantu model belajar pola dengan lebih baik.
+
+    Dengan menerapkan teknik *oversampling*, distribusi kelas dalam dataset menjadi lebih seimbang, sehingga model yang dibangun dapat belajar lebih adil terhadap seluruh kelas dan menghasilkan prediksi yang lebih akurat serta representatif, terutama dalam mengidentifikasi kelas minoritas.
+ 
 
     <br>
 
 - ***Data Splitting***
+  
+  *Data splitting* adalah proses memisahkan dataset menjadi dua bagian utama, yaitu **data latih (*training set*)** dan **data uji (*testing set*)**. Tujuan dari proses ini adalah untuk mengevaluasi kinerja model secara objektif terhadap data yang belum pernah dilihat sebelumnya. Rasio yang umum digunakan dalam pemisahan data adalah **80:20**, artinya:
+
+  * **80%** dari total data digunakan sebagai **data latih** untuk melatih model machine learning.
+  * **20%** sisanya digunakan sebagai **data uji** untuk menguji performa model.
+
+  Proses ini sangat penting agar model tidak hanya mengingat data pelatihan (*overfitting*), tetapi juga mampu melakukan generalisasi dengan baik terhadap data baru.
+
+  **Tujuan Data Splitting (80:20):**
+
+  - **Melatih model secara efektif:**
+     Sebagian besar data (80%) digunakan untuk melatih model agar dapat memahami pola dan hubungan antar fitur serta target.
+
+  - **Mengukur performa model secara objektif:**
+     Dengan menyisihkan 20% data untuk pengujian, kita dapat mengevaluasi seberapa baik model bekerja pada data yang belum pernah dilihat sebelumnya (*unseen data*).
+
+  - **Menghindari *overfitting*:**
+     Dengan adanya data uji yang terpisah, kita bisa mengetahui apakah model hanya menghafal data pelatihan atau benar-benar mampu melakukan generalisasi.
+
+  - **Menjaga efisiensi dan keadilan dalam evaluasi:**
+     Rasio 80:20 memberikan keseimbangan antara cukupnya data untuk pelatihan dan tersedianya data yang cukup untuk evaluasi. Jika proporsi data uji terlalu kecil, evaluasi bisa menjadi bias; jika terlalu besar, data latih menjadi tidak cukup.
+
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan proses data preparation yang dilakukan
