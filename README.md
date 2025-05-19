@@ -241,7 +241,6 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
     Metode yang digunakan dalam proses *data encoding* adalah *label encoding*, dimana setiap kategori diubah ke dalam bentuk satu digit angka. Hal ini dilakukan karena setiap kolom yang memiliki data kategorikal pada dataset hanya terdapat dua jenis data saja, seperti *Graduate* atau *Not Graduate* pada kolom ```education```, lalu *yes* atau *no* pada kolom ```self_employed```, dan *Approved* atau *Rejected* pada kolom ```loan_status```. Berikut merupakan gambaran dari proses *data encoding*.
 
-    <br>
     
     **Kode**
 
@@ -283,9 +282,12 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     | 3     | 1        | 0              | 0           |
     | 4     | 0        | 1              | 0           |
 
-  - Mengatasi Kelas Tidak Seimbang 
-  
-    Pada tahap ini,
+  - Mengatasi *Imbalanced Data* 
+
+    *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang seperti pada ```Gambar 7```
+
+    
+    
 - ***Data Splitting***
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
