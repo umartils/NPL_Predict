@@ -340,7 +340,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
     Dengan menerapkan teknik *oversampling*, distribusi kelas dalam dataset menjadi lebih seimbang seperti pada `Gambar 8`, sehingga model yang dibangun dapat belajar lebih adil terhadap seluruh kelas dan menghasilkan prediksi yang lebih akurat serta representatif, terutama dalam mengidentifikasi kelas minoritas.
  
-
+    ![Image](https://github.com/user-attachments/assets/89fc036d-6b61-4df2-b181-8d69d818667b)
     
 
 - ***Data Splitting***
