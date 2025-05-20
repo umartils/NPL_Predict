@@ -112,7 +112,7 @@ Berikut tahapan EDA yang dilakukan:
     
 - **Melihat ringkasan statistik deskriptif kolom numerik**
   
-    | **Feature**                   | **count**   | **mean**        | **std**         | **min**     | *25%*      | **50%**      | **75%**       | **max**       |
+    |                    | count   | mean        | std         | min     | *25%*      | 50%      | 75%       | max       |
     |---------------------------|---------|-------------|-------------|---------|----------|----------|-----------|-----------|
     | no_of_dependents          | 4269.0  | 2.498712e+00| 1.695910e+00| 0.0     | 1.0      | 3.0      | 4.0       | 5.0       |
     | income_annum              | 4269.0  | 5.059124e+06| 2.806840e+06| 200000.0| 2700000.0| 5100000.0| 7500000.0 | 9900000.0 |
@@ -290,12 +290,12 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
     
     | Index | Education     | Self Employed | Loan Status |
-    |-------|---------------|----------------|--------------|
-    | 0     | Graduate       | No             | Approved     |
-    | 1     | Not Graduate   | Yes            | Rejected     |
-    | 2     | Graduate       | No             | Rejected     |
-    | 3     | Graduate       | No             | Rejected     |
-    | 4     | Not Graduate   | Yes            | Rejected     |
+    |-------|---------------|---------------|-------------|
+    | 0     | Not Graduate  | Yes           | Rejected    |
+    | 1     | Graduate      | No            | Rejected    |
+    | 2     | Graduate      | No            | Rejected    |
+    | 3     | Not Graduate  | Yes           | Rejected    |
+    | 4     | Graduate      | Yes           | Rejected    |
 
     **Kode**
 
@@ -310,13 +310,13 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     **Output**
 
     
-    | Index | Education | Self Employed | Loan Status |
-    |-------|----------|----------------|-------------|
-    | 0     | 1        | 0              | 1           |
-    | 1     | 0        | 1              | 0           |
-    | 2     | 1        | 0              | 0           |
-    | 3     | 1        | 0              | 0           |
-    | 4     | 0        | 1              | 0           |
+    | Index | Education| Self Employed | Loan Status |
+    |-------|----------|---------------|-------------|
+    | 0     | 0        | 1             | 0           |
+    | 1     | 0        | 0             | 0           |
+    | 2     | 1        | 0             | 0           |
+    | 3     | 0        | 1             | 0           |
+    | 4     | 1        | 1             | 0           |
 
   - **Mengatasi *Imbalanced Data*** 
 
@@ -345,6 +345,42 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     <img src="https://github.com/user-attachments/assets/8a4dde9a-6f06-4b77-aac4-682a346da4aa" alt="imbalanced_data" />
     </p><div align="center">Gambar 8 - Distribusi Kelas Data Seimbang</div>
     
+  - **Standarisasi Data**
+
+    Standarisasi data merupakan proses mengubah nilai-nilai pada fitur numerik agar berada dalam skala tertentu tanpa mengubah distribusi relatif data. Proses ini perlu dilakukan terutama pada dengan rentang nilai yang sangat bervariasi antar fitur, karena beberapa model *machine learning* seperti decision tree, random forest, dan lainnya dapat terpengaruh oleh fitur dengan skala dominan.
+
+    Standarasi data bertujuan agar data memiliki rentang yang sama, sehingga tidak ada fitur yang dominan karena memiliki nilai yang jauh lebih besar dibanding fitur lainnya. Selain itu juga dengan melakukan standarisai dapat meningkatkan performa model *machine learning* dibanding jika data tidak dalam rentang yang sama. Berikut penerapan dari proses standarisasi data.
+
+    **Data Sebelum Standarisasi**
+    
+
+    |                     | count  | mean        | std         | min      | 25%       | 50%       | 75%       | max        |
+    |---------------------------|--------|-------------|-------------|----------|-----------|-----------|-----------|------------|
+    | no_of_dependents          | 4098.0 | 2.499024e+00 | 1.694835e+00 | 0.0      | 1.0       | 3.0       | 4.0       | 5.0        |
+    | income_annum              | 4098.0 | 4.993289e+06 | 2.743011e+06 | 200000.0 | 2700000.0 | 5000000.0 | 7400000.0 | 9900000.0  |
+    | loan_amount               | 4098.0 | 1.495549e+07 | 8.879951e+06 | 300000.0 | 7625000.0 | 14400000.0| 21100000.0| 39500000.0 |
+    | loan_term                 | 4098.0 | 1.088141e+01 | 5.708747e+00 | 2.0      | 6.0       | 10.0      | 16.0      | 20.0       |
+    | cibil_score               | 4098.0 | 5.998580e+02 | 1.724263e+02 | 300.0    | 453.25    | 600.0     | 748.0     | 900.0      |
+    | residential_assets_value  | 4098.0 | 7.314324e+06 | 6.122743e+06 | 100000.0 | 2200000.0 | 5600000.0 | 11100000.0| 25000000.0 |
+    | commercial_assets_value   | 4098.0 | 4.835139e+06 | 4.186796e+06 | 0.0      | 1300000.0 | 3700000.0 | 7500000.0 | 16800000.0 |
+    | luxury_assets_value       | 4098.0 | 1.495688e+07 | 8.948087e+06 | 300000.0 | 7500000.0 | 14400000.0| 21300000.0| 39200000.0 |
+    | bank_asset_value          | 4098.0 | 4.900537e+06 | 3.160728e+06 | 0.0      | 2300000.0 | 4500000.0 | 7000000.0 | 14000000.0 |
+
+    **Data Setelah Standarisasi**
+
+    |                    | count  | mean     | std      | min | 25%      | 50%      | 75%      | max |
+    |---------------------------|--------|----------|----------|-----|----------|----------|----------|-----|
+    | no_of_dependents          | 4098.0 | 0.499805 | 0.338967 | 0.0 | 0.200000 | 0.600000 | 0.800000 | 1.0 |
+    | income_annum              | 4098.0 | 0.494154 | 0.282785 | 0.0 | 0.257732 | 0.494845 | 0.742268 | 1.0 |
+    | loan_amount               | 4098.0 | 0.373865 | 0.226529 | 0.0 | 0.186862 | 0.356964 | 0.530612 | 1.0 |
+    | loan_term                 | 4098.0 | 0.493411 | 0.317153 | 0.0 | 0.222222 | 0.444444 | 0.777778 | 1.0 |
+    | cibil_score               | 4098.0 | 0.499763 | 0.287377 | 0.0 | 0.255417 | 0.500000 | 0.746667 | 1.0 |
+    | residential_assets_value  | 4098.0 | 0.289732 | 0.245893 | 0.0 | 0.084337 | 0.220884 | 0.441767 | 1.0 |
+    | commercial_assets_value   | 4098.0 | 0.287806 | 0.249214 | 0.0 | 0.077381 | 0.220238 | 0.446429 | 1.0 |
+    | luxury_assets_value       | 4098.0 | 0.376874 | 0.230028 | 0.0 | 0.185090 | 0.362468 | 0.539846 | 1.0 |
+    | bank_asset_value          | 4098.0 | 0.350038 | 0.225766 | 0.0 | 0.164286 | 0.321429 | 0.500000 | 1.0 |
+
+    Terlihat perbedaan nilai antara data sebelum standarisasi dan setelah standarisasi. Pada data sebelum standarisasi, rentang nilai setiap fitur sangat bervariasi, sedangkan setelah standarisasi rentang nilai semua fitur berada di rentang 0 hingga 1. Meskipun skala data telah diubah, distribusi relatif antar nilai dalam setiap fitur tetap terjaga. Artinya, pola hubungan antar data dalam setiap fitur tidak berubah, hanya dinormalisasi agar berada dalam skala yang sama. Selain itu, proses standarisasi tidak mengubah jumlah data atau strukturnya, hanya memodifikasi nilai numerik dari fitur numerik yang ada.
 
 - ***Data Splitting***
   
