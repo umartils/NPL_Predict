@@ -327,8 +327,8 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     **Data Sebelum Standarisasi**
     
 
-    |                     | count  | mean        | std         | min      | 25%       | 50%       | 75%       | max        |
-    |---------------------------|--------|-------------|-------------|----------|-----------|-----------|-----------|------------|
+    |                           | count  | mean         | std          | min      | 25%       | 50%       | 75%       | max        |
+    |---------------------------|--------|--------------|--------------|----------|-----------|-----------|-----------|------------|
     | no_of_dependents          | 4098.0 | 2.499024e+00 | 1.694835e+00 | 0.0      | 1.0       | 3.0       | 4.0       | 5.0        |
     | income_annum              | 4098.0 | 4.993289e+06 | 2.743011e+06 | 200000.0 | 2700000.0 | 5000000.0 | 7400000.0 | 9900000.0  |
     | loan_amount               | 4098.0 | 1.495549e+07 | 8.879951e+06 | 300000.0 | 7625000.0 | 14400000.0| 21100000.0| 39500000.0 |
@@ -341,7 +341,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
     **Data Setelah Standarisasi**
 
-    |                    | count  | mean     | std      | min | 25%      | 50%      | 75%      | max |
+    |                           | count  | mean     | std      | min | 25%      | 50%      | 75%      | max |
     |---------------------------|--------|----------|----------|-----|----------|----------|----------|-----|
     | no_of_dependents          | 4098.0 | 0.499805 | 0.338967 | 0.0 | 0.200000 | 0.600000 | 0.800000 | 1.0 |
     | income_annum              | 4098.0 | 0.494154 | 0.282785 | 0.0 | 0.257732 | 0.494845 | 0.742268 | 1.0 |
@@ -413,6 +413,27 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 - Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
 
 ## Modeling
+### Support Vector Machine
+
+
+*Support Vector Machine* (SVM) adalah salah satu algoritma *supervised learning* yang digunakan untuk klasifikasi dan regresi, namun lebih sering digunakan untuk klasifikasi. Mekanisme kerja SVM bertujuan untuk menemukan *hyperplane* terbaik yang dapat memisahkan data ke dalam kelas-kelas yang berbeda. Berikut mekanisme kerja algoritma SVM:
+
+- SVM mencari pemisah terbaik (*hyperlane*) antara dua kelas dengan memetakan data ke ruang dimensi tinggi. Jika data tidak dapat dipisahkan secara linier, maka SVM akan melakukan transformasi non-linier ke dalam dimensi yang lebih tinggi menggunakan *kernel trick*
+- 
+
+**Parameter**
+**Performa**
+
+### Random Forest
+
+**Parameter**
+**Performa**
+
+### XGBoost
+
+**Parameter**
+**Performa**
+
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
 Pada tahap awal modeling, saya coba menggunakan algoritma decision tree untuk melakukan prediksi biner. H
 
