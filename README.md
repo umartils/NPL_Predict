@@ -355,7 +355,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
     Terlihat perbedaan nilai antara data sebelum standarisasi dan setelah standarisasi. Pada data sebelum standarisasi, rentang nilai setiap fitur sangat bervariasi, sedangkan setelah standarisasi rentang nilai semua fitur berada di rentang 0 hingga 1. Meskipun skala data telah diubah, distribusi relatif antar nilai dalam setiap fitur tetap terjaga. Artinya, pola hubungan antar data dalam setiap fitur tidak berubah, hanya dinormalisasi agar berada dalam skala yang sama. Selain itu, proses standarisasi tidak mengubah jumlah data atau strukturnya, hanya memodifikasi nilai numerik dari fitur numerik yang ada.
 
-    - **Mengatasi *Imbalanced Data*** 
+  - **Mengatasi *Imbalanced Data*** 
 
     *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang, yaitu salah satu kelas (biasanya kelas mayoritas) memiliki jumlah data yang jauh lebih banyak dibandingkan kelas lainnya (kelas minoritas). Ketika distribusi kelas tidak seimbang, model *machine learning* yang dibangun cenderung bias terhadap kelas mayoritas dan mengabaikan kelas minoritas. Akibatnya, meskipun nilai akurasi model tampak tinggi, model tersebut dapat menipu karena gagal memprediksi kelas minoritas secara akurat. Hal ini menyebabkan performa model secara keseluruhan menjadi tidak optimal, khususnya jika metrik evaluasi seperti *precision*, *recall*, atau *F1-score* digunakan. Kondisi *imbalanced data* bisa dilihat seperti pada ```Gambar 7```.
   
