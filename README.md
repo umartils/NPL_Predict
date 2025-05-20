@@ -264,7 +264,51 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
   Pada tahap ini, data dibersihkan untuk meningkatkan kualitas dari data yang akan digunakan untuk melakukan pemodelan. Pada tahap ini ada beberapa hal yang akan dilakukan, yaitu sebagai berikut:
 
   - Menghapus nilai tidak relevan
+  
+    Pada tahap ini, dilakukan proses pembersihan data dengan menghilangkan nilai yang tidak relevan. Pada dataset yang digunakan, terdapat nilai tidak relevan pada kolom `residential_assets_value` dimana terdapat data yang bernilai negatif. Setelah diperiksa ternyata semua data yang bernilai negatif memiliki nilai yang sama, yaitu -100000.
+
+    **Data Sebelum Dibersihkan**
+    
+    |                    | count   | mean        | std         | min     | *25%*      | 50%      | 75%       | max       |
+    |---------------------------|---------|-------------|-------------|---------|----------|----------|-----------|-----------|
+    | no_of_dependents          | 4269.0  | 2.498712e+00| 1.695910e+00| 0.0     | 1.0      | 3.0      | 4.0       | 5.0       |
+    | income_annum              | 4269.0  | 5.059124e+06| 2.806840e+06| 200000.0| 2700000.0| 5100000.0| 7500000.0 | 9900000.0 |
+    | loan_amount               | 4269.0  | 1.513345e+07| 9.043363e+06| 300000.0| 7700000.0| 14500000.0| 21500000.0| 39500000.0|
+    | loan_term                 | 4269.0  | 1.090045e+01| 5.709187e+00| 2.0     | 6.0      | 10.0     | 16.0      | 20.0      |
+    | cibil_score               | 4269.0  | 5.999361e+02| 1.724304e+02| 300.0   | 453.0    | 600.0    | 748.0     | 900.0     |
+    | residential_assets_value  | 4269.0  | 7.472617e+06| 6.503637e+06| -100000.0|2200000.0 | 5600000.0| 11300000.0| 29100000.0|
+    | commercial_assets_value   | 4269.0  | 4.973155e+06| 4.388986e+06| 0.0     | 1300000.0| 3700000.0| 7600000.0 | 19400000.0|
+    | luxury_assets_value       | 4269.0  | 1.512631e+07| 9.103754e+06| 300000.0| 7500000.0| 14600000.0| 21700000.0| 39200000.0|
+    | bank_asset_value          | 4269.0  | 4.976692e+06| 3.250185e+06| 0.0     | 2300000.0| 4600000.0| 7100000.0 | 14700000.0|
+
+    Untuk membersihkan nilai tidak relevan, saya menjalan kode sebagai berikut.
+
+    ```py
+    data = df.drop(columns='loan_id')
+    data = data[data['residential_assets_value'] > 0]
+    data.describe().T 
+    ```
+
+    **output**
+
+    |                     | count  | mean        | std         | min      | 25%       | 50%       | 75%        | max       |
+    |---------------------------|--------|-------------|-------------|----------|-----------|-----------|------------|-----------|
+    | no_of_dependents          | 4241.0 | 2.497996e+00 | 1.695599e+00 | 0.0      | 1.0       | 3.0       | 4.0        | 5.0       |
+    | income_annum              | 4241.0 | 5.074251e+06 | 2.803166e+06 | 200000.0 | 2700000.0 | 5100000.0 | 7500000.0  | 9900000.0 |
+    | loan_amount               | 4241.0 | 1.517840e+07 | 9.034490e+06 | 300000.0 | 7700000.0 | 14600000.0| 21500000.0 | 39500000.0|
+    | loan_term                 | 4241.0 | 1.090215e+01 | 5.708988e+00 | 2.0      | 6.0       | 10.0      | 16.0       | 20.0      |
+    | cibil_score               | 4241.0 | 5.996857e+02 | 1.722773e+02 | 300.0    | 453.0     | 600.0     | 747.0      | 900.0     |
+    | residential_assets_value  | 4241.0 | 7.522613e+06 | 6.495800e+06 | 0.0      | 2200000.0 | 5700000.0 | 11400000.0 | 29100000.0|
+    | commercial_assets_value   | 4241.0 | 4.985121e+06 | 4.391504e+06 | 0.0      | 1300000.0 | 3700000.0 | 7700000.0  | 19400000.0|
+    | luxury_assets_value       | 4241.0 | 1.517121e+07 | 9.094717e+06 | 300000.0 | 7500000.0 | 14600000.0| 21700000.0 | 39200000.0|
+    | bank_asset_value          | 4241.0 | 4.991488e+06 | 3.249494e+06 | 0.0      | 2400000.0 | 4600000.0 | 7100000.0  | 14700000.0|
+
+
+    
+
   - Menangani *Outliers*
+
+    *Outlier* adalah data yang memiliki nilai sangat jauh dari mayoritas data lainnya. Misalnya, jika kebanyakan gaji dalam dataset berada di kisaran 3 juta–10 juta, lalu ada satu data dengan gaji 200 juta, maka itu kemungkinan *outlier*. Pada tahap ini, nilai yang menjadi *outlier* akan dihilangkan agar persebaran data lebih merata dan meningkatkan kualitas data. Metode yang digunakan dalam menangani outlier adalah menggunakan metode IQR (*Interquarile Range*).
   
   
 - ***Data Transformation***
@@ -327,31 +371,36 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     **Data Sebelum Standarisasi**
     
 
-    |                           | count  | mean         | std          | min      | 25%       | 50%       | 75%       | max        |
-    |---------------------------|--------|--------------|--------------|----------|-----------|-----------|-----------|------------|
-    | no_of_dependents          | 4098.0 | 2.499024e+00 | 1.694835e+00 | 0.0      | 1.0       | 3.0       | 4.0       | 5.0        |
-    | income_annum              | 4098.0 | 4.993289e+06 | 2.743011e+06 | 200000.0 | 2700000.0 | 5000000.0 | 7400000.0 | 9900000.0  |
-    | loan_amount               | 4098.0 | 1.495549e+07 | 8.879951e+06 | 300000.0 | 7625000.0 | 14400000.0| 21100000.0| 39500000.0 |
-    | loan_term                 | 4098.0 | 1.088141e+01 | 5.708747e+00 | 2.0      | 6.0       | 10.0      | 16.0      | 20.0       |
-    | cibil_score               | 4098.0 | 5.998580e+02 | 1.724263e+02 | 300.0    | 453.25    | 600.0     | 748.0     | 900.0      |
-    | residential_assets_value  | 4098.0 | 7.314324e+06 | 6.122743e+06 | 100000.0 | 2200000.0 | 5600000.0 | 11100000.0| 25000000.0 |
-    | commercial_assets_value   | 4098.0 | 4.835139e+06 | 4.186796e+06 | 0.0      | 1300000.0 | 3700000.0 | 7500000.0 | 16800000.0 |
-    | luxury_assets_value       | 4098.0 | 1.495688e+07 | 8.948087e+06 | 300000.0 | 7500000.0 | 14400000.0| 21300000.0| 39200000.0 |
-    | bank_asset_value          | 4098.0 | 4.900537e+06 | 3.160728e+06 | 0.0      | 2300000.0 | 4500000.0 | 7000000.0 | 14000000.0 |
+    |                     | count  | mean        | std         | min      | 25%       | 50%       | 75%        | max       |
+    |---------------------------|--------|-------------|-------------|----------|-----------|-----------|------------|-----------|
+    | no_of_dependents          | 4148.0 | 2.499759e+00 | 1.694329e+00 | 0.0      | 1.0       | 3.0       | 4.0        | 5.0       |
+    | education                 | 4148.0 | 5.038573e-01 | 5.000454e-01 | 0.0      | 0.0       | 1.0       | 1.0        | 1.0       |
+    | self_employed             | 4148.0 | 5.031340e-01 | 5.000505e-01 | 0.0      | 0.0       | 1.0       | 1.0        | 1.0       |
+    | income_annum              | 4148.0 | 4.976230e+06 | 2.755451e+06 | 200000.0 | 2600000.0 | 5000000.0 | 7400000.0  | 9900000.0 |
+    | loan_amount               | 4148.0 | 1.490921e+07 | 8.914531e+06 | 300000.0 | 7600000.0 | 14300000.0| 21100000.0 | 39500000.0|
+    | loan_term                 | 4148.0 | 1.089007e+01 | 5.708494e+00 | 2.0      | 6.0       | 10.0      | 16.0       | 20.0      |
+    | cibil_score               | 4148.0 | 5.999298e+02 | 1.721955e+02 | 300.0    | 453.75    | 600.0     | 747.0      | 900.0     |
+    | residential_assets_value  | 4148.0 | 7.244455e+06 | 6.144507e+06 | 0.0      | 2200000.0 | 5500000.0 | 11000000.0 | 25100000.0|
+    | commercial_assets_value   | 4148.0 | 4.834616e+06 | 4.210183e+06 | 0.0      | 1300000.0 | 3600000.0 | 7500000.0  | 17000000.0|
+    | luxury_assets_value       | 4148.0 | 1.490137e+07 | 8.977879e+06 | 300000.0 | 7375000.0 | 14300000.0| 21225000.0 | 39200000.0|
+    | bank_asset_value          | 4148.0 | 4.880231e+06 | 3.168089e+06 | 0.0      | 2300000.0 | 4500000.0 | 7000000.0  | 14000000.0|
+    | loan_status               | 4148.0 | 6.231919e-01 | 4.846446e-01 | 0.0      | 0.0       | 1.0       | 1.0        | 1.0       |
+
 
     **Data Setelah Standarisasi**
 
-    |                           | count  | mean     | std      | min | 25%      | 50%      | 75%      | max |
-    |---------------------------|--------|----------|----------|-----|----------|----------|----------|-----|
-    | no_of_dependents          | 4098.0 | 0.499805 | 0.338967 | 0.0 | 0.200000 | 0.600000 | 0.800000 | 1.0 |
-    | income_annum              | 4098.0 | 0.494154 | 0.282785 | 0.0 | 0.257732 | 0.494845 | 0.742268 | 1.0 |
-    | loan_amount               | 4098.0 | 0.373865 | 0.226529 | 0.0 | 0.186862 | 0.356964 | 0.530612 | 1.0 |
-    | loan_term                 | 4098.0 | 0.493411 | 0.317153 | 0.0 | 0.222222 | 0.444444 | 0.777778 | 1.0 |
-    | cibil_score               | 4098.0 | 0.499763 | 0.287377 | 0.0 | 0.255417 | 0.500000 | 0.746667 | 1.0 |
-    | residential_assets_value  | 4098.0 | 0.289732 | 0.245893 | 0.0 | 0.084337 | 0.220884 | 0.441767 | 1.0 |
-    | commercial_assets_value   | 4098.0 | 0.287806 | 0.249214 | 0.0 | 0.077381 | 0.220238 | 0.446429 | 1.0 |
-    | luxury_assets_value       | 4098.0 | 0.376874 | 0.230028 | 0.0 | 0.185090 | 0.362468 | 0.539846 | 1.0 |
-    | bank_asset_value          | 4098.0 | 0.350038 | 0.225766 | 0.0 | 0.164286 | 0.321429 | 0.500000 | 1.0 |
+    |                    | count  | mean     | std      | min | 25%      | 50%      | 75%      | max |
+    |--------------------------|--------|----------|----------|-----|----------|----------|----------|-----|
+    | no_of_dependents         | 4148.0 | 0.499952 | 0.338866 | 0.0 | 0.200000 | 0.600000 | 0.800000 | 1.0 |
+    | income_annum             | 4148.0 | 0.492395 | 0.284067 | 0.0 | 0.247423 | 0.494845 | 0.742268 | 1.0 |
+    | loan_amount              | 4148.0 | 0.372684 | 0.227412 | 0.0 | 0.186224 | 0.357143 | 0.530612 | 1.0 |
+    | loan_term                | 4148.0 | 0.493893 | 0.317139 | 0.0 | 0.222222 | 0.444444 | 0.777778 | 1.0 |
+    | cibil_score              | 4148.0 | 0.499883 | 0.286993 | 0.0 | 0.256250 | 0.500000 | 0.745000 | 1.0 |
+    | residential_assets_value | 4148.0 | 0.288624 | 0.244801 | 0.0 | 0.087649 | 0.219124 | 0.438247 | 1.0 |
+    | commercial_assets_value  | 4148.0 | 0.284362 | 0.247658 | 0.0 | 0.076471 | 0.211765 | 0.441176 | 1.0 |
+    | luxury_assets_value      | 4148.0 | 0.375357 | 0.230794 | 0.0 | 0.181877 | 0.359897 | 0.537918 | 1.0 |
+    | bank_asset_value         | 4148.0 | 0.348588 | 0.226292 | 0.0 | 0.164286 | 0.321429 | 0.500000 | 1.0 |
+
 
     Terlihat perbedaan nilai antara data sebelum standarisasi dan setelah standarisasi. Pada data sebelum standarisasi, rentang nilai setiap fitur sangat bervariasi, sedangkan setelah standarisasi rentang nilai semua fitur berada di rentang 0 hingga 1. Meskipun skala data telah diubah, distribusi relatif antar nilai dalam setiap fitur tetap terjaga. Artinya, pola hubungan antar data dalam setiap fitur tidak berubah, hanya dinormalisasi agar berada dalam skala yang sama. Selain itu, proses standarisasi tidak mengubah jumlah data atau strukturnya, hanya memodifikasi nilai numerik dari fitur numerik yang ada.
 
@@ -418,21 +467,43 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
 *Support Vector Machine* (SVM) adalah salah satu algoritma *supervised learning* yang digunakan untuk klasifikasi dan regresi, namun lebih sering digunakan untuk klasifikasi. Mekanisme kerja SVM bertujuan untuk menemukan *hyperplane* terbaik yang dapat memisahkan data ke dalam kelas-kelas yang berbeda. Berikut mekanisme kerja algoritma SVM:
 
-- SVM mencari pemisah terbaik (*hyperlane*) antara dua kelas dengan memetakan data ke ruang dimensi tinggi. Jika data tidak dapat dipisahkan secara linier, maka SVM akan melakukan transformasi non-linier ke dalam dimensi yang lebih tinggi menggunakan *kernel trick*
+- SVM melakukan klasifikasi dengan cara menentukan batas keputusan yang memisahkan data antar kelas yang memiliki jarak terdekat dengan semua data pada kelas. Batas keputusan  yang dibuat oleh SVM disebut dengan *maximum margin classifier* dan dipisahkan oleh suatu bidang hiper (*hyperplane*) [5].
+- SVM mencari pemisah terbaik (*hyperplane*) antara dua kelas dengan memetakan data ke ruang dimensi tinggi. Jika data tidak dapat dipisahkan secara linier, maka SVM akan melakukan transformasi non-linier ke dalam dimensi yang lebih tinggi menggunakan *kernel trick*
 - 
 
 **Parameter**
+
+- `C` (default=1.0) : Parameter regulasi. Nilai parameter yang digunakan pada tahap pemodelan adalah `C = 6.9423`. Nilai ini didapat dari proses *hyperparameter tuning* menggunakan metode *Randomized Search*.
+- `gamma` (default='scale') : Parameter koefisien untuk kernel `rbf`, `poly`, dan `sigmoid`. Nilai parameter yang digunakan adalah nilai default `gamma='scale'`.
+- `kernel`(default='rbf') : Parameter untuk tipe kernal yang digunakan dalam pembuatan model. Nilai parameter yang digunakan adalah nilai default `kernel='rbf'`.
+
+
 **Performa**
 
-### Random Forest
+Model SVM memiliki performa yang cukup baik dengan nilai *accuracy* sebesar 94,5% dan nilai *f1-score* sebesar 94,3%. Meskipun begitu, SVM memiliki performa paling rendah dibandingkan model lainnya yang memiliki nilai *accuracy* dan *f1-score* di atas 95%.
+
+### Random Forest Classification
+
+*Random Forest Classification* adalah algoritma ensemble learning berbasis decision tree yang menggabungkan banyak pohon keputusan (*decision tree*) untuk menghasilkan prediksi yang lebih akurat dan stabil. Berikut cara kerja algoritma *Random Forest Classification*:
+
+- Membuat sampel bootstrap dari dataset asli
+- Membangun atau melatih beberapa pohon keputusanuntuk setiap sampel, menggunakan subset fitur acak pada setiap split
+- Melakukan voting dari hasil prediksi setiap pohon dan mengambil kelas mayortias dari hasil voting setiap pohon.
 
 **Parameter**
+
+
+
 **Performa**
+
+Model *Random Forest* memiliki performa yang cukup baik dengan nilai *accuracy* sebesar 98,63% dan nilai *f1-score* sebesar 98,62%. *Random Forest* merupakan model dengan performa terbaik kedua yang digunakan pada proyek ini.
 
 ### XGBoost
 
 **Parameter**
 **Performa**
+
+Model XGBoost memiliki performa yang sangat baik dengan nilai *accuracy* mencapai 99,2% dan nilai *f1-score* sebesar 99,2%. Jika dibandingkan model lainnya, XGBoost merupakan model dengan performa terbaik, dimana nilai *accuracy* dan *f1-score* nya mencapai 99%. Dengan performa ini, XGBoost dapat melakukan klasifikasi yang sangat baik dan presisi karena memiliki akurasi tinggi dan juga dapat melakukan klasifikasi yang seimbang untuk setiap kelas.
 
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
 Pada tahap awal modeling, saya coba menggunakan algoritma decision tree untuk melakukan prediksi biner. H
