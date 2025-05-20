@@ -318,33 +318,6 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     | 3     | 0        | 1             | 0           |
     | 4     | 1        | 1             | 0           |
 
-  - **Mengatasi *Imbalanced Data*** 
-
-    *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang, yaitu salah satu kelas (biasanya kelas mayoritas) memiliki jumlah data yang jauh lebih banyak dibandingkan kelas lainnya (kelas minoritas). Ketika distribusi kelas tidak seimbang, model *machine learning* yang dibangun cenderung bias terhadap kelas mayoritas dan mengabaikan kelas minoritas. Akibatnya, meskipun nilai akurasi model tampak tinggi, model tersebut dapat menipu karena gagal memprediksi kelas minoritas secara akurat. Hal ini menyebabkan performa model secara keseluruhan menjadi tidak optimal, khususnya jika metrik evaluasi seperti *precision*, *recall*, atau *F1-score* digunakan. Kondisi *imbalanced data* bisa dilihat seperti pada ```Gambar 7```.
-  
-    <p align="center">
-    <img src="https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94" alt="imbalanced_data" />
-    </p><div align="center">Gambar 7 - Distribusi Kelas Data Tidak Seimbang</div>
-    
-    Untuk mengatasi kondisi *imbalanced data*, terdapat beberapa pendekatan yang umum digunakan, antara lain:
-
-    * ***Oversampling***: Menambahkan jumlah data pada kelas minoritas agar setara dengan kelas mayoritas.
-    * ***Undersampling***: Mengurangi jumlah data pada kelas mayoritas agar seimbang dengan kelas minoritas.
-    * ***Hybrid methods***: Menggabungkan *oversampling* dan undersampling.
-
-    Pada tahap ini, teknik yang digunakan adalah ***oversampling***. Oversampling bertujuan untuk meningkatkan proporsi kelas minoritas dalam dataset agar distribusi kelas menjadi seimbang. Beberapa metode *oversampling* yang umum digunakan adalah:
-
-    * ***Random Oversampling***: Duplikasi acak terhadap data dari kelas minoritas hingga jumlahnya setara dengan kelas mayoritas. Meskipun sederhana dan cepat, metode ini berisiko menimbulkan *overfitting* karena data yang sama diulang berkali-kali.
-
-    * **SMOTE (*Synthetic Minority Over-sampling Technique*)**: Membuat data sintetis baru untuk kelas minoritas dengan cara menginterpolasi antar titik data terdekat. Teknik ini lebih canggih dibanding random *oversampling* karena menghasilkan variasi data baru yang dapat membantu model belajar pola dengan lebih baik.
-
-    Dengan menerapkan teknik *oversampling*, distribusi kelas dalam dataset menjadi lebih seimbang seperti pada `Gambar 8`, sehingga model yang dibangun dapat belajar lebih adil terhadap seluruh kelas dan menghasilkan prediksi yang lebih akurat serta representatif, terutama dalam mengidentifikasi kelas minoritas.
- 
-
-    <p align="center">
-    <img src="https://github.com/user-attachments/assets/8a4dde9a-6f06-4b77-aac4-682a346da4aa" alt="imbalanced_data" />
-    </p><div align="center">Gambar 8 - Distribusi Kelas Data Seimbang</div>
-    
   - **Standarisasi Data**
 
     Standarisasi data merupakan proses mengubah nilai-nilai pada fitur numerik agar berada dalam skala tertentu tanpa mengubah distribusi relatif data. Proses ini perlu dilakukan terutama pada dengan rentang nilai yang sangat bervariasi antar fitur, karena beberapa model *machine learning* seperti decision tree, random forest, dan lainnya dapat terpengaruh oleh fitur dengan skala dominan.
@@ -381,6 +354,34 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     | bank_asset_value          | 4098.0 | 0.350038 | 0.225766 | 0.0 | 0.164286 | 0.321429 | 0.500000 | 1.0 |
 
     Terlihat perbedaan nilai antara data sebelum standarisasi dan setelah standarisasi. Pada data sebelum standarisasi, rentang nilai setiap fitur sangat bervariasi, sedangkan setelah standarisasi rentang nilai semua fitur berada di rentang 0 hingga 1. Meskipun skala data telah diubah, distribusi relatif antar nilai dalam setiap fitur tetap terjaga. Artinya, pola hubungan antar data dalam setiap fitur tidak berubah, hanya dinormalisasi agar berada dalam skala yang sama. Selain itu, proses standarisasi tidak mengubah jumlah data atau strukturnya, hanya memodifikasi nilai numerik dari fitur numerik yang ada.
+
+    - **Mengatasi *Imbalanced Data*** 
+
+    *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang, yaitu salah satu kelas (biasanya kelas mayoritas) memiliki jumlah data yang jauh lebih banyak dibandingkan kelas lainnya (kelas minoritas). Ketika distribusi kelas tidak seimbang, model *machine learning* yang dibangun cenderung bias terhadap kelas mayoritas dan mengabaikan kelas minoritas. Akibatnya, meskipun nilai akurasi model tampak tinggi, model tersebut dapat menipu karena gagal memprediksi kelas minoritas secara akurat. Hal ini menyebabkan performa model secara keseluruhan menjadi tidak optimal, khususnya jika metrik evaluasi seperti *precision*, *recall*, atau *F1-score* digunakan. Kondisi *imbalanced data* bisa dilihat seperti pada ```Gambar 7```.
+  
+    <p align="center">
+    <img src="https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94" alt="imbalanced_data" />
+    </p><div align="center">Gambar 7 - Distribusi Kelas Data Tidak Seimbang</div>
+    
+    Untuk mengatasi kondisi *imbalanced data*, terdapat beberapa pendekatan yang umum digunakan, antara lain:
+
+    * ***Oversampling***: Menambahkan jumlah data pada kelas minoritas agar setara dengan kelas mayoritas.
+    * ***Undersampling***: Mengurangi jumlah data pada kelas mayoritas agar seimbang dengan kelas minoritas.
+    * ***Hybrid methods***: Menggabungkan *oversampling* dan undersampling.
+
+    Pada tahap ini, teknik yang digunakan adalah ***oversampling***. Oversampling bertujuan untuk meningkatkan proporsi kelas minoritas dalam dataset agar distribusi kelas menjadi seimbang. Beberapa metode *oversampling* yang umum digunakan adalah:
+
+    * ***Random Oversampling***: Duplikasi acak terhadap data dari kelas minoritas hingga jumlahnya setara dengan kelas mayoritas. Meskipun sederhana dan cepat, metode ini berisiko menimbulkan *overfitting* karena data yang sama diulang berkali-kali.
+
+    * **SMOTE (*Synthetic Minority Over-sampling Technique*)**: Membuat data sintetis baru untuk kelas minoritas dengan cara menginterpolasi antar titik data terdekat. Teknik ini lebih canggih dibanding random *oversampling* karena menghasilkan variasi data baru yang dapat membantu model belajar pola dengan lebih baik.
+
+    Dengan menerapkan teknik *oversampling*, distribusi kelas dalam dataset menjadi lebih seimbang seperti pada `Gambar 8`, sehingga model yang dibangun dapat belajar lebih adil terhadap seluruh kelas dan menghasilkan prediksi yang lebih akurat serta representatif, terutama dalam mengidentifikasi kelas minoritas.
+ 
+
+    <p align="center">
+    <img src="https://github.com/user-attachments/assets/8a4dde9a-6f06-4b77-aac4-682a346da4aa" alt="imbalanced_data" />
+    </p><div align="center">Gambar 8 - Distribusi Kelas Data Seimbang</div>
+    
 
 - ***Data Splitting***
   
