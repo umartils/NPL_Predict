@@ -324,7 +324,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     
     - **Distribusi data setelah implementasi IQR**
 
-      ![Image](https://github.com/user-attachments/assets/a3a0fd75-20b3-4984-84fc-c6a652b7f9ef)
+      ![Image](https://github.com/user-attachments/assets/0939208c-82b1-4a7e-9819-678723c84e00)
       <div align="center">Gambar 8 - Distribusi data setelah proses IQR </div>
   
   
@@ -426,7 +426,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     *Imbalanced data* merupakan kondisi ketika distribusi kelas dalam dataset tidak seimbang, yaitu salah satu kelas (biasanya kelas mayoritas) memiliki jumlah data yang jauh lebih banyak dibandingkan kelas lainnya (kelas minoritas). Ketika distribusi kelas tidak seimbang, model *machine learning* yang dibangun cenderung bias terhadap kelas mayoritas dan mengabaikan kelas minoritas. Akibatnya, meskipun nilai akurasi model tampak tinggi, model tersebut dapat menipu karena gagal memprediksi kelas minoritas secara akurat. Hal ini menyebabkan performa model secara keseluruhan menjadi tidak optimal, khususnya jika metrik evaluasi seperti *precision*, *recall*, atau *F1-score* digunakan. Kondisi *imbalanced data* bisa dilihat seperti pada ```Gambar 7```.
   
     <p align="center">
-    <img src="https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94" alt="imbalanced_data" />
+    <img src="https://github.com/user-attachments/assets/c00f7072-d4cc-4118-8558-a971822fa07c" alt="imbalanced_data" />
     </p><div align="center">Gambar 9 - Distribusi Kelas Data Tidak Seimbang</div>
     
     Untuk mengatasi kondisi *imbalanced data*, terdapat beberapa pendekatan yang umum digunakan, antara lain:
@@ -445,7 +445,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
  
 
     <p align="center">
-    <img src="https://github.com/user-attachments/assets/8a4dde9a-6f06-4b77-aac4-682a346da4aa" alt="imbalanced_data" />
+    <img src="https://github.com/user-attachments/assets/c4b6697c-fc9e-4ee0-84b9-c819ed9db546" alt="imbalanced_data" />
     </p><div align="center">Gambar 10 - Distribusi Kelas Data Seimbang</div>
     
 
