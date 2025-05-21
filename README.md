@@ -320,8 +320,12 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     - **Distribusi data sebelum implementasi IQR**
 
       ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
-  <div align="center">Gambar 4 - Distribusi data sebelum proses IQR </div>
+      <div align="center">Gambar 7 - Distribusi data sebelum proses IQR </div>
+    
     - **Distribusi data setelah implementasi IQR**
+
+      ![Image](https://github.com/user-attachments/assets/a3a0fd75-20b3-4984-84fc-c6a652b7f9ef)
+      <div align="center">Gambar 8 - Distribusi data sebelum proses IQR </div>
   
   
 - ***Data Transformation***
