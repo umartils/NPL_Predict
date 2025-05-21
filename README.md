@@ -322,6 +322,22 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
       ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
       <div align="center">Gambar 7 - Distribusi data sebelum proses IQR </div>
     
+    - **Implementasi metode IQR**
+  
+      ```py
+
+      data = df.drop(columns="loand_id")
+      numeric_columns = data.select_dtypes(include='int64').columns
+
+      for kolom in numeric_columns:
+        q1 = data[kolom].quantile(0.25)
+        q3 = data[kolom].quantile(0.75)
+        iqr = q3-q1
+
+        low_bound = q1 - 1.5 * iqr
+        up_bound = q3 + 1.5 * iqr
+        data = data[(data[kolom] > low_bound) & (data[kolom] < up_bound)]
+      ```
     - **Distribusi data setelah implementasi IQR**
 
       ![Image](https://github.com/user-attachments/assets/0939208c-82b1-4a7e-9819-678723c84e00)
@@ -480,7 +496,7 @@ Tahapan modeling merupakan inti dari proyek machine learning yang bertujuan untu
 
 Untuk mendapatkan performa terbaik, proyek ini membandingkan tiga algoritma klasifikasi populer yang memiliki karakteristik dan keunggulan masing-masing, yaitu:
 
-1. **Support Vector Classifier (SVC)**
+1. **Support Vector Machine (SVM)**
    
 
 2. **Random Forest Classifier**
@@ -539,8 +555,36 @@ Parameter yang digunakan untuk melatih model adalah parameter default.
 
 Model XGBoost memiliki performa yang sangat baik dengan nilai *accuracy* mencapai 99,9% dan nilai *f1-score* sebesar 99,9%. XGBoost  merupakan model dengan performa terbaik kedua yang digunakan pada proyek ini.
 
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
-Pada tahap awal modeling, saya coba menggunakan algoritma decision tree untuk melakukan prediksi biner.
+### Hyperparameter Tuning
+
+Hyperparameter tuning adalah proses penting dalam pengembangan model machine learning untuk meningkatkan performa prediksi. Hyperparameter merupakan parameter eksternal yang mengontrol proses pelatihan model dan tidak dipelajari langsung dari data. Contohnya meliputi jumlah pohon dalam Random Forest, nilai C dalam SVC, atau learning rate dalam XGBoost. 
+
+Tujuan dari hyperparameter tuning adalah untuk menemukan kombinasi parameter terbaik yang menghasilkan model dengan performa optimal pada data validasi, tanpa menyebabkan overfitting atau underfitting. Proses ini bertujuan untuk memaksimalkan metrik evaluasi seperti akurasi, precision, recall, atau F1-score.
+
+Dalam proyek ini, proses tuning dilakukan menggunakan metode Grid Search. Grid Search adalah pendekatan exhaustive search yang mencoba semua kombinasi nilai hyperparameter yang telah ditentukan dalam sebuah grid. Untuk setiap kombinasi, model dilatih dan dievaluasi menggunakan teknik validasi silang (cross-validation) untuk memastikan hasil tuning lebih general terhadap data yang belum terlihat.
+
+Contoh konfigurasi grid search yang digunakan dalam proyek ini antara lain:
+
+* **SVM**
+
+  * `C`: \[0.1, 1, 10]
+  * `kernel`: \['linear', 'rbf']
+  * `gamma`: \['scale', 'auto']
+
+* **Random Forest Classifier**
+
+  * `n_estimators`: \[100, 200, 300]
+  * `max_depth`: \[None, 10, 20, 30]
+  * `min_samples_split`: \[2, 10]
+  * `min_samples_leaf`: \[1, 5]
+
+* **XGBoost**
+
+  * `n_estimators`: \[100, 200]
+  * `learning_rate`: \[0.01, 0.1, 0.2]
+  * `max_depth`: \[3, 6, 9]
+  * `subsample` : \[0.8, 1]
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
@@ -548,7 +592,28 @@ Pada tahap awal modeling, saya coba menggunakan algoritma decision tree untuk me
 - Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+
+Tahapan evaluasi bertujuan untuk mengukur kinerja model dalam melakukan prediksi terhadap data yang belum pernah dilihat sebelumnya (data uji). Evaluasi dilakukan setelah model dilatih dan disetel hyperparameternya melalui proses hyperparameter tuning. Pada proyek ini, model dievaluasi berdasarkan kemampuannya dalam melakukan klasifikasi biner, yaitu memprediksi apakah suatu permohonan pinjaman akan disetujui atau ditolak.
+
+### Metrik Evaluasi
+
+Beberapa metrik evaluasi yang digunakan dalam proyek ini antara lain:
+
+* **Accuracy (Akurasi)**
+  Mengukur proporsi prediksi yang benar terhadap seluruh data uji. Namun, akurasi bisa menyesatkan jika data tidak seimbang (misalnya, lebih banyak data pinjaman yang ditolak dibanding disetujui).
+
+* **Precision**
+  Mengukur seberapa banyak prediksi positif yang benar-benar positif. Metrik ini penting ketika kesalahan dalam menyetujui pinjaman yang seharusnya ditolak harus diminimalkan.
+
+* **Recall**
+  Mengukur seberapa banyak data positif yang berhasil dikenali dengan benar. Ini penting jika tujuan adalah mengidentifikasi semua permohonan pinjaman yang layak.
+
+* **F1-Score**
+  Merupakan harmonisasi antara precision dan recall, dan digunakan sebagai metrik utama karena proyek ini melibatkan trade-off antara keduanya.
+
+* **Confusion Matrix**
+  Matriks ini menunjukkan jumlah prediksi yang benar dan salah untuk setiap kelas (disetujui atau ditolak), dan memberikan wawasan lebih detail terhadap jenis kesalahan yang dilakukan oleh model.
+
 
 Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
 - Penjelasan mengenai metrik yang digunakan
