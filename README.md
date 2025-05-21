@@ -325,7 +325,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     - **Distribusi data setelah implementasi IQR**
 
       ![Image](https://github.com/user-attachments/assets/a3a0fd75-20b3-4984-84fc-c6a652b7f9ef)
-      <div align="center">Gambar 8 - Distribusi data sebelum proses IQR </div>
+      <div align="center">Gambar 8 - Distribusi data setelah proses IQR </div>
   
   
 - ***Data Transformation***
@@ -374,7 +374,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
     | Index | Education| Self Employed | Loan Status |
     |-------|----------|---------------|-------------|
     | 0     | 0        | 1             | 0           |
-    | 1     | 0        | 0             | 0           |
+    | 1     | 1        | 0             | 0           |
     | 2     | 1        | 0             | 0           |
     | 3     | 0        | 1             | 0           |
     | 4     | 1        | 1             | 0           |
@@ -427,7 +427,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
   
     <p align="center">
     <img src="https://github.com/user-attachments/assets/ea0df7c5-e537-4f9e-a63c-5722a434dc94" alt="imbalanced_data" />
-    </p><div align="center">Gambar 7 - Distribusi Kelas Data Tidak Seimbang</div>
+    </p><div align="center">Gambar 9 - Distribusi Kelas Data Tidak Seimbang</div>
     
     Untuk mengatasi kondisi *imbalanced data*, terdapat beberapa pendekatan yang umum digunakan, antara lain:
 
@@ -446,7 +446,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
     <p align="center">
     <img src="https://github.com/user-attachments/assets/8a4dde9a-6f06-4b77-aac4-682a346da4aa" alt="imbalanced_data" />
-    </p><div align="center">Gambar 8 - Distribusi Kelas Data Seimbang</div>
+    </p><div align="center">Gambar 10 - Distribusi Kelas Data Seimbang</div>
     
 
 - ***Data Splitting***
@@ -474,11 +474,23 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
 
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
-
 ## Modeling
+
+Tahapan modeling merupakan inti dari proyek machine learning yang bertujuan untuk membangun model prediktif berdasarkan data yang telah melalui proses pembersihan dan pra-pemrosesan. Dalam proyek ini, tugas utama machine learning adalah melakukan *prediksi biner*, yaitu menentukan apakah permohonan pinjaman dari seorang pemohon akan **disetujui** atau **ditolak**. Oleh karena itu, pendekatan klasifikasi biner digunakan sebagai solusi permasalahan.
+
+Untuk mendapatkan performa terbaik, proyek ini membandingkan tiga algoritma klasifikasi populer yang memiliki karakteristik dan keunggulan masing-masing, yaitu:
+
+1. **Support Vector Classifier (SVC)**
+   
+
+2. **Random Forest Classifier**
+   
+
+3. **XGBoost (Extreme Gradient Boosting)**
+
+Setiap model dilatih menggunakan data latih (*training set*) dan dievaluasi menggunakan data uji (*test set*) untuk mengukur kinerjanya dalam melakukan klasifikasi biner. Evaluasi dilakukan dengan metrik-metrik seperti akurasi, precision, recall, dan F1-score, untuk memberikan gambaran menyeluruh terhadap kemampuan prediktif dari masing-masing model.
+
+
 ### Support Vector Machine
 
 
@@ -486,22 +498,22 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
 - SVM melakukan klasifikasi dengan cara menentukan batas keputusan yang memisahkan data antar kelas yang memiliki jarak terdekat dengan semua data pada kelas. Batas keputusan  yang dibuat oleh SVM disebut dengan *maximum margin classifier* dan dipisahkan oleh suatu bidang hiper (*hyperplane*) [5].
 - SVM mencari pemisah terbaik (*hyperplane*) antara dua kelas dengan memetakan data ke ruang dimensi tinggi. Jika data tidak dapat dipisahkan secara linier, maka SVM akan melakukan transformasi non-linier ke dalam dimensi yang lebih tinggi menggunakan *kernel trick*
-- 
+
 
 **Parameter**
 
-- `C` (default=1.0) : Parameter regulasi. Nilai parameter yang digunakan pada tahap pemodelan adalah `C = 6.9423`. Nilai ini didapat dari proses *hyperparameter tuning* menggunakan metode *Randomized Search*.
+- `C` (default=1.0) : Parameter regulasi. Nilai parameter yang digunakan pada tahap pemodelan adalah `C = 10`. Nilai ini didapat dari proses *hyperparameter tuning* menggunakan metode *Grid Search*.
 - `gamma` (default='scale') : Parameter koefisien untuk kernel `rbf`, `poly`, dan `sigmoid`. Nilai parameter yang digunakan adalah nilai default `gamma='scale'`.
 - `kernel`(default='rbf') : Parameter untuk tipe kernal yang digunakan dalam pembuatan model. Nilai parameter yang digunakan adalah nilai default `kernel='rbf'`.
 
 
 **Performa**
 
-Model SVM memiliki performa yang cukup baik dengan nilai *accuracy* sebesar 94,5% dan nilai *f1-score* sebesar 94,3%. Meskipun begitu, SVM memiliki performa paling rendah dibandingkan model lainnya yang memiliki nilai *accuracy* dan *f1-score* di atas 95%.
+Model SVM memiliki performa yang cukup baik dengan nilai *accuracy* sebesar 96% dan nilai *f1-score* sebesar 95,9%. Meskipun begitu, SVM memiliki performa paling rendah dibandingkan model lainnya yang memiliki nilai *accuracy* dan *f1-score* di atas 97%.
 
 ### Random Forest Classification
 
-*Random Forest Classification* adalah algoritma ensemble learning berbasis decision tree yang menggabungkan banyak pohon keputusan (*decision tree*) untuk menghasilkan prediksi yang lebih akurat dan stabil. Berikut cara kerja algoritma *Random Forest Classification*:
+*Random Forest Classification* adalah algoritma ensemble learning berbasis decision tree yang menggabungkan banyak pohon keputusan (*decision tree*) untuk menghasilkan prediksi yang lebih akurat dan stabil. Model ini memiliki keunggulan dalam mengatasi overfitting yang umum terjadi pada decision tree tunggal. Berikut cara kerja algoritma *Random Forest Classification*:
 
 - Membuat sampel bootstrap dari dataset asli
 - Membangun atau melatih beberapa pohon keputusanuntuk setiap sampel, menggunakan subset fitur acak pada setiap split
@@ -509,21 +521,26 @@ Model SVM memiliki performa yang cukup baik dengan nilai *accuracy* sebesar 94,5
 
 **Parameter**
 
-
+  Parameter yang digunakan untuk melatih model adalah parameter default.
 
 **Performa**
 
-Model *Random Forest* memiliki performa yang cukup baik dengan nilai *accuracy* sebesar 98,63% dan nilai *f1-score* sebesar 98,62%. *Random Forest* merupakan model dengan performa terbaik kedua yang digunakan pada proyek ini.
+Model *Random Forest* memiliki performa yang sangat baik dengan nilai *accuracy* sebesar 99% dan nilai *f1-score* sebesar 99%. Jika dibandingkan model lainnya, *Random Forest* merupakan model dengan performa terbaik, dimana nilai accuracy dan f1-score nya mencapai 99%. Dengan performa ini, *Random Forest* dapat melakukan klasifikasi yang sangat baik dan presisi karena memiliki akurasi tinggi dan juga dapat melakukan klasifikasi yang seimbang untuk setiap kelas.
 
 ### XGBoost
 
+XGBoost adalah salah satu algoritma boosting yang sangat powerful dan sering digunakan dalam kompetisi data science karena kemampuannya dalam menghasilkan model yang sangat akurat. Keunggulan XGBoost meliputi efisiensi waktu pelatihan, pengendalian overfitting, dan fleksibilitas terhadap berbagai jenis data.
+
 **Parameter**
+
+Parameter yang digunakan untuk melatih model adalah parameter default.
+
 **Performa**
 
-Model XGBoost memiliki performa yang sangat baik dengan nilai *accuracy* mencapai 99,2% dan nilai *f1-score* sebesar 99,2%. Jika dibandingkan model lainnya, XGBoost merupakan model dengan performa terbaik, dimana nilai *accuracy* dan *f1-score* nya mencapai 99%. Dengan performa ini, XGBoost dapat melakukan klasifikasi yang sangat baik dan presisi karena memiliki akurasi tinggi dan juga dapat melakukan klasifikasi yang seimbang untuk setiap kelas.
+Model XGBoost memiliki performa yang sangat baik dengan nilai *accuracy* mencapai 99,9% dan nilai *f1-score* sebesar 99,9%. XGBoost  merupakan model dengan performa terbaik kedua yang digunakan pada proyek ini.
 
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
-Pada tahap awal modeling, saya coba menggunakan algoritma decision tree untuk melakukan prediksi biner. H
+Pada tahap awal modeling, saya coba menggunakan algoritma decision tree untuk melakukan prediksi biner.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
