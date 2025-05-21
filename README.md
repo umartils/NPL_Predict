@@ -308,7 +308,20 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
   - Menangani *Outliers*
 
-    *Outlier* adalah data yang memiliki nilai sangat jauh dari mayoritas data lainnya. Misalnya, jika kebanyakan gaji dalam dataset berada di kisaran 3 juta–10 juta, lalu ada satu data dengan gaji 200 juta, maka itu kemungkinan *outlier*. Pada tahap ini, nilai yang menjadi *outlier* akan dihilangkan agar persebaran data lebih merata dan meningkatkan kualitas data. Metode yang digunakan dalam menangani outlier adalah menggunakan metode IQR (*Interquarile Range*).
+    *Outlier* adalah data yang memiliki nilai sangat jauh dari mayoritas data lainnya. Misalnya, jika kebanyakan gaji dalam dataset berada di kisaran 3 juta–10 juta, lalu ada satu data dengan gaji 200 juta, maka data tersebut kemungkinan merupakan *outlier*. Outlier dapat muncul karena kesalahan input, variasi alami, atau fenomena luar biasa. Pada tahap ini, nilai yang menjadi *outlier* akan dihilangkan agar persebaran data lebih merata dan meningkatkan kualitas data. Metode yang digunakan dalam menangani outlier adalah menggunakan metode *Interquarile Range* (IQR), dengan langkah-langkah berikut:
+    
+    - Hitung nilai kuartil pertama (Q1) dan kuartil ketiga (Q3) dari kolom data numerik.
+    - Hitung nilai IQR = Q3 - Q1.
+    - Tentukan batas atas dan batas bawah.
+    - Hapus data *outlier* dari dataset.
+
+    Berikut proses implementasi metode IQR untuk menangani *outlier*:
+
+    - **Distribusi data sebelum implementasi IQR**
+
+      ![Image](https://github.com/user-attachments/assets/723edf9b-8f1d-403a-aef8-05fbe45f3421)
+  <div align="center">Gambar 4 - Distribusi data sebelum proses IQR </div>
+    - **Distribusi data setelah implementasi IQR**
   
   
 - ***Data Transformation***
