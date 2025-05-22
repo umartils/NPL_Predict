@@ -818,7 +818,7 @@ Selain nilai evaluasi di atas, pada proyek ini juga dilakukan proses analisis fi
   | 10  | commercial\_assets\_value  | 0.643748   |
   | 11  | education                  | 0.401160   |
 
-Terlihat pada kedua tabel bahwa fitur paling berpengaruh dalam proses prediksi adalah fitur `cibil_score` yang memiliki nilai *importance* paling tinggi dan juga jauh lebih besar dibanding fitur lainnya. Selanjutnya ada fitur loan_term, loan_ammount sebagai fitur dengan nilai *importance* di urutan kedua dan ketiga.
+Terlihat pada kedua tabel bahwa fitur paling berpengaruh dalam proses prediksi adalah fitur `cibil_score` yang memiliki nilai *importance* paling tinggi dan juga jauh lebih besar dibanding fitur lainnya. Selanjutnya ada fitur `loan_term`, `loan_ammount` sebagai fitur dengan nilai *importance* di urutan kedua dan ketiga.
 
 ## Kesimpulan
 
