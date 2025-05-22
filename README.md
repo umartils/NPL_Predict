@@ -629,7 +629,7 @@ Beberapa metrik evaluasi yang digunakan dalam proyek ini antara lain:
 
 
 
-#### **1. Accuracy (Akurasi)**
+ **1. Accuracy (Akurasi)**
 
 Mengukur proporsi prediksi yang benar terhadap seluruh data uji. Meskipun populer, akurasi bisa menyesatkan jika data tidak seimbang (misalnya, lebih banyak data pinjaman yang ditolak dibanding disetujui).
 
@@ -644,7 +644,7 @@ $$
 
 
 
-#### **2. Precision (Presisi)**
+ **2. Precision (Presisi)**
 
 Mengukur seberapa banyak prediksi positif yang benar-benar positif. Presisi penting ketika kesalahan dalam menyetujui pinjaman yang seharusnya ditolak harus diminimalkan.
 
@@ -654,7 +654,7 @@ $$
 
 
 
-#### **3. Recall (Sensitivitas / True Positive Rate)**
+ **3. Recall (Sensitivitas / True Positive Rate)**
 
 Mengukur seberapa banyak data positif yang berhasil dikenali dengan benar. Recall penting jika tujuan adalah mengidentifikasi semua permohonan pinjaman yang layak.
 
@@ -664,7 +664,7 @@ $$
 
 
 
-#### **4. F1-Score**
+ **4. F1-Score**
 
 Merupakan rata-rata harmonik dari precision dan recall. Metrik ini berguna saat dibutuhkan keseimbangan antara *false positive* dan *false negative*.
 
@@ -674,7 +674,7 @@ $$
 
 
 
-#### **5. Confusion Matrix**
+ **5. Confusion Matrix**
 
 Matriks ini menunjukkan jumlah prediksi yang benar dan salah untuk setiap kelas (misalnya: disetujui dan ditolak), memberikan wawasan lebih mendalam terhadap jenis kesalahan yang dilakukan oleh model. Format umum:
 
@@ -683,6 +683,38 @@ Matriks ini menunjukkan jumlah prediksi yang benar dan salah untuk setiap kelas 
 | **Actual Positive** | True Positive (TP)  | False Negative (FN) |
 | **Actual Negative** | False Positive (FP) | True Negative (TN)  |
 
+ **6. ROC AUC (Receiver Operating Characteristic – Area Under the Curve)**
+
+ROC AUC digunakan untuk mengukur performa model klasifikasi pada berbagai ambang batas (threshold). ROC adalah grafik yang menampilkan hubungan antara *True Positive Rate* (Recall) dan *False Positive Rate* (FPR). Sedangkan **AUC** (Area Under the Curve) mengukur luas area di bawah kurva ROC — semakin besar nilai AUC (maksimum 1), semakin baik performa model.
+
+* **True Positive Rate (TPR)** = Recall
+
+  $$
+  \text{TPR} = \frac{TP}{TP + FN}
+  $$
+
+* **False Positive Rate (FPR)**
+
+  $$
+  \text{FPR} = \frac{FP}{FP + TN}
+  $$
+
+Nilai **AUC** berkisar antara 0 hingga 1:
+
+* AUC = 1: model sempurna
+* AUC > 0.9: sangat baik
+* AUC = 0.5: model tidak lebih baik dari tebakan acak
+* AUC < 0.5: model salah prediksi (kebalikannya benar)
+
+### Hasil Evaluasi
+
+***Summary***
+
+***Model Comparasion***
+
+***Confusion Matrix***
+
+***ROC AUC Plot***
 
 Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
 - Penjelasan mengenai metrik yang digunakan
