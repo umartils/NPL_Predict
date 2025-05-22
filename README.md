@@ -708,7 +708,9 @@ Nilai **AUC** berkisar antara 0 hingga 1:
 
 ### Hasil Evaluasi
 
-***Summary***
+#### *Summary Table*
+
+Tabel berikut menyajikan ringkasan performa dari tiga model klasifikasi: XGBoost *Classifier*, *Random Forest Classifier*, dan *Support Vector Classifier* berdasarkan metrik evaluasi utama:
 
 |  Model                    | *Accuracy*  | *Precision* | *Recall* | *F-Score* | ROC AUC  |
 | ------------------------- | ----------- | ----------- | ---------| --------- | -------- |
@@ -716,13 +718,22 @@ Nilai **AUC** berkisar antara 0 hingga 1:
 | Random Forest Clasifier   | 0.991296	  | 1.000000    | 0.982592 | 0.991220  | 0.999981 |
 | Support Vector Classifier | 0.960348    | 0.977912    | 0.941973 | 0.959606  | 0.991994 |
 
-***Model Comparasion***
+Dari tabel di atas, dapat disimpulkan sebagai berikut.
+- XGB *Classifier* memberikan performa terbaik dengan *accuracy* dan ROC AUC tertinggi.
+- *Random Forest* juga menunjukkan performa sangat baik dan hampir setara dengan XGBoost.
+- *Support Vector Classifier* (SVC) berada di posisi ketiga, dengan nilai metrik sedikit lebih rendah, namun tetap sangat kompetitif.
+
+#### *Model Comparasion*
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/a2921513-d364-4136-ae6e-19f5779fd47f" alt="comparasion" />
 </p><div align="center">Gambar 9 - Perbandingan Performa Setiap Model</div>
 
-***Classification Report***
+Visualisasi di atas memperjelas bagaimana setiap model memiliki performa yang konsisten tinggi. XGBoost dan *Random Forest* unggul pada semua metrik, sedangkan SVC sedikit tertinggal dalam *recall* dan *F1-score*. Berikut adalah *classification report* dari setiap model.
+
+#### *Classification Report*
+
+Classification report menyajikan hasil metrik per kelas (0 = Ditolak, 1 = Disetujui), memungkinkan kita memahami seberapa baik model mengenali masing-masing label.
 
 * ***Support Vector Classifier***
   
@@ -764,7 +775,10 @@ Nilai **AUC** berkisar antara 0 hingga 1:
   weighted avg       0.99      0.99      0.99       1034
   ```
 
-***Confusion Matrix***
+#### *Confusion Matrix*
+
+Confusion Matrix adalah tabel yang menggambarkan kinerja model klasifikasi dengan membandingkan antara hasil prediksi model dengan label sebenarnya dari data uji. Matriks ini berisi empat komponen utama yaitu *True Positive* (TP), *False Positive* (FP), *False Negative* (FN), *True Negative* (TN). Berikut *confuison matrix* dari setiap model.
+
 * ***Support Vector Classifier***
   
   <p align="center">
@@ -783,26 +797,35 @@ Nilai **AUC** berkisar antara 0 hingga 1:
   <img src="https://github.com/user-attachments/assets/bd58b946-165f-40dc-b296-329997576d18" alt="cm_xgb" />
   </p><div align="center">Gambar 9 - Confusion Matrix XGBoost</div>
 
-***ROC AUC Plot***
+#### Kurva ROC AUC 
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/b2986072-b081-4b65-a707-7c9599d37eb2" alt="roc_auc" />
 </p><div align="center">Gambar 9 - ROC AUC Plot</div>
 
+Berikut informasi atau *insight* yang didapat dari kurva ROC AUC di atas.
+- Kurva ROC mendekati sudut kiri atas, menunjukkan True Positive Rate tinggi dan False Positive Rate rendah.
+- Nilai AUC > 0.99 untuk ketiga model, menandakan kemampuan diskriminatif yang sangat baik (mampu membedakan antara kelas "disetujui" dan "ditolak").
+
 Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
 - Penjelasan mengenai metrik yang digunakan
 - Menjelaskan hasil proyek berdasarkan metrik evaluasi
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+### Kesimpulan
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Berdasarkan hasil evaluasi terhadap tiga model klasifikasi yaitu **XGBoost *Classifier***, ***Random Forest Classifie*r**, dan ***Support Vector Classifier* (SVC)**, dapat disimpulkan bahwa:
 
-**---Ini adalah bagian akhir laporan---**
+1. **XGBoost *Classifier*** merupakan model dengan performa terbaik secara keseluruhan. Hal ini dibuktikan dengan nilai ***accuracy*** sebesar 99.32%, ***precision*** sempurna (100%), ***recall*** sebesar 98.64%, serta **ROC AUC** mendekati 1 (0.9999). Model ini menunjukkan kemampuan luar biasa dalam mengenali kedua kelas (disetujui dan ditolak) dengan sangat sedikit kesalahan.
 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+2. **Random Forest Classifier** juga menunjukkan performa yang sangat baik dan hampir setara dengan XGBoost. Meskipun memiliki ***recall*** sedikit lebih rendah (98.26%), namun model ini tetap akurat dan andal dengan ***accuracy*** sebesar 99.13% dan **ROC AUC** yang sangat tinggi (0.9999).
+
+3. **Support Vector Classifier (SVC)** berada di urutan ketiga dengan ***accuracy*** sebesar 96.03%. Meskipun tidak sebaik dua model lainnya, SVC tetap menunjukkan performa yang solid dengan ***F1-score*** sebesar 95.96% dan **ROC AUC** sebesar 0.9919. Model ini bisa menjadi alternatif jika dibutuhkan model yang lebih ringan secara komputasi.
+
+4. Dari semua metrik, **ROC AUC** menjadi indikator tambahan yang menunjukkan bahwa ketiga model memiliki kemampuan klasifikasi yang sangat baik dalam membedakan antara kelas positif dan negatif, dengan nilai di atas 0.99 untuk semuanya.
+
+5. Berdasarkan keseluruhan hasil evaluasi dan analisis visual seperti ***confusion matrix*** dan **ROC *curve***, **XGBoost *Classifier*** dapat direkomendasikan sebagai **model terbaik** untuk diterapkan dalam sistem prediksi persetujuan pinjaman pada proyek ini.
+
+
 
 ## Referensi
 
