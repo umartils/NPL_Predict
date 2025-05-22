@@ -690,13 +690,17 @@ ROC AUC digunakan untuk mengukur performa model klasifikasi pada berbagai ambang
 * **True Positive Rate (TPR)** = Recall
 
   $$
+  
   \text{TPR} = \frac{TP}{TP + FN}
+
   $$
 
 * **False Positive Rate (FPR)**
 
   $$
+  
   \text{FPR} = \frac{FP}{FP + TN}
+
   $$
 
 Nilai **AUC** berkisar antara 0 hingga 1:
