@@ -721,7 +721,7 @@ Nilai **AUC** berkisar antara 0 hingga 1:
 ***ROC AUC Plot***
 
 <p align="center">
-<img src="[https://github.com/user-attachments/assets/a2921513-d364-4136-ae6e-19f5779fd47f](https://github.com/user-attachments/assets/b2986072-b081-4b65-a707-7c9599d37eb2)" alt="comparasion" />
+<img src="https://github.com/user-attachments/assets/b2986072-b081-4b65-a707-7c9599d37eb2" alt="roc_auc" />
 </p><div align="center">Gambar 9 - ROC AUC Plot</div>
 
 Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
