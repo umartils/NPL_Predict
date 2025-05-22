@@ -710,13 +710,64 @@ Nilai **AUC** berkisar antara 0 hingga 1:
 
 ***Summary***
 
+|  Model                    | *Accuracy*  | *Precision* | *Recall* | *F-Score* | ROC AUC  |
+| ------------------------- | ----------- | ----------- | ---------| --------- | -------- |
+| XGB Classifier            | 0.993230    | 1.000000    | 0.986460 | 0.993184  | 0.999892 |
+| Random Forest Clasifier   | 0.991296	  | 1.000000    | 0.982592 | 0.991220  | 0.999981 |
+| Support Vector Classifier | 0.960348    | 0.977912    | 0.941973 | 0.959606  | 0.991994 |
+
 ***Model Comparasion***
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/a2921513-d364-4136-ae6e-19f5779fd47f" alt="comparasion" />
 </p><div align="center">Gambar 9 - Perbandingan Performa Setiap Model</div>
 
+***Classification Report***
+
+* ***Support Vector Classifier***
+  
+  ```python
+    Classification Report:
+                precision    recall  f1-score   support
+  
+             0       0.94      0.98      0.96       517
+             1       0.98      0.94      0.96       517
+  
+      accuracy                           0.96       1034
+     macro avg       0.96      0.96      0.96       1034
+  weighted avg       0.96      0.96      0.96       1034
+  ```
+
+* ***Random Forest Classifier***
+  ```python
+    Classification Report:
+                precision    recall  f1-score   support
+  
+             0       0.98      1.00      0.99       517
+             1       1.00      0.98      0.99       517
+  
+      accuracy                           0.99       1034
+     macro avg       0.99      0.99      0.99       1034
+  weighted avg       0.99      0.99      0.99       1034
+  ```
+* ***XGB Classifier***
+
+  ```python
+    Classification Report:
+                precision    recall  f1-score   support
+  
+             0       0.99      1.00      0.99       517
+             1       1.00      0.99      0.99       517
+  
+      accuracy                           0.99       1034
+     macro avg       0.99      0.99      0.99       1034
+  weighted avg       0.99      0.99      0.99       1034
+  ```
+
 ***Confusion Matrix***
+* ***Support Vector Classifier***
+* ***Random Forest Classifier***
+* ***XGB Classifier***
 
 ***ROC AUC Plot***
 
