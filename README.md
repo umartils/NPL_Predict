@@ -712,9 +712,13 @@ Nilai **AUC** berkisar antara 0 hingga 1:
 
 ***Model Comparasion***
 
+![comparasion](https://github.com/user-attachments/assets/a2921513-d364-4136-ae6e-19f5779fd47f)</p><div align="center">Gambar 9 - Perbandingan Performa Setiap Model</div>
+
 ***Confusion Matrix***
 
 ***ROC AUC Plot***
+
+![roc_auc](https://github.com/user-attachments/assets/b2986072-b081-4b65-a707-7c9599d37eb2)</p><div align="center">Gambar 9 - ROC AUC Plot</div>
 
 Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
 - Penjelasan mengenai metrik yang digunakan
