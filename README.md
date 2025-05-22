@@ -23,13 +23,14 @@ Bank sering kali mengalami kerugian akibat memberikan pinjaman kepada nasabah ya
 ### Goals
 
 - Membangun model *machine learning* klasifikasi yang dapat menentukan apakah pengajuan pinjaman disetujui atau tidak berdasarkan data historis calon nasabah.
-- Menidentifikasi dan menganalisis faktor yang mempengaruhi dalam proses prediksi kelayakan calon nasabah.
+- Mengidentifikasi dan menganalisis faktor yang mempengaruhi dalam proses prediksi kelayakan calon nasabah.
 - Membandingkan performa dari beberapa model *machine learning* dan memilih model terbaik dalam proses prediksi kelayakan calon nasabah.
 
 
 ### Solution statements
-- Dengan membangun model machine learning klasifikasi menggunakan beberapa algoritma seperti Decision Tree, Random Forest, atau XGBoost yang dilatih menggunakan data historis pengajuan pinjaman.
 - Melakukan proses *data preprocessing* agar kualitas data yang digunakan menjadi lebih baik sehingga model machine learning yang dibangun memiliki performa yang baik.
+- Membangun model *machine learning* klasifikasi menggunakan beberapa algoritma seperti *Support Vector Machine*, *Random Forest*, dan XGBoost yang dilatih menggunakan data historis pengajuan pinjaman.
+- Menggunakan metrik evaluasi seperti *accuracy*, *precision*, *recall*, *f1-score*, *confusion matrix*, dan roc auc untuk mengukur performa model dalam melakukan klasifikasi biner.
 
 
 ## Data Understanding
