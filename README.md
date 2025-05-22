@@ -766,8 +766,22 @@ Nilai **AUC** berkisar antara 0 hingga 1:
 
 ***Confusion Matrix***
 * ***Support Vector Classifier***
+  
+  <p align="center">
+  <img src="https://github.com/user-attachments/assets/cf8cf695-77cd-4837-b0d0-bf6789aa124f" alt="cm_svm" />
+  </p><div align="center">Gambar 9 - Confusion Matrix SVM</div>
+  
 * ***Random Forest Classifier***
+  
+  <p align="center">
+  <img src="https://github.com/user-attachments/assets/f58955eb-b4fe-4749-b527-fbd63b81411a" alt="cm_rf" />
+  </p><div align="center">Gambar 9 - Confusion Matrix Random Forest</div>
+  
 * ***XGB Classifier***
+
+  <p align="center">
+  <img src="https://github.com/user-attachments/assets/bd58b946-165f-40dc-b296-329997576d18" alt="cm_xgb" />
+  </p><div align="center">Gambar 9 - Confusion Matrix XGBoost</div>
 
 ***ROC AUC Plot***
 
