@@ -513,10 +513,6 @@ Model SVM dalam proyek ini dikonfigurasi menggunakan parameter sebagai berikut:
 * `random_state=32`: Seed acak untuk memastikan bahwa hasil pelatihan dapat direproduksi.
 
 
-**Performa**
-
-Model SVM memiliki performa yang cukup baik dengan nilai *accuracy* sebesar 96% dan nilai *f1-score* sebesar 95,9%. Meskipun begitu, SVM memiliki performa paling rendah dibandingkan model lainnya yang memiliki nilai *accuracy* dan *f1-score* di atas 97%.
-
 ### Random Forest Classification
 
 *Random Forest Classification* adalah algoritma ensemble learning berbasis decision tree yang menggabungkan banyak pohon keputusan (*decision tree*) untuk menghasilkan prediksi yang lebih akurat dan stabil. Model ini memiliki keunggulan dalam mengatasi overfitting yang umum terjadi pada decision tree tunggal. Berikut cara kerja algoritma *Random Forest Classification*:
@@ -538,10 +534,6 @@ Model *Random Forest* dalam proyek ini dikonfigurasi menggunakan parameter sebag
 * `random_state=32`: Seed pengacakan untuk memastikan hasil pelatihan dapat direproduksi.
 
 
-**Performa**
-
-Model *Random Forest* memiliki performa yang sangat baik dengan nilai *accuracy* sebesar 99,1% dan nilai *f1-score* sebesar 99,1%. *Random Forest*  merupakan model dengan performa terbaik kedua yang digunakan pada proyek ini.
-
 ### XGBoost
 
 XGBoost adalah salah satu algoritma boosting yang sangat powerful dan sering digunakan dalam kompetisi data science karena kemampuannya dalam menghasilkan model yang sangat akurat. Keunggulan XGBoost meliputi efisiensi waktu pelatihan, pengendalian overfitting, dan fleksibilitas terhadap berbagai jenis data.
@@ -558,11 +550,6 @@ Model XGBoost dalam proyek ini dikonfigurasi dengan parameter sebagai berikut:
 * `subsample=0.8`: Proporsi sampel data pelatihan yang digunakan untuk membangun setiap pohon. Nilai di bawah 1.0 membantu mencegah overfitting dengan memperkenalkan variasi antar pohon.
 * `random_state=32`: Menentukan seed untuk pengacakan, agar hasil pelatihan bisa direproduksi.
 
-
-
-**Performa**
-
-Model XGBoost memiliki performa yang sangat baik dengan nilai *accuracy* mencapai 99,3% dan nilai *f1-score* sebesar 99,3%. Jika dibandingkan model lainnya, XGBoost merupakan model dengan performa terbaik, dimana nilai accuracy dan f1-score nya mencapai lebih dari 99% dan di atas performa dari model *Random Forest*. Dengan performa ini, XGBoost dapat melakukan klasifikasi yang sangat baik dan presisi karena memiliki akurasi tinggi dan juga dapat melakukan klasifikasi yang seimbang untuk setiap kelas.
 
 ### Hyperparameter Tuning
 
@@ -714,7 +701,7 @@ Dari tabel di atas, dapat disimpulkan sebagai berikut.
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/a2921513-d364-4136-ae6e-19f5779fd47f" alt="comparasion" />
-</p><div align="center">Gambar 9 - Perbandingan Performa Setiap Model</div>
+</p><div align="center">Gambar 11 - Perbandingan Performa Setiap Model</div>
 
 Visualisasi di atas memperjelas bagaimana setiap model memiliki performa yang konsisten tinggi. XGBoost dan *Random Forest* unggul pada semua metrik, sedangkan SVC sedikit tertinggal dalam *recall* dan *F1-score*. 
 
@@ -770,47 +757,88 @@ Confusion Matrix adalah tabel yang menggambarkan kinerja model klasifikasi denga
   
   <p align="center">
   <img src="https://github.com/user-attachments/assets/cf8cf695-77cd-4837-b0d0-bf6789aa124f" alt="cm_svm" />
-  </p><div align="center">Gambar 9 - Confusion Matrix SVM</div>
+  </p><div align="center">Gambar 12 - Confusion Matrix SVM</div>
   
 * ***Random Forest Classifier***
   
   <p align="center">
   <img src="https://github.com/user-attachments/assets/f58955eb-b4fe-4749-b527-fbd63b81411a" alt="cm_rf" />
-  </p><div align="center">Gambar 9 - Confusion Matrix Random Forest</div>
+  </p><div align="center">Gambar 13 - Confusion Matrix Random Forest</div>
   
 * ***XGB Classifier***
 
   <p align="center">
   <img src="https://github.com/user-attachments/assets/bd58b946-165f-40dc-b296-329997576d18" alt="cm_xgb" />
-  </p><div align="center">Gambar 9 - Confusion Matrix XGBoost</div>
+  </p><div align="center">Gambar 14 - Confusion Matrix XGBoost</div>
 
 #### Kurva ROC AUC 
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/b2986072-b081-4b65-a707-7c9599d37eb2" alt="roc_auc" />
-</p><div align="center">Gambar 9 - ROC AUC Plot</div>
+</p><div align="center">Gambar 15 - ROC AUC Plot</div>
 
 Berikut informasi atau *insight* yang didapat dari kurva ROC AUC di atas.
 - Kurva ROC mendekati sudut kiri atas, menunjukkan True Positive Rate tinggi dan False Positive Rate rendah.
 - Nilai AUC > 0.99 untuk ketiga model, menandakan kemampuan diskriminatif yang sangat baik (mampu membedakan antara kelas "disetujui" dan "ditolak").
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+#### *Feature Importance*
 
-### Kesimpulan
+Selain nilai evaluasi di atas, pada proyek ini juga dilakukan proses analisis fitur paling berpengaruh dalam melakukan prediksi. Hal ini dilakukan untuk melihat faktor apa saja yang dapat mempengaruhi proses prediksi kelayakan calon nasabah. Berikut hasil analisis *feature importance* dari dua model terbaik yang dibangun pada proyek ini.
 
-Berdasarkan hasil evaluasi terhadap tiga model klasifikasi yaitu **XGBoost *Classifier***, ***Random Forest Classifie*r**, dan ***Support Vector Classifier* (SVC)**, dapat disimpulkan bahwa:
+* *Random Forest Classifier*
+  
+  | No. | Feature                    | Importance |
+  | --- | -------------------------- | ---------- |
+  | 1   | cibil\_score               | 0.829835   |
+  | 2   | loan\_term                 | 0.049259   |
+  | 3   | loan\_amount               | 0.030204   |
+  | 4   | income\_annum              | 0.017469   |
+  | 5   | luxury\_assets\_value      | 0.017071   |
+  | 6   | bank\_asset\_value         | 0.014885   |
+  | 7   | residential\_assets\_value | 0.014806   |
+  | 8   | commercial\_assets\_value  | 0.014462   |
+  | 9   | no\_of\_dependents         | 0.007608   |
+  | 10  | self\_employed             | 0.002567   |
+  | 11  | education                  | 0.001834   |
 
-1. **XGBoost *Classifier*** merupakan model dengan performa terbaik secara keseluruhan. Hal ini dibuktikan dengan nilai ***accuracy*** sebesar 99.32%, ***precision*** sempurna (100%), ***recall*** sebesar 98.64%, serta **ROC AUC** mendekati 1 (0.9999). Model ini menunjukkan kemampuan luar biasa dalam mengenali kedua kelas (disetujui dan ditolak) dengan sangat sedikit kesalahan.
 
-2. **Random Forest Classifier** juga menunjukkan performa yang sangat baik dan hampir setara dengan XGBoost. Meskipun memiliki ***recall*** sedikit lebih rendah (98.26%), namun model ini tetap akurat dan andal dengan ***accuracy*** sebesar 99.13% dan **ROC AUC** yang sangat tinggi (0.9999).
+* XGBoost *Classifier*
+  
+  | No. | Feature                    | Importance |
+  | --- | -------------------------- | ---------- |
+  | 1   | cibil\_score               | 47.943947  |
+  | 2   | loan\_term                 | 10.541603  |
+  | 3   | loan\_amount               | 2.017761   |
+  | 4   | income\_annum              | 1.802001   |
+  | 5   | luxury\_assets\_value      | 1.081965   |
+  | 6   | bank\_asset\_value         | 0.792145   |
+  | 7   | self\_employed             | 0.770378   |
+  | 8   | residential\_assets\_value | 0.743889   |
+  | 9   | no\_of\_dependents         | 0.679367   |
+  | 10  | commercial\_assets\_value  | 0.643748   |
+  | 11  | education                  | 0.401160   |
 
-3. **Support Vector Classifier (SVC)** berada di urutan ketiga dengan ***accuracy*** sebesar 96.03%. Meskipun tidak sebaik dua model lainnya, SVC tetap menunjukkan performa yang solid dengan ***F1-score*** sebesar 95.96% dan **ROC AUC** sebesar 0.9919. Model ini bisa menjadi alternatif jika dibutuhkan model yang lebih ringan secara komputasi.
+Terlihat pada kedua tabel bahwa fitur paling berpengaruh dalam proses prediksi adalah fitur `cibil_score` yang memiliki nilai *importance* paling tinggi dan juga jauh lebih besar dibanding fitur lainnya. Selanjutnya ada fitur loan_term, loan_ammount sebagai fitur dengan nilai *importance* di urutan kedua dan ketiga.
 
-4. Dari semua metrik, **ROC AUC** menjadi indikator tambahan yang menunjukkan bahwa ketiga model memiliki kemampuan klasifikasi yang sangat baik dalam membedakan antara kelas positif dan negatif, dengan nilai di atas 0.99 untuk semuanya.
+## Kesimpulan
 
-5. Berdasarkan keseluruhan hasil evaluasi dan analisis visual seperti ***confusion matrix*** dan **ROC *curve***, **XGBoost *Classifier*** dapat direkomendasikan sebagai **model terbaik** untuk diterapkan dalam sistem prediksi persetujuan pinjaman pada proyek ini.
+Berdasarkan hasil eksperimen dan evaluasi terhadap ketiga model machine learning (Support Vector Classifier, Random Forest Classifier, dan XGBoost Classifier), proyek ini berhasil menjawab pertanyaan-pertanyaan utama dalam *problem statement* sebagai berikut:
+
+* Prediksi kelayakan pinjaman dapat dilakukan secara efektif dengan memanfaatkan model *machine learning* yang dilatih menggunakan data historis nasabah. Dalam proyek ini, data berupa informasi demografis dan keuangan calon nasabah digunakan sebagai fitur input untuk membangun model klasifikasi biner yang memutuskan apakah pinjaman akan *disetujui* (kelas 1) atau *ditolak* (kelas 0). Proses pelatihan model dilakukan dengan pendekatan supervised learning, menggunakan data yang telah dilabeli berdasarkan keputusan sebelumnya.
+
+* Berdasarkan analisis *feature importance* dari dua model terbaik, yaitu **XGBoost Classifier** dan **Random Forest Classifier**, diketahui bahwa faktor utama yang paling memengaruhi keputusan persetujuan pinjaman adalah:
+  * `cibil_score`
+  Merupakan fitur paling berpengaruh dalam kedua model, menandakan bahwa skor kredit calon nasabah sangat menentukan kelayakan pinjaman.
+
+  * `loan_term` dan `loan_amount`
+    Dua fitur ini juga memiliki kontribusi signifikan, menunjukkan bahwa jangka waktu dan jumlah pinjaman menjadi pertimbangan penting dalam menentukan risiko.
+
+  * `income_annum` dan `luxury_assets_value`
+    Meskipun tidak sekuat tiga fitur utama sebelumnya, informasi penghasilan tahunan dan aset mewah turut memberikan pengaruh terhadap keputusan akhir.
+
+  Sementara itu, fitur seperti `education`, `self_employed`, dan `no_of_dependents` menunjukkan pengaruh yang lebih rendah, sehingga dapat dikatakan memiliki kontribusi minor terhadap hasil prediksi kelayakan.
+* Berdasarkan hasil evaluasi, model **XGBoost Classifier** memberikan performa terbaik di antara ketiga model yang diuji, dengan nilai *accuracy* sebesar **0.993**, *F1-score* sebesar **0.993**, dan skor ROC AUC mendekati sempurna (**0.9999**). Ini menunjukkan bahwa XGBoost sangat efektif dalam mengklasifikasikan pengajuan pinjaman secara akurat, baik untuk kelas yang disetujui maupun yang ditolak. *Random Forest Classifier* juga menunjukkan performa yang sangat kompetitif, hanya sedikit di bawah XGBoost. Sementara itu, *Support Vector Classifier* meskipun memiliki akurasi dan F1-score yang baik, masih tertinggal dibandingkan dua model lainnya dalam hal *recall*.
+
 
 
 

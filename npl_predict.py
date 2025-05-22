@@ -25,7 +25,7 @@ warnings.filterwarnings('ignore')
 
 from sklearn.preprocessing import MinMaxScaler
 from imblearn.over_sampling import RandomOverSampler
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
@@ -408,11 +408,6 @@ plt.show()
 
 """#  Hyperparameter Tuning (Grid Search)"""
 
-from sklearn.model_selection import GridSearchCV
-from sklearn.svm import SVC
-from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
-
 # Parameter grid untuk setiap model
 param_grid = {
     "SVM": {
@@ -437,8 +432,8 @@ param_grid = {
 # Model dictionary
 models_grid = {
     "SVM": SVC(),
-    "Random Forest": RandomForestClassifier(random_state=42),
-    "XGBoost": XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=42),
+    "Random Forest": RandomForestClassifier(random_state=32),
+    "XGBoost": XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=32),
 }
 
 # Tempat menyimpan model terbaik
@@ -609,4 +604,25 @@ for name, model in best_models.items():
 
     # Tampilkan confusion matrix
     plot_conf_matrix(y_test, y_pred, name)
+
+# Feature Importance
+
+feat_importance_rf = best_models['Random Forest'].feature_importances_
+features = X_train.columns
+
+# Buat dataframe untuk tampilan yang rapi
+feat_importance_rf_df = pd.DataFrame({'Feature': features, 'Importance': feat_importance_rf})
+feat_importance_rf_df = feat_importance_rf_df.sort_values(by='Importance', ascending=False)
+feat_importance_rf_df
+
+feat_importance_xgb = best_models['XGBoost'].get_booster().get_score(importance_type='gain')
+
+# Ubah ke DataFrame
+feat_importance_xgb_df = pd.DataFrame.from_dict(feat_importance_xgb, orient='index', columns=['Importance'])
+feat_importance_xgb_df = feat_importance_xgb_df.reset_index().rename(columns={'index': 'Feature'})
+feat_importance_xgb_df = feat_importance_xgb_df.sort_values(by='Importance', ascending=False)
+
+feat_importance_xgb_df = feat_importance_xgb_df.reset_index(drop=True)
+
+feat_importance_xgb_df
 
