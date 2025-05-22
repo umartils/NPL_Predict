@@ -4,15 +4,11 @@
 
 **Latar Belakang (Domain Proyek)**
 
-Pada zaman ini, industri keuangan dan perbankan adalah salah satu sektor yang paling terdigitalisasi dan mengandalkan pengambilan keputusan berbasis data. Salah satu produk utama lembaga keuangan adalah pembiayaan kredit/pinjaman. Namun, keputusan pemberian pinjaman merupakan proses yang kompleks karena harus mempertimbangkan risiko gagal bayar dari calon peminjam.
+Pada zaman ini, industri keuangan dan perbankan adalah salah satu sektor yang paling terdigitalisasi dan mengandalkan pengambilan keputusan berbasis data. Salah satu produk utama lembaga keuangan adalah pembiayaan kredit/pinjaman. Namun, keputusan pemberian pinjaman merupakan proses yang kompleks karena harus mempertimbangkan risiko gagal bayar dari calon peminjam. Karena dalam proses pemberian kredit atau pinjaman, bank atau lembaga keuangan akan selalu berhadapan dengan masalah kredit macet atau Non Performing Loan (NPL). Ratio NPL akan selalu berdampak terhadap keuntungan sebuah lembaga keuangan. Serta semakin tinggi ratio NPL maka akan semakin buruk pula kualitas kredit
+pada bank atau lembaga keuangan tersebut [1].
 
-Menurut data dari Otoritas Jasa Keuangan (OJK), tingkat kredit bermasalah atau Non-Performing Loan (NPL) perbankan di Indonesia pada 2023 tercatat berada di angka sekitar 2,5%. Untuk menekan angka ini, perbankan dan fintech mulai mengadopsi teknologi machine learning (ML) sebagai solusi dalam melakukan penilaian kelayakan kredit secara otomatis.
+Sejak 2013 hingga 2023 ratio NPL di Indonesia mengalami tren kenaikan, tercatat pada 2021 ratio NPL Indonesia sebesar 2.65% dan mendapat peringkat 4 tertinggi di ASEAN dan peringkat ke 7 dari 20 negara yang tergabung pada G20 [2]. Menurut data dari Otoritas Jasa Keuangan (OJK), tingkat kredit bermasalah atau Non-Performing Loan (NPL) perbankan di Indonesia pada 2023 tercatat berada di angka sekitar 2,5%. Untuk menekan angka ini, perbankan dan fintech mulai mengadopsi teknologi *machine learning* (ML) sebagai solusi dalam melakukan penilaian kelayakan kredit secara otomatis.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Jelaskan mengapa dan bagaimana masalah tersebut harus diselesaikan
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
-- Format Referensi dapat mengacu pada penulisan sitasi [IEEE](https://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE_Reference_Guide.pdf), [APA](https://www.mendeley.com/guides/apa-citation-guide/) atau secara umum seperti [di sini](https://penerbitdeepublish.com/menulis-buku-membuat-sitasi-dengan-mudah/)
-- Sumber yang bisa digunakan [Scholar](https://scholar.google.com/)
 
 ## Business Understanding
  
@@ -34,20 +30,10 @@ Bank sering kali mengalami kerugian akibat memberikan pinjaman kepada nasabah ya
 ### Solution statements
 - Dengan membangun model machine learning klasifikasi menggunakan beberapa algoritma seperti Decision Tree, Random Forest, atau XGBoost yang dilatih menggunakan data historis pengajuan pinjaman.
 - Melakukan proses *data preprocessing* agar kualitas data yang digunakan menjadi lebih baik sehingga model machine learning yang dibangun memiliki performa yang baik.
-  
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Statement” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
 
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution statement. Misalnya, menggunakan dua atau lebih algoritma untuk mencapai solusi yang diinginkan atau melakukan improvement pada baseline model dengan hyperparameter tuning.
-    - Solusi yang diberikan harus dapat terukur dengan metrik evaluasi.
 
 ## Data Understanding
-*Dataset* yang digunakan pada proyek *machine learning* ini adalah **"*Loan Approval Prediction Dataset*"**, yang tersedia di *platform* [Kaggle](https://www.kaggle.com/datasets/architsharma01/loan-approval-prediction-dataset). *Dataset* ini berisi kumpulan data kuantitatif yang terdiri dari berbagai kolom yang menjadi faktor apakah pengajuan pinjaman ditolak atau disetujui. Secara keseluruhan, *dataset* ini terdiri dari 4269 baris dan 12 kolom.
-
-*Dataset* ini sesuai dengan kebutuhan dalam membangun proyek machine learning, khususnya untuk tugas *binary classification*. 
-
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+*Dataset* yang digunakan pada proyek *machine learning* ini adalah **"*Loan Approval Prediction Dataset*"**, yang tersedia di *platform* [Kaggle](https://www.kaggle.com/datasets/architsharma01/loan-approval-prediction-dataset). *Dataset* ini berisi kumpulan data kuantitatif yang terdiri dari berbagai kolom yang menjadi faktor apakah pengajuan pinjaman ditolak atau disetujui. Secara keseluruhan, *dataset* ini terdiri dari 4269 baris dan 12 kolom. *Dataset* ini sesuai dengan kebutuhan dalam membangun proyek machine learning, khususnya untuk tugas *binary classification*. 
 
 ### Variabel-variabel pada *Loan Approval Prediction Dataset* adalah sebagai berikut:
 - ```loan_id```: id atau idex dari data pengajuan pinjaman.
@@ -510,9 +496,9 @@ Setiap model dilatih menggunakan data latih (*training set*) dan dievaluasi meng
 ### Support Vector Machine
 
 
-S*upport Vector Machine* (SVM) adalah metode klasifikasi yang menggunakan hyperplane untuk memisahkan data ke dalam kelas yang berbeda. Algoritma ini efektif untuk data berdimensi tinggi dan mampu menangani hubungan non-linear melalui kernel trick. Namun, SVM membutuhkan tuning parameter yang baik untuk performa optimal dan kurang efisien pada dataset besar[2].  Berikut mekanisme kerja algoritma SVM:
+S*upport Vector Machine* (SVM) adalah metode klasifikasi yang menggunakan hyperplane untuk memisahkan data ke dalam kelas yang berbeda. Algoritma ini efektif untuk data berdimensi tinggi dan mampu menangani hubungan non-linear melalui kernel trick. Namun, SVM membutuhkan tuning parameter yang baik untuk performa optimal dan kurang efisien pada dataset besar[3].  Berikut mekanisme kerja algoritma SVM:
 
-- SVM melakukan klasifikasi dengan cara menentukan batas keputusan yang memisahkan data antar kelas yang memiliki jarak terdekat dengan semua data pada kelas. Batas keputusan  yang dibuat oleh SVM disebut dengan *maximum margin classifier* dan dipisahkan oleh suatu bidang hiper (*hyperplane*) [3].
+- SVM melakukan klasifikasi dengan cara menentukan batas keputusan yang memisahkan data antar kelas yang memiliki jarak terdekat dengan semua data pada kelas. Batas keputusan  yang dibuat oleh SVM disebut dengan *maximum margin classifier* dan dipisahkan oleh suatu bidang hiper (*hyperplane*) [4].
 - SVM mencari pemisah terbaik (*hyperplane*) antara dua kelas dengan memetakan data ke ruang dimensi tinggi. Jika data tidak dapat dipisahkan secara linier, maka SVM akan melakukan transformasi non-linier ke dalam dimensi yang lebih tinggi menggunakan *kernel trick*
 
 
@@ -729,11 +715,11 @@ Dari tabel di atas, dapat disimpulkan sebagai berikut.
 <img src="https://github.com/user-attachments/assets/a2921513-d364-4136-ae6e-19f5779fd47f" alt="comparasion" />
 </p><div align="center">Gambar 9 - Perbandingan Performa Setiap Model</div>
 
-Visualisasi di atas memperjelas bagaimana setiap model memiliki performa yang konsisten tinggi. XGBoost dan *Random Forest* unggul pada semua metrik, sedangkan SVC sedikit tertinggal dalam *recall* dan *F1-score*. Berikut adalah *classification report* dari setiap model.
+Visualisasi di atas memperjelas bagaimana setiap model memiliki performa yang konsisten tinggi. XGBoost dan *Random Forest* unggul pada semua metrik, sedangkan SVC sedikit tertinggal dalam *recall* dan *F1-score*. 
 
 #### *Classification Report*
 
-Classification report menyajikan hasil metrik per kelas (0 = Ditolak, 1 = Disetujui), memungkinkan kita memahami seberapa baik model mengenali masing-masing label.
+Classification report menyajikan hasil metrik per kelas (0 = Ditolak, 1 = Disetujui), memungkinkan kita memahami seberapa baik model mengenali masing-masing label. Berikut adalah *classification report* dari setiap model.
 
 * ***Support Vector Classifier***
   
@@ -829,9 +815,16 @@ Berdasarkan hasil evaluasi terhadap tiga model klasifikasi yaitu **XGBoost *Clas
 
 ## Referensi
 
-[2] A. Kurani, P. Doshi, A. Vakharia, and M. Shah, “A Comprehensive Comparative Study of Artificial 
-Neural Network (ANN) and Support Vector Machines (SVM) on Stock Forecasting,” Ann. Data 
-Sci., vol. 10, no. 1, pp. 183–208, 2023, doi: 10.1007/s40745-021-00344-x.
+[1] S. P. Dewi, “Pengaruh *Capital Adequacy Ratio*, *Non Performing Loan*, *Loan to Deposit Ratio* dan Efisiensi Operasional Terhadap Profitabilitas Perbankan Yang Terdaftar Di Bursa Efek Indonesia,” J. Akunt., vol. 18, no. 3, pp. 422–437, 2014.
 
-[3] K. Kristiawan and A. Widjaja, “Perbandingan Algoritma Machine Learning dalam Menilai Sebuah Lokasi Toko Ritel,” Jurnal Teknik Informatika dan Sistem Informasi, vol. 7, no. 1, Art. no. 1, Apr. 2021, doi: 10.28932/jutisi.v7i1.3182.
-[4]
+[2] D. S. Bhakti, A. Prasetyo, and P. Arsi, "*Implementation of Hyperparameter Tuning in Random Forest Algorithm for Loan Approval Prediction*," Jurnal Teknik Informatika (JUTIF)., vol. 5, no. 4, pp. 63-69. 2024
+
+[3] A. Kurani, P. Doshi, A. Vakharia, and M. Shah, “*A Comprehensive Comparative Study of Artificial Neural Network (ANN) and Support Vector Machines (SVM) on Stock Forecasting*,” Ann. Data Sci., vol. 10, no. 1, pp. 183–208, 2023, doi: https://doi.org/10.1007/s40745-021-00344-x.
+
+[4] K. Kristiawan and A. Widjaja, “Perbandingan Algoritma *Machine Learning* dalam Menilai Sebuah Lokasi Toko Ritel,” Jurnal Teknik Informatika dan Sistem Informasi, vol. 7, no. 1, Art. no. 1, Apr. 2021, doi: https://doi.org/10.28932/jutisi.v7i1.3182.
+
+[5] B. Pernama and H. D. Purnomo, "Analisis Risiko Pinjaman dengan Metode *Support Vector Machine*, *Artificial Neural Network* dan *Naive Bayes*", Jurnal JTIK (Jurnal Teknologi Informasi dan Komunikasi), vol. 7, no. 1, pp. 92 - 99, 2023, doi: https://doi.org/10.35870/jtik.v7i1.693 .
+
+[6] W. Andriani, G. Gunawan, and N. N. P. W. Naja, "Analisis Perbandingan *Machine Learning* untuk Prediksi Kelayakan Kredit Perbankan pada Bank BRI Tegal", Jurnal Penerapan Teknologi, Informasi dan Komunikasi, vol. 4, no. 1, pp. 82-92, 2025, doi: https://doi.org/10.24246/itexplore.v4i1.2025.pp82-92 
+
+[7] N. Hadianto, H. B. Novitasari, and A. Rahmawati, "Klasifikasi Peminjaman Nasabah Bank Menggunakan Metode *Neural Network*", Jurnal PILAR Nusa Mandiri, vol. 15, no. 2, pp. 163-170, 2019, doi: https://doi.org/10.33480/pilar.v15i2.658
