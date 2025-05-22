@@ -510,17 +510,20 @@ Setiap model dilatih menggunakan data latih (*training set*) dan dievaluasi meng
 ### Support Vector Machine
 
 
-*Support Vector Machine* (SVM) adalah salah satu algoritma *supervised learning* yang digunakan untuk klasifikasi dan regresi, namun lebih sering digunakan untuk klasifikasi. Mekanisme kerja SVM bertujuan untuk menemukan *hyperplane* terbaik yang dapat memisahkan data ke dalam kelas-kelas yang berbeda. Berikut mekanisme kerja algoritma SVM:
+S*upport Vector Machine* (SVM) adalah metode klasifikasi yang menggunakan hyperplane untuk memisahkan data ke dalam kelas yang berbeda. Algoritma ini efektif untuk data berdimensi tinggi dan mampu menangani hubungan non-linear melalui kernel trick. Namun, SVM membutuhkan tuning parameter yang baik untuk performa optimal dan kurang efisien pada dataset besar[2].  Berikut mekanisme kerja algoritma SVM:
 
-- SVM melakukan klasifikasi dengan cara menentukan batas keputusan yang memisahkan data antar kelas yang memiliki jarak terdekat dengan semua data pada kelas. Batas keputusan  yang dibuat oleh SVM disebut dengan *maximum margin classifier* dan dipisahkan oleh suatu bidang hiper (*hyperplane*) [5].
+- SVM melakukan klasifikasi dengan cara menentukan batas keputusan yang memisahkan data antar kelas yang memiliki jarak terdekat dengan semua data pada kelas. Batas keputusan  yang dibuat oleh SVM disebut dengan *maximum margin classifier* dan dipisahkan oleh suatu bidang hiper (*hyperplane*) [3].
 - SVM mencari pemisah terbaik (*hyperplane*) antara dua kelas dengan memetakan data ke ruang dimensi tinggi. Jika data tidak dapat dipisahkan secara linier, maka SVM akan melakukan transformasi non-linier ke dalam dimensi yang lebih tinggi menggunakan *kernel trick*
 
 
 **Parameter**
 
-- `C` (default=1.0) : Parameter regulasi. Nilai parameter yang digunakan pada tahap pemodelan adalah `C = 10`. Nilai ini didapat dari proses *hyperparameter tuning* menggunakan metode *Grid Search*.
-- `gamma` (default='scale') : Parameter koefisien untuk kernel `rbf`, `poly`, dan `sigmoid`. Nilai parameter yang digunakan adalah nilai default `gamma='scale'`.
-- `kernel`(default='rbf') : Parameter untuk tipe kernal yang digunakan dalam pembuatan model. Nilai parameter yang digunakan adalah nilai default `kernel='rbf'`.
+Model SVM dalam proyek ini dikonfigurasi menggunakan parameter sebagai berikut:
+
+* `C=10`: Parameter regularisasi yang mengontrol trade-off antara margin maksimal dan kesalahan klasifikasi. Nilai C yang lebih besar (seperti 10) memberikan penalti yang lebih tinggi terhadap kesalahan klasifikasi, sehingga model akan mencoba mengklasifikasikan semua data dengan benar namun bisa berisiko overfitting.
+* `kernel='rbf'`: Jenis kernel yang digunakan adalah *Radial Basis Function* (RBF), yang umum digunakan untuk data yang tidak dapat dipisahkan secara linier. Kernel ini memetakan data ke dimensi yang lebih tinggi untuk menemukan *hyperplane* yang optimal.
+* `gamma='scale'`: Parameter gamma mengontrol pengaruh satu titik data terhadap model. Dengan opsi `'scale'`, nilai gamma ditentukan secara otomatis berdasarkan `1 / (n_features * X.var())`, yang cenderung memberikan hasil yang stabil untuk banyak kasus.
+* `random_state=32`: Seed acak untuk memastikan bahwa hasil pelatihan dapat direproduksi.
 
 
 **Performa**
@@ -537,11 +540,20 @@ Model SVM memiliki performa yang cukup baik dengan nilai *accuracy* sebesar 96% 
 
 **Parameter**
 
-  Parameter yang digunakan untuk melatih model adalah parameter default.
+Model *Random Forest* dalam proyek ini dikonfigurasi menggunakan parameter sebagai berikut:
+
+* `bootstrap=True`: Menentukan bahwa sampel data untuk setiap pohon akan diambil menggunakan teknik *bootstrap sampling*, yaitu pengambilan sampel acak dengan pengembalian dari dataset asli.
+* `criterion='gini'`: Menggunakan indeks Gini sebagai fungsi pengukuran untuk memisahkan node dalam pohon keputusan. Gini menghitung ketidakteraturan (impurity) suatu node; semakin rendah nilai Gini, semakin bersih pemisahannya.
+* `max_features='sqrt'`: Menentukan jumlah fitur maksimum yang dipertimbangkan untuk split di setiap node. Dengan nilai `'sqrt'`, hanya akar kuadrat dari jumlah total fitur yang dipertimbangkan, yang membantu mengurangi korelasi antar pohon dan memperkuat ensemble.
+* `min_samples_leaf=1`: Menentukan jumlah minimum sampel yang diperlukan untuk berada di daun (leaf node). Nilai 1 berarti node daun bisa dibentuk hanya dengan satu data.
+* `min_samples_split=2`: Jumlah minimum sampel yang diperlukan untuk memisahkan node internal. Nilai 2 berarti node akan dipisah jika memiliki dua atau lebih data.
+* `n_estimators=100`: Jumlah pohon keputusan yang digunakan dalam ensemble. Semakin banyak jumlah pohon, biasanya semakin stabil dan akurat prediksinya, namun juga meningkatkan waktu komputasi.
+* `random_state=32`: Seed pengacakan untuk memastikan hasil pelatihan dapat direproduksi.
+
 
 **Performa**
 
-Model *Random Forest* memiliki performa yang sangat baik dengan nilai *accuracy* sebesar 99% dan nilai *f1-score* sebesar 99%. Jika dibandingkan model lainnya, *Random Forest* merupakan model dengan performa terbaik, dimana nilai accuracy dan f1-score nya mencapai 99%. Dengan performa ini, *Random Forest* dapat melakukan klasifikasi yang sangat baik dan presisi karena memiliki akurasi tinggi dan juga dapat melakukan klasifikasi yang seimbang untuk setiap kelas.
+Model *Random Forest* memiliki performa yang sangat baik dengan nilai *accuracy* sebesar 99,1% dan nilai *f1-score* sebesar 99,1%. *Random Forest*  merupakan model dengan performa terbaik kedua yang digunakan pada proyek ini.
 
 ### XGBoost
 
@@ -549,19 +561,29 @@ XGBoost adalah salah satu algoritma boosting yang sangat powerful dan sering dig
 
 **Parameter**
 
-Parameter yang digunakan untuk melatih model adalah parameter default.
+Model XGBoost dalam proyek ini dikonfigurasi dengan parameter sebagai berikut:
+
+* `use_label_encoder=False`: Menonaktifkan encoder label bawaan XGBoost untuk mencegah warning terkait versi terbaru. Label harus sudah dalam bentuk numerik.
+* `eval_metric='logloss'`: Metode evaluasi yang digunakan saat pelatihan adalah log loss (*logarithmic loss*), yang cocok untuk klasifikasi biner atau multikelas.
+* `learning_rate=0.2`: Menentukan seberapa besar langkah yang diambil model pada setiap iterasi boosting. Nilai ini lebih besar dari default (0.1), artinya model belajar lebih cepat, tetapi berpotensi overfitting jika tidak dikombinasikan dengan pengaturan lain yang tepat.
+* `max_depth=10`: Menentukan kedalaman maksimum dari pohon keputusan. Nilai yang lebih besar memungkinkan model menangkap lebih banyak kompleksitas dalam data, tetapi juga meningkatkan risiko overfitting.
+* `n_estimators=100`: Jumlah pohon yang akan dibangun oleh model. Meningkatkan jumlah estimator bisa meningkatkan akurasi, tetapi juga meningkatkan waktu pelatihan dan risiko overfitting.
+* `subsample=0.8`: Proporsi sampel data pelatihan yang digunakan untuk membangun setiap pohon. Nilai di bawah 1.0 membantu mencegah overfitting dengan memperkenalkan variasi antar pohon.
+* `random_state=32`: Menentukan seed untuk pengacakan, agar hasil pelatihan bisa direproduksi.
+
+
 
 **Performa**
 
-Model XGBoost memiliki performa yang sangat baik dengan nilai *accuracy* mencapai 99,9% dan nilai *f1-score* sebesar 99,9%. XGBoost  merupakan model dengan performa terbaik kedua yang digunakan pada proyek ini.
+Model XGBoost memiliki performa yang sangat baik dengan nilai *accuracy* mencapai 99,3% dan nilai *f1-score* sebesar 99,3%. Jika dibandingkan model lainnya, XGBoost merupakan model dengan performa terbaik, dimana nilai accuracy dan f1-score nya mencapai lebih dari 99% dan di atas performa dari model *Random Forest*. Dengan performa ini, XGBoost dapat melakukan klasifikasi yang sangat baik dan presisi karena memiliki akurasi tinggi dan juga dapat melakukan klasifikasi yang seimbang untuk setiap kelas.
 
 ### Hyperparameter Tuning
 
-Hyperparameter tuning adalah proses penting dalam pengembangan model machine learning untuk meningkatkan performa prediksi. Hyperparameter merupakan parameter eksternal yang mengontrol proses pelatihan model dan tidak dipelajari langsung dari data. Contohnya meliputi jumlah pohon dalam Random Forest, nilai C dalam SVC, atau learning rate dalam XGBoost. 
+Hyperparameter tuning adalah proses penting dalam pengembangan model *machine learning* untuk meningkatkan performa prediksi. Hyperparameter merupakan parameter eksternal yang mengontrol proses pelatihan model dan tidak dipelajari langsung dari data. Contohnya meliputi jumlah pohon dalam *Random Forest*, nilai C dalam SVM, atau *learning rate* dalam XGBoost. 
 
-Tujuan dari hyperparameter tuning adalah untuk menemukan kombinasi parameter terbaik yang menghasilkan model dengan performa optimal pada data validasi, tanpa menyebabkan overfitting atau underfitting. Proses ini bertujuan untuk memaksimalkan metrik evaluasi seperti akurasi, precision, recall, atau F1-score.
+Tujuan dari hyperparameter tuning adalah untuk menemukan kombinasi parameter terbaik yang menghasilkan model dengan performa optimal pada data validasi, tanpa menyebabkan *overfitting* atau *underfitting*. Proses ini bertujuan untuk memaksimalkan metrik evaluasi seperti *accuracy*, *precision*, *recall*, atau *f1-score*.
 
-Dalam proyek ini, proses tuning dilakukan menggunakan metode Grid Search. Grid Search adalah pendekatan exhaustive search yang mencoba semua kombinasi nilai hyperparameter yang telah ditentukan dalam sebuah grid. Untuk setiap kombinasi, model dilatih dan dievaluasi menggunakan teknik validasi silang (cross-validation) untuk memastikan hasil tuning lebih general terhadap data yang belum terlihat.
+Dalam proyek ini, proses tuning dilakukan menggunakan metode *Grid Search*. *Grid Search* adalah pendekatan *exhaustive search* yang mencoba semua kombinasi nilai hyperparameter yang telah ditentukan dalam sebuah grid. Untuk setiap kombinasi, model dilatih dan dievaluasi menggunakan teknik validasi silang (*cross-validation*) untuk memastikan hasil tuning lebih general terhadap data yang belum terlihat.
 
 Contoh konfigurasi grid search yang digunakan dalam proyek ini antara lain:
 
@@ -586,33 +608,80 @@ Contoh konfigurasi grid search yang digunakan dalam proyek ini antara lain:
   * `subsample` : \[0.8, 1]
 
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+
+Berikut hasil dari proses Hyperparameter Tuning menggunakan metode *Grid Search*:
+
+| Model                  | Best Params                                                     | Best Accuracy |
+|------------------------|-----------------------------------------------------------------|---------------|
+| SupportMachineClassifier | {'C': 10, 'gamma': 'scale', 'kernel': 'rbf', random_state=32}                                           | 0.960348     |
+| RandomForestClassifier   | {'bootstrap': True, 'criterion': 'gini', 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 100, random_state=32}| 0.991296      |
+| XGBClassifier          | {'learning_rate': 0.2, 'max_depth': 10, 'n_estimators': 100, 'subsample': 0.8, random_state=32}                     | 0.993230      |
+
+
 
 ## Evaluation
 
 Tahapan evaluasi bertujuan untuk mengukur kinerja model dalam melakukan prediksi terhadap data yang belum pernah dilihat sebelumnya (data uji). Evaluasi dilakukan setelah model dilatih dan disetel hyperparameternya melalui proses hyperparameter tuning. Pada proyek ini, model dievaluasi berdasarkan kemampuannya dalam melakukan klasifikasi biner, yaitu memprediksi apakah suatu permohonan pinjaman akan disetujui atau ditolak.
 
-### Metrik Evaluasi
+### **Metrik Evaluasi**
 
 Beberapa metrik evaluasi yang digunakan dalam proyek ini antara lain:
 
-* **Accuracy (Akurasi)**
-  Mengukur proporsi prediksi yang benar terhadap seluruh data uji. Namun, akurasi bisa menyesatkan jika data tidak seimbang (misalnya, lebih banyak data pinjaman yang ditolak dibanding disetujui).
 
-* **Precision**
-  Mengukur seberapa banyak prediksi positif yang benar-benar positif. Metrik ini penting ketika kesalahan dalam menyetujui pinjaman yang seharusnya ditolak harus diminimalkan.
 
-* **Recall**
-  Mengukur seberapa banyak data positif yang berhasil dikenali dengan benar. Ini penting jika tujuan adalah mengidentifikasi semua permohonan pinjaman yang layak.
+#### **1. Accuracy (Akurasi)**
 
-* **F1-Score**
-  Merupakan harmonisasi antara precision dan recall, dan digunakan sebagai metrik utama karena proyek ini melibatkan trade-off antara keduanya.
+Mengukur proporsi prediksi yang benar terhadap seluruh data uji. Meskipun populer, akurasi bisa menyesatkan jika data tidak seimbang (misalnya, lebih banyak data pinjaman yang ditolak dibanding disetujui).
 
-* **Confusion Matrix**
-  Matriks ini menunjukkan jumlah prediksi yang benar dan salah untuk setiap kelas (disetujui atau ditolak), dan memberikan wawasan lebih detail terhadap jenis kesalahan yang dilakukan oleh model.
+$$
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+$$
+
+* **TP**: True Positive
+* **TN**: True Negative
+* **FP**: False Positive
+* **FN**: False Negative
+
+
+
+#### **2. Precision (Presisi)**
+
+Mengukur seberapa banyak prediksi positif yang benar-benar positif. Presisi penting ketika kesalahan dalam menyetujui pinjaman yang seharusnya ditolak harus diminimalkan.
+
+$$
+\text{Precision} = \frac{TP}{TP + FP}
+$$
+
+
+
+#### **3. Recall (Sensitivitas / True Positive Rate)**
+
+Mengukur seberapa banyak data positif yang berhasil dikenali dengan benar. Recall penting jika tujuan adalah mengidentifikasi semua permohonan pinjaman yang layak.
+
+$$
+\text{Recall} = \frac{TP}{TP + FN}
+$$
+
+
+
+#### **4. F1-Score**
+
+Merupakan rata-rata harmonik dari precision dan recall. Metrik ini berguna saat dibutuhkan keseimbangan antara *false positive* dan *false negative*.
+
+$$
+\text{F1-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+$$
+
+
+
+#### **5. Confusion Matrix**
+
+Matriks ini menunjukkan jumlah prediksi yang benar dan salah untuk setiap kelas (misalnya: disetujui dan ditolak), memberikan wawasan lebih mendalam terhadap jenis kesalahan yang dilakukan oleh model. Format umum:
+
+|                     | Predicted Positive  | Predicted Negative  |
+| ------------------- | ------------------- | ------------------- |
+| **Actual Positive** | True Positive (TP)  | False Negative (FN) |
+| **Actual Negative** | False Positive (FP) | True Negative (TN)  |
 
 
 Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
@@ -630,3 +699,11 @@ _Catatan:_
 - _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
 - Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
 
+## Referensi
+
+[2] A. Kurani, P. Doshi, A. Vakharia, and M. Shah, “A Comprehensive Comparative Study of Artificial 
+Neural Network (ANN) and Support Vector Machines (SVM) on Stock Forecasting,” Ann. Data 
+Sci., vol. 10, no. 1, pp. 183–208, 2023, doi: 10.1007/s40745-021-00344-x.
+
+[3] K. Kristiawan and A. Widjaja, “Perbandingan Algoritma Machine Learning dalam Menilai Sebuah Lokasi Toko Ritel,” Jurnal Teknik Informatika dan Sistem Informasi, vol. 7, no. 1, Art. no. 1, Apr. 2021, doi: 10.28932/jutisi.v7i1.3182.
+[4]
