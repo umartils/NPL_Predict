@@ -384,7 +384,7 @@ Data Preparation adalah proses pembersihan, transformasi, dan pengorganisasian d
 
   - **Standarisasi Data**
 
-    Standarisasi data merupakan proses mengubah nilai-nilai pada fitur numerik agar berada dalam skala tertentu tanpa mengubah distribusi relatif data. Proses ini perlu dilakukan terutama pada dengan rentang nilai yang sangat bervariasi antar fitur, karena beberapa model *machine learning* seperti decision tree, random forest, dan lainnya dapat terpengaruh oleh fitur dengan skala dominan.
+    Standarisasi data merupakan proses mengubah nilai-nilai pada fitur numerik agar berada dalam skala tertentu tanpa mengubah distribusi relatif data. Proses ini perlu dilakukan terutama pada dengan rentang nilai yang sangat bervariasi antar fitur, karena beberapa model *machine learning* dapat terpengaruh oleh fitur dengan skala dominan.
 
     Standarasi data bertujuan agar data memiliki rentang yang sama, sehingga tidak ada fitur yang dominan karena memiliki nilai yang jauh lebih besar dibanding fitur lainnya. Selain itu juga dengan melakukan standarisai dapat meningkatkan performa model *machine learning* dibanding jika data tidak dalam rentang yang sama. Berikut penerapan dari proses standarisasi data.
 
