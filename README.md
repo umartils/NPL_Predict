@@ -34,7 +34,7 @@ Bank sering kali mengalami kerugian akibat memberikan pinjaman kepada nasabah ya
 
 
 ## Data Understanding
-*Dataset* yang digunakan pada proyek *machine learning* ini adalah **"*Loan Approval Prediction Dataset*"**, yang tersedia di *platform* [Kaggle](https://www.kaggle.com/datasets/architsharma01/loan-approval-prediction-dataset). *Dataset* ini berisi kumpulan data kuantitatif yang terdiri dari berbagai kolom yang menjadi faktor apakah pengajuan pinjaman ditolak atau disetujui. Secara keseluruhan, *dataset* ini terdiri dari 4269 baris dan 12 kolom. *Dataset* ini sesuai dengan kebutuhan dalam membangun proyek machine learning, khususnya untuk tugas *binary classification*. 
+*Dataset* yang digunakan pada proyek *machine learning* ini adalah **"*Loan Approval Prediction Dataset*"**, yang tersedia di *platform* [Kaggle](https://www.kaggle.com/datasets/architsharma01/loan-approval-prediction-dataset). *Dataset* ini berisi kumpulan data kuantitatif yang terdiri dari berbagai kolom yang menjadi faktor apakah pengajuan pinjaman ditolak atau disetujui. Secara keseluruhan, *dataset* ini terdiri dari 4269 baris dan 13 kolom. *Dataset* ini sesuai dengan kebutuhan dalam membangun proyek machine learning, khususnya untuk tugas *binary classification*. 
 
 ### Variabel-variabel pada *Loan Approval Prediction Dataset* adalah sebagai berikut:
 - ```loan_id```: id atau idex dari data pengajuan pinjaman.
@@ -196,13 +196,30 @@ Berikut tahapan EDA yang dilakukan:
   Berdasarkan ```Gambar 4``` terdapat kolom yang memiliki *outlier* yaitu kolom ```residential_assets_value```, ```commercial_assets_value```, dan ```bank_assets_value```. Kondisi ini terjadi apabila terdapat data yang bernilai ekstrem atau jauh dari nilai mayoritas pada data.
   <br>
   
-
-- ***Heatmap* Korelasi Setiap Fitur Numerik dengan Label**
-![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)<div align="center">Gambar 5 - Heatmap Korelasi Pearson</div>
+- ***Heatmap* Korelasi Setiap Fitur Numerik**
+![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)<div align="center">Gambar 5 - Heatmap Korelasi Setiap Fitur Numerik</div>
 
   **Insight**
 
-  Pada `Gambar 5` menunjukkan korelasi Pearson antara setiap kolom numerik terhadap kolom label `loan_status`. Terlihat bahwa:
+  Pada `Gambar 5` menampilkan korelasi setiap kolom numerik pada data. Berikut informasi yang didapatkan dari gambar tersebut:
+
+  * `income_annum` dan `loan_amount` memiliki korelasi yang paling tinggi yaitu sebesar **0.93** atau **93%**
+  * `income_annum` dan `luxury_assets_value` juga memiliki korelasi tinggi yaitu sebesar **0.93** atau **93%**
+  * `loan_amount` berkorelasi tinggi dengan `luxury_assets_value` sebesar **0.86** atau **86%**
+  * `bank_asset_value` memiliki korelasi kuat terhadap `income_annum` (**0.85**) dan `loan_amount` (**0.79**)
+  * Korelasi paling signifikan terhadap variabel target `loan_status` berasal dari `cibil_score`, dengan nilai korelasi sebesar **0.77**, yang menunjukkan bahwa skor kredit sangat berpengaruh terhadap status pinjaman
+  * Sebagian besar kolom lainnya memiliki korelasi yang rendah atau hampir tidak berkorelasi dengan `loan_status`, seperti `loan_term` (-0.11), `no_of_dependents` (-0.02), dan `residential_assets_value` (-0.01)
+
+  **Kesimpulan**
+  Beberapa fitur seperti `cibil_score`, `income_annum`, `loan_amount`, dan `luxury_assets_value` dapat menjadi fitur penting dalam prediksi status pinjaman karena memiliki korelasi yang cukup tinggi terhadap `loan_status` ataupun antar fitur yang relevan.
+
+
+- ***Heatmap* Korelasi Setiap Fitur Numerik dengan Label**
+![Heatmap](https://github.com/user-attachments/assets/868592c0-270f-4bcd-80d8-c22afeda717d)<div align="center">Gambar 6 - Heatmap Korelasi Pearson</div>
+
+  **Insight**
+
+  Pada `Gambar 6` menunjukkan korelasi Pearson antara setiap kolom numerik terhadap kolom label `loan_status`. Terlihat bahwa:
 
   * Fitur dengan nilai korelasi tertinggi terhadap kolom `loan_status` adalah **`cibil_score`** dengan nilai korelasi sebesar **0.77**, yang berarti hubungan positif yang kuat. Artinya, semakin tinggi nilai `cibil_score`, maka semakin besar kemungkinan pinjaman akan **disetujui (*Approved*)**.
   * Sementara itu, fitur lain seperti:
@@ -224,22 +241,7 @@ Berikut tahapan EDA yang dilakukan:
 
 
 
-- ***Heatmap* Korelasi Setiap Fitur Numerik**
-![Heatmap1](https://github.com/user-attachments/assets/669b760f-f7bb-4e4a-9392-3aace93036ae)<div align="center">Gambar 6 - Heatmap Korelasi Setiap Fitur Numerik</div>
 
-  **Insight**
-
-  Pada `Gambar 6` menampilkan korelasi setiap kolom numerik pada data. Berikut informasi yang didapatkan dari gambar tersebut:
-
-  * `income_annum` dan `loan_amount` memiliki korelasi yang paling tinggi yaitu sebesar **0.93** atau **93%**
-  * `income_annum` dan `luxury_assets_value` juga memiliki korelasi tinggi yaitu sebesar **0.93** atau **93%**
-  * `loan_amount` berkorelasi tinggi dengan `luxury_assets_value` sebesar **0.86** atau **86%**
-  * `bank_asset_value` memiliki korelasi kuat terhadap `income_annum` (**0.85**) dan `loan_amount` (**0.79**)
-  * Korelasi paling signifikan terhadap variabel target `loan_status` berasal dari `cibil_score`, dengan nilai korelasi sebesar **0.77**, yang menunjukkan bahwa skor kredit sangat berpengaruh terhadap status pinjaman
-  * Sebagian besar kolom lainnya memiliki korelasi yang rendah atau hampir tidak berkorelasi dengan `loan_status`, seperti `loan_term` (-0.11), `no_of_dependents` (-0.02), dan `residential_assets_value` (-0.01)
-
-  **Kesimpulan**
-  Beberapa fitur seperti `cibil_score`, `income_annum`, `loan_amount`, dan `luxury_assets_value` dapat menjadi fitur penting dalam prediksi status pinjaman karena memiliki korelasi yang cukup tinggi terhadap `loan_status` ataupun antar fitur yang relevan.
 
 
 

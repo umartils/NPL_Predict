@@ -33,12 +33,16 @@ from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_curve, roc_auc_score, confusion_matrix, classification_report
 
+"""**Mendownload Dataset Dari Kaggle**"""
+
 path = kagglehub.dataset_download("architsharma01/loan-approval-prediction-dataset")
 
 print("Konten direktori utama:")
 print(os.listdir(path))
 for root, dirs, _ in os.walk(path):
     print(root)
+
+"""**Menyimpan Dataset Ke dalam Variabel df**"""
 
 df = pd.read_csv(f"{path}/loan_approval_dataset.csv")
 df.columns = df.columns.str.strip()
@@ -47,11 +51,28 @@ df.head()
 """# EDA
 
 ## Data Understanding
+
+### Menganalisis Detail Dataset
 """
 
 df.info()
 
+"""**Insight**
+- Dataset terdiri dari 13 kolom dan 4269 baris data
+- Terdapat 10 kolom numerik (int64) dan 3 kolom kategorikal (object)
+- Setiap kolom memiliki jumlah bari yang sama menandakan bahwa tidak ada kolom yang memiliki nilai yang kosong (missing value)
+
+### Menganalisis Ringkasan Statistik Deskriptif Dataset
+"""
+
 df.describe().T
+
+"""**Insight**
+- Semua kolom memiliki jumlah data yang sama yaitu 4269 baris data
+- Terdapat data anomali yaitu pada kolom `residential_assets_value` dimana nilai minimumnya bernilai negatif.
+
+### Menampilkan Jumlah Missing Value dan Data Duplikat
+"""
 
 null_val = df.isna().sum()
 duplicated_data = df.duplicated().sum()
@@ -60,12 +81,21 @@ print(f"Jumlah Missing Values: \n{null_val}")
 print(f"Jumlah Data Duplikat: {duplicated_data}")
 print("===============================")
 
-"""## Univariate Analysis"""
+"""**Insight**
+- Tidak ada kolom yang memiliki missing value
+- Tidak ada data yang duplikat satu sama lain
+
+## Univariate Analysis
+
+#### Menghapus Fitur Tidak Relevan dan Mengelompokkan Kolom Numerik dan Kategorikal
+"""
 
 data = df.copy()
 data = data.drop(columns='loan_id')
 num_col = data.select_dtypes(include=['int64']).columns
 cat_col = data.select_dtypes(include='object').columns
+
+"""### Menampilkan Visualisai Data Kategorikal (Bar Chart)"""
 
 # Pilih palet warna
 palette = sns.color_palette("Set2")
@@ -99,6 +129,13 @@ plt.suptitle("Distribusi Kolom Kategorikal", fontsize=16, fontweight='normal')
 plt.subplots_adjust(wspace=0.4, top=0.8)  # atur jarak horizontal dan ruang atas
 plt.show()
 
+"""**Insight**
+- Distribusi jumlah data pada kolom loan_status tidak seimbang dimana jumlah data untuk nilai Approved lebih banyak
+- Distribusi jumlah data kolom education dan self_employed terlihat seimbang
+
+### Menampilkan Visualisai Data Numerikal (Histogram Chart)
+"""
+
 # Palet warna (tidak begitu berpengaruh untuk histogram, tapi tetap bisa digunakan)
 palette = sns.color_palette("Set2")
 
@@ -128,6 +165,14 @@ plt.suptitle("Distribusi Kolom Numerik", fontsize=20, fontweight='normal')
 plt.subplots_adjust(wspace=0.4, hspace=0.4, top=0.9)
 plt.show()
 
+"""**Insight**
+- Kolom no_of_depents dan loan_term memiliki distrbusi diskrit dan merata
+- Distribusi kolom income_annum dan cibil_score cenderung stabil
+- Kolom loan_ammount dan semua kolom assets_value memiliki distribusi **right-skewed**
+
+### Menampilkan Visualisai Data Numerikal (Boxplot)
+"""
+
 # Hitung jumlah subplot
 n_cols = 3
 n_rows = math.ceil(len(num_col) / n_cols)
@@ -150,13 +195,22 @@ plt.suptitle("Boxplot Kolom Numerik", fontsize=20, fontweight='normal')
 plt.subplots_adjust(wspace=0.4, hspace=0.4)
 plt.show()
 
-"""## Multivariate Analysis"""
+"""**Insight**
+- Terdapat outlier pada kolom residential_assets_value, commercial_assets_value dan bank_assets_value
+
+## Multivariate Analysis
+
+### Menampilkan Visualisai Pairplot
+"""
 
 sns.pairplot(data, hue='loan_status')
 plt.suptitle("Pairplot Kolom Numerik", fontsize=16, y=1.02)
 plt.show()
 
-"""## Analisis Korelasi"""
+"""## Analisis Korelasi
+
+### Menampilkan Korelasi Antar Kolom
+"""
 
 data_corr = data.copy()
 data_corr['loan_status'] = data_corr['loan_status'].map({' Approved':1, ' Rejected':0})
@@ -166,6 +220,17 @@ correlation_matrix = data_corr.corr(numeric_only=True)
 sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
 plt.title("Korelasi Setiap Kolom Numerik")
 plt.show()
+
+"""**Insight**
+- Kolom luxury_assets_value dengan income_annum memiliki korelasi yang cukup tinggi dengan nilai sebesar 0.93
+- Kolom loan_ammount dengan income_annum memiliki korelasi yang cukup tinggi dengan nilai sebesar 0.93
+- Kolom luxury_assets_value dengan loan_ammount memiliki korelasi yang cukup tinggi dengan nilai sebesar 0.86
+- Kolom bank_assets_value dengan income_annum memiliki korelasi yang cukup tinggi dengan nilai sebesar 0.85
+- Kolom bank_assets_value dengan loan_ammount memiliki korelasi yang cukup tinggi dengan nilai sebesar 0.79
+- Kolom cibil_score dengan loan_status memiliki korelasi yang cukup tinggi dengan nilai sebesar 0.77
+
+### Menampilkan Korelasi Setiap Kolom Terhadap Kolom Label (loan_status)
+"""
 
 # Salin dataframe agar tidak mengubah aslinya
 df_corr = data.copy()
@@ -179,12 +244,18 @@ sns.heatmap(corr[['loan_status']].sort_values(by='loan_status', ascending=False)
 plt.title("Korelasi Fitur Numerik dengan Loan Status", fontsize=16, fontweight='normal')
 plt.show()
 
-"""# Data Pre Processing (Data Preparation)
+"""**Insight**
+- Kolom cibil_score memiliki korelasi paling tinggi dengan label yaitu sebesar 0.77
+- Kolom laon_term memiliki korelasi negatif dengan label yaitu sebesar -0.11
+
+# Data Pre Processing (Data Preparation)
 
 ## Data Cleaning
 """
 
 df.describe().T
+
+"""### Menangani Anomali (Nilai Negatif)"""
 
 (data['residential_assets_value'] < 0).sum()
 
@@ -192,7 +263,10 @@ df.describe().T
 data = data[data['residential_assets_value'] >= 0]
 data.info()
 
-"""## Mengatasi Pencilan (Outlier)"""
+"""## Mengatasi Pencilan (Outlier)
+
+### Menerapkan Metode IQR untuk Menangani Outlier
+"""
 
 # data = df.drop(columns='loan_id')
 numeric_columns = data.select_dtypes(include='int64').columns
@@ -207,6 +281,8 @@ for kolom in numeric_columns:
   data = data[(data[kolom] > low_bound) & (data[kolom] < up_bound)]
 
 data.info()
+
+"""### Menampilkan Distribusi Data Setelah Outlier Dihilangkan"""
 
 # Hitung jumlah subplot
 n_cols = 3
@@ -231,12 +307,19 @@ plt.suptitle("Boxplot Kolom Numerik", fontsize=20, fontweight='normal')
 plt.subplots_adjust(wspace=0.4, hspace=0.4)
 plt.show()
 
-"""## Encoding Categorical Columns"""
+"""## Encoding Categorical Columns
+
+**Melihat Nilai Unik Pada Kolom Kategorikal**
+"""
 
 for kolom in cat_col:
   print(f"{kolom}: {data[kolom].unique()}")
 
+"""**Menampilkan Data Sebelum Proses Encoding**"""
+
 data[cat_col].head()
+
+"""**Melakukan Encoding Secara Manual**"""
 
 # data = df.drop(columns='loan_id')
 data['education'] = data['education'].map({' Graduate': 1, ' Not Graduate': 0})
@@ -244,9 +327,14 @@ data['self_employed'] = data['self_employed'].map({' Yes': 1, ' No': 0})
 data['loan_status'] = data['loan_status'].map({' Approved': 1, ' Rejected': 0})
 data[cat_col].head()
 
-"""## Data Standardization"""
+"""## Data Standardization
+
+**Menampilkan Data Sebelum Proses Standarisasi**
+"""
 
 data.describe().T
+
+"""**Melakukan Standarisasi Data Menggunakan Metode Min Max Scaler**"""
 
 scaler = MinMaxScaler()
 scaled_numeric = pd.DataFrame(
@@ -261,7 +349,10 @@ data_scaled = pd.concat([scaled_numeric, data[cat_col]], axis=1)
 # Tampilkan hasil
 scaled_numeric.describe().T
 
-"""## Handling Imbalanced Data (Oversampling)"""
+"""## Handling Imbalanced Data (Oversampling)
+
+### Menampilkan Data Sebelum Proses Oversampling
+"""
 
 # data = df.drop(columns='loan_id')
 X = data_scaled.drop(columns='loan_status')
@@ -276,10 +367,6 @@ print(f"Jumlah baris data yang bernilai '1' ada sebanyak: {count_1}")
 print(f"Persentase kelas 0: {count_0/(count_0+count_1)*100:.2f}%")
 print(f"Persentase kelas 1: {count_1/(count_0+count_1)*100:.2f}%")
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Salin data dan ubah label
 df_imbalanced = data_scaled.copy()
 df_imbalanced['loan_status'] = df_imbalanced['loan_status'].map({1: 'Approved', 0: 'Rejected'})
 
@@ -304,9 +391,13 @@ for p in axs.patches:
 plt.tight_layout()
 plt.show()
 
+"""### Proses Oversampling"""
+
 # Over-sampling dengan keseimbangan penuh
 over_sampler = RandomOverSampler(sampling_strategy='auto', random_state=42)
 X_resampled, y_resampled = over_sampler.fit_resample(X, y)
+
+"""### Menampilkan Data Setelah Proses Oversampling"""
 
 # Melihat distribusi kelas setelah oversampling
 count_0 = np.sum(y_resampled == 0)
@@ -341,13 +432,19 @@ for p in axs.patches:
               (p.get_x() + p.get_width() / 2., count),
               ha='center', va='bottom', fontsize=10, color='black')
 
-"""## Data Splitting"""
+"""## Data Splitting
+
+**Melakukan Splitting Data Dengan Rasio 80:20**
+"""
 
 X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.2, random_state=42, stratify=y_resampled)
 print(X_train.shape)
 print(y_train.shape)
 
-"""# Modeling"""
+"""# Modeling
+
+**Membuat dictionary untuk model yang akan digunakan dan menyimpan hasil evaluasi model**
+"""
 
 # Daftar model yang digunakan
 models = {
@@ -377,6 +474,8 @@ for name, model in models.items():
         "ROC-AUC": roc_auc_score(y_test, y_scores)
     })
 
+"""**Menampilkan hasil evaluasi ketiga model (dataframe)**"""
+
 # Ubah hasil ke dalam bentuk DataFrame
 results_df = pd.DataFrame(results)
 
@@ -384,6 +483,8 @@ results_df = pd.DataFrame(results)
 results_df = results_df.sort_values(by='Accuracy', ascending=False)
 results_df = results_df.reset_index(drop=True)
 results_df
+
+"""**Menampilkan hasil evaluasi ketiga model (barplot)**"""
 
 # Ubah dataframe ke format long agar bisa digunakan di seaborn barplot
 results_long = results_df.melt(id_vars='Model', value_vars=['Accuracy', 'F1 Score', 'ROC-AUC'],
@@ -406,7 +507,13 @@ plt.legend(title='Metric')
 plt.tight_layout()
 plt.show()
 
-"""#  Hyperparameter Tuning (Grid Search)"""
+"""**Insight**
+- Random Forest merupakan model terbaik pada saat sebelum proses hyperparameter tuning
+
+#  Hyperparameter Tuning (Grid Search)
+
+**Menjalankan proses hyperparameter tuning menggunakan Grid Search**
+"""
 
 # Parameter grid untuk setiap model
 param_grid = {
@@ -451,12 +558,16 @@ for name in models_grid:
     print(f"Best score for {name}: {grid.best_score_:.4f}\n")
     best_models_grid[name] = grid.best_estimator_
 
+"""**Menampilkan hasil nilai akurasi dan parameter terbaik hasil tuning**"""
+
 for name, model in best_models_grid.items():
   y_pred = best_models_grid[name].predict(X_test)
   print(f"Test accuracy for {name}: {accuracy_score(y_test, y_pred):.4f}")
   print(f"Parameter dari model {name}:")
   print(model.get_params())
   print("-" * 50)
+
+"""**Melakukan evaluasi dan menyimpan hasil evaluasi dari model dengan parameter terbaik**"""
 
 grid_results = []
 
@@ -472,6 +583,8 @@ for name, model in best_models_grid.items():
         "F1 Score": f1_score(y_test, y_pred)
     })
 
+"""**Menampilkan metrik evaluasi dari model dengan parameter terbaik**"""
+
 grid_results_df = pd.DataFrame(grid_results)
 
 # Tampilkan hasil
@@ -479,7 +592,10 @@ grid_results_df = grid_results_df.sort_values(by='Accuracy', ascending=False)
 grid_results_df = grid_results_df.reset_index(drop=True)
 grid_results_df
 
-"""# Best Model"""
+"""# Best Model
+
+**Melakukan training ulang menggunakan parameter terbaik hasil tuning (kecuali model random forest)**
+"""
 
 # Daftar model yang digunakan
 best_models = {
@@ -525,6 +641,8 @@ for name, model in best_models.items():
     print(model.get_params())
     print("-" * 50)
 
+"""**Menampilkan hasil evaluasi ketiga model (dataframe)**"""
+
 # Ubah hasil ke dalam bentuk DataFrame
 best_results_df = pd.DataFrame(best_results)
 
@@ -532,6 +650,13 @@ best_results_df = pd.DataFrame(best_results)
 best_results_df = best_results_df.sort_values(by='Accuracy', ascending=False)
 best_results_df = best_results_df.reset_index(drop=True)
 best_results_df
+
+"""**Insight**
+- XGBoost model dengan performa terbaik
+- SVM model dengan performa paling rendah diantara model lain
+
+**Menampilkan hasil evaluasi ketiga model (roc curve)**
+"""
 
 plt.figure(figsize=(8, 6))
 for name, model in best_models.items():
@@ -563,6 +688,13 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
+"""**Insight**
+- Random Forest dan XGBoost memiliki kurva yang hampir sempurna dengan nilai AUC sangat mendekati 1
+- SVM memiliki nilai AUC paling rendah diantara model lainnya
+
+**Menampilkan hasil evaluasi ketiga model (barplot)**
+"""
+
 # Ubah dataframe ke format long agar bisa digunakan di seaborn barplot
 results_long = best_results_df.melt(id_vars='Model', value_vars=['Accuracy', 'F1 Score', 'ROC-AUC'],
                                var_name='Metric', value_name='Score')
@@ -584,7 +716,13 @@ plt.legend(title='Metric')
 plt.tight_layout()
 plt.show()
 
-"""# Confusion Matrix"""
+"""**Insight**
+- XGBoost merupakan model terbaik pada saat sebelum proses hyperparameter tuning
+
+# Confusion Matrix
+
+**Membuat fungsi untuk menampilkan confusion matrix**
+"""
 
 def plot_conf_matrix(y_true, y_pred, model_name,):
     cm = confusion_matrix(y_true, y_pred)
@@ -594,6 +732,8 @@ def plot_conf_matrix(y_true, y_pred, model_name,):
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.show()
+
+"""**Menampilkan confusion matrix ketiga model**"""
 
 for name, model in best_models.items():
     print(f"Evaluating model: {name}")
@@ -605,7 +745,10 @@ for name, model in best_models.items():
     # Tampilkan confusion matrix
     plot_conf_matrix(y_test, y_pred, name)
 
-# Feature Importance
+"""# Feature Importance
+
+**Menampilkan daftar feature importance dari model Random Forest**
+"""
 
 feat_importance_rf = best_models['Random Forest'].feature_importances_
 features = X_train.columns
@@ -614,6 +757,8 @@ features = X_train.columns
 feat_importance_rf_df = pd.DataFrame({'Feature': features, 'Importance': feat_importance_rf})
 feat_importance_rf_df = feat_importance_rf_df.sort_values(by='Importance', ascending=False)
 feat_importance_rf_df
+
+"""**Menampilkan daftar feature importance dari model XGBoost**"""
 
 feat_importance_xgb = best_models['XGBoost'].get_booster().get_score(importance_type='gain')
 
@@ -625,4 +770,9 @@ feat_importance_xgb_df = feat_importance_xgb_df.sort_values(by='Importance', asc
 feat_importance_xgb_df = feat_importance_xgb_df.reset_index(drop=True)
 
 feat_importance_xgb_df
+
+"""**Insight**
+- Fitur cibil_score memiliki nilai importance paling tinggi diantara fitur lainnya
+- Fitur education memiliki nilai importance paling rendah diantara fitur lainnya
+"""
 
